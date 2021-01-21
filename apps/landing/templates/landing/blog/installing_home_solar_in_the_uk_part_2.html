@@ -1,0 +1,89 @@
+{% extends "landing/blog/blog_article.html" %}
+{% load i18n static svg %}
+
+{% block meta_title %}Installing home solar in the UK - A first year review (Part 2) - {{ block.super }}{% endblock %}
+{% block meta_description %}{% trans "Technology PowerMarket is using and developing. Satellite data processing. Machnine learning algorithms. GIS. A.I." context "Meta description." %}{% endblock %}
+
+{% block page_title %}Installing home solar in the UK{% endblock %}
+{% block page_subtitle %}A first year review (Part 2){% endblock %}
+{% block article_author %}Phil Worthington{% endblock %}
+{% block article_content %}
+
+            <p>
+                In Part 1 of this article we provided a brief overview of our ground-mounted home 4kW solar system and how it’s been performing.  In this second part we’ll review some unexpected factors that we didn’t anticipate.  Most are pretty specific to our particular installation, but they may give some food for thought to those who are considering installing solar for their home.
+            </p>
+            <h3>Things we didn't anticipate</h3>
+            <ul>
+                <li>
+                    Grass is a pain! The ground mounting trays are really low, so regular mowing and trimming
+                    around the panels is needed for much of the year to stop long grass growing and shadowing them.
+                    It would have been better to source taller panel mounts, but those are more expensive and prone
+                    to wind damage, so a bit of mowing isn't too much of an issue.
+                </li>
+                <li>
+                    Panels get nice and warm in the sun. This encourages our neighbours' cats to use them as a nice
+                    location for a nap, and to leave footprints all over them!  We did not anticipate this.
+                    A simple mop with a water spray soon cleans them off, but it isn't something we'd need to worry
+                    about with a rooftop installation.
+                </li>
+                <li>
+                    Because our electricity bills weren't very high to begin with, we hadn't previously paid
+                    attention to how much of the bill was down to the standing charge, so even though we've cut
+                    our usage by over half, our bills have only fallen by around a quarter because the standing
+                    charge stays fixed.  How's that for a disincentive to go green?!  Although we currently use a
+                    green electricity supplier we’re looking at switching to a supplier with a much lower standing
+                    charge so that we get more financial benefit from our solar generation.
+                </li>
+                <li>
+                    Checking how much electricity is being generated via the online monitoring platform is an
+                    addictive time waster - especially when you start trying to keep an eye on which panel is getting
+                    grass shadowed or has a cat sleeping on it!
+                </li>
+            </ul>
+            <h3>Things we'd like to do</h3>
+            <ul>
+                <li>
+                    Install more panels to increase our generation capacity.
+                </li>
+                <li>
+                    Switch to an electricity supplier that doesn't have a standing charge so we can get the full
+                    benefit of our reduced electricity usage.
+                </li>
+                <li>
+                    Install a new heating system with a cylinder that can automatically use our spare electricity
+                    during the day to heat water.
+                </li>
+                <li>
+                    Install a battery storage system once the prices come down so we can use all of the electricity
+                    we generate.
+                </li>
+                <li>
+                    Get some concrete blocks to increase the tilt angle of the panels next winter – the current
+                    15 degree tilt is intended to maximise total annual generation at our latitude, but a steeper
+                    tilt would be better to generate more power from a low sun in winter months.
+                </li>
+                <li>
+                    Buy a Tesla Model 3 when it comes out (or a BMW i8 - I can dream!)
+                </li>
+            </ul>
+            <p>
+                We'd have liked to go for a bigger system than 4kW, and may look to expand our installation in the
+                future when finances permit, especially if we go down the battery storage and/or electric car route.
+                In the nearer term, we're planning to replace our outdated oil boiler and heating system so we can
+                heat our water with electricity when the sun’s out.
+            </p>
+            <h3>Would we do it again?</h3>
+            <p>
+                Absolutely. The financial benefits are good but not huge at the moment, but are only going to get
+                bigger - already most of the major UK energy companies have announced significant price rises at
+                the start 2017, and such increases will likely keep coming.  As we aren’t able to get gas we don’t
+                benefit from dual fuel discounts, so our electricity prices are increasing by around 10% right now.
+                Over the 25+ year lifetime of our solar system they could well triple or worse (unless nuclear fusion
+                becomes a reality in that timespan!)   But there’s also the good feeling we get from knowing we’re
+                generating at least as much electricity as we’re using, and could easily become almost self-sufficient
+                by adding battery storage once its cost comes down.
+            </p>
+            <br/>
+            <p><a href="{% url 'blog' slug='installing_home_solar_in_the_uk_part_1' %}" class="btn btn-lg btn-theme">Back to part 1</a></p>
+
+{% endblock %}

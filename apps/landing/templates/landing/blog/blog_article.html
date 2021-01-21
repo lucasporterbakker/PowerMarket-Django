@@ -1,0 +1,49 @@
+{% extends 'static_page.html' %}
+{% load static %}
+
+{% block links %}
+    {{ block.super }}
+    {% if has_amp_page %}
+        <link rel="amphtml" href="{{ settings.SITE_URL }}{% url "blog_amp" slug=slug %}" />
+    {% endif %}
+{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static 'css/blog_article.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title_container %}
+    <div class="static-page-title">
+        <h1>{% block page_title %}{% endblock %}</h1>
+        <h3>{% block page_subtitle %}{% endblock %}</h3>
+    </div>
+{% endblock %}
+{% block page_content %}
+    <div class="row">
+        <div class="col-xs-12">
+            {% block article_author_container %}
+                <p class="text-right">By: {% block article_author %}{% endblock %}</p>
+                <br/>
+            {% endblock %}
+            {% block article_content %}{% endblock %}
+            <br/>
+            <hr>
+            <p>
+                <i>
+                    PowerMarket is a product of SunReign Ltd, a UK registered company founded with a mission:
+                    <b>sustainable energy for all</b>. PowerMarket, an Oxford University Innovation and European Space Agency
+                    supported venture, provides companies end-to-end solar solutions – helping you assess, procure,
+                    finance, install and maintain solar energy projects.
+                </i>
+            </p>
+            <p>
+                <i>
+                    If you have a rooftop, carpark or an open field within your business premises, you can evaluate
+                    its solar potential for free at <a href="https://www.powermarket.net" class="underline">https://www.powermarket.net</a>
+                    and sign-up for your bespoke solar solution. Or, write to us at <a href="mailto:contact@powermarket.net" class="underline">contact@powermarket.net</a>.
+                </i>
+            </p>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+Hi PowerMarket Managers,
+
+a support call was requested.
+
+Name: {{ name }}
+Phone: {{ phone }}
+
+Note: {{ note }}
+
+Have a nice day!

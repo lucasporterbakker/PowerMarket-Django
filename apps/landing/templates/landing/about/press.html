@@ -1,0 +1,69 @@
+{% extends "static_page.html" %}
+{% load i18n static %}
+
+{% block meta_title %}
+    {% trans 'News & Updates' context 'Meta: Page title.' %} - {{ block.super }}
+{% endblock %}
+
+{% block meta_description %}
+    {% trans "Relevant news and press releases." context "Meta description." %}
+{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static 'css/press.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}
+    {% trans 'News & Updates' context 'Page title.' %}
+{% endblock %}
+
+{% block page_content %}
+
+    {% for entry in object_list %}
+
+        {% ifchanged entry.date.year %}
+            <div class="row">
+                <div class="col-xs-12 year-container">
+                    <h1 class="faded-text">{{ entry.date|date:"Y" }}</h1>
+                </div>
+            </div>
+        {% endifchanged %}
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-3 date-container">
+
+                <h3>{{ entry.date|date:"M d" }}</h3>
+
+            </div>
+
+            <div class="col-xs-12 col-sm-9 press-entry-container">
+
+                <div class="test">
+                <h3 class="press-entry-title">
+                    {% if entry.link %}
+                        <a href="{{ entry.link }}">{{ entry.title }}</a>
+                    {% else %}
+                        {{ entry.title }}
+                    {% endif %}
+                </h3>
+
+                <h4 class="press-entry-headline faded-text">{{ entry.headline }}</h4>
+                </div>
+
+                <p>
+                    {{ entry.details|safe }}
+                    {% if entry.link %}
+                        <br/>
+                        <small>[ <a href="{{ entry.link }}" target="_blank">{% trans 'Read the article' context 'Press entry: read more.' %}</a> ]</small>
+                    {% endif %}
+                </p>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,270 @@
+{% extends 'manager/manager_base.html' %}
+{% load i18n l10n static bootstrap3 %}
+
+{% block meta_title %}{% trans 'Dashboard' context 'Meta: title.' %} - {{ block.super }}{% endblock %}
+{% block meta_description %}{% trans "Dashboard for your solar projects." context "Meta description." %}{% endblock %}
+
+{% block styles %}<link href="{% static 'css/dashboard.css' %}" rel="stylesheet">{% endblock %}
+
+{% block content %}
+    <div class="steps-container">
+        <div class="container">
+            <div class="steps">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-2 col-sm-offset-1">
+                        <div class="step {% if project.stage == project.STAGE_ASSESSMENT %}active{% else %}done{% endif %}">
+                            <div class="step-number">1</div>
+                            <div class="step-title">Solar Assessment</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="step {% if project.stage == project.STAGE_DATA_COLLECTION %}active{% endif %}{% if project.stage > project.STAGE_DATA_COLLECTION %}done{% endif %}">
+                            <div class="step-number">2</div>
+                            <div class="step-title">Project Scoping</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="step {% if project.stage == project.STAGE_PROJECT_DESIGN %}active{% endif %}{% if project.stage > project.STAGE_PROJECT_DESIGN %}done{% endif %}">
+                            <div class="step-number">3</div>
+                            <div class="step-title">Project Design</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="step {% if project.stage == project.STAGE_PERMISSIONS %}active{% endif %}{% if project.stage > project.STAGE_PERMISSIONS %}done{% endif %}">
+                            <div class="step-number">4</div>
+                            <div class="step-title">Permissions & Approvals</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="step {% if project.stage == project.STAGE_KICKOFF %}active{% endif %}">
+                            <div class="step-number">5</div>
+                            <div class="step-title">Project Kick-Off</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <br/>
+            <div class="col-xs-12 col-md-4 column-left">
+
+                {% comment %}<div class="card">
+                    <h3><i class="fa fa-file-text chart-title-icon"></i>&nbsp; {% trans 'Offers' context 'Dashboard: card title.' %}</h3>
+                    <hr>
+                    {% if offers %}
+                        {% for offer in offers %}
+                            <a href="javascript:createModal('{% url "manager:offer_review" pk=offer.pk %}');" class="offer-container">
+                                <div class="offer-title-container">{{ offer.supplier }}</div>
+                                <div class="offer-headline-container">{{ offer.headline|default_if_none:"" }}</div>
+                                <div class="offer-status-container"><span class="offer-status badge badge-sm" {% if offer.get_status_display == 'interested' %}style="background-color: {{ settings.PRIMARY_COLOR }}"{% endif %}>{{ offer.get_status_display }}</span></div>
+                                <div class="offer-age-container">{{ offer.age_in_days }} day{% if offer.age_in_days != 1 %}s{% endif %} ago</div>
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        {% if project.has_assessments %}
+                            <p>Conditional offers will show up here. Just relax and complete the to-dos if there are any.</p>
+                        {% else %}
+                            <p>Contitional offers will show up here once you have added an assessment.</p>
+                        {% endif %}
+                    {% endif %}
+                </div>{% endcomment %}
+
+                <div class="card">
+                    <h3><i class="fa fa-user chart-title-icon"></i>&nbsp; Welcome</h3>
+                    <hr>
+                    <p><b><u>Personal data</u></b> <small>[<a href="javascript:createModal('{% url 'user:personal_information_update' pk=user.profile.pk %}')">edit</a>]</small></p>
+                    {% with profile=request.user.profile %}
+                    <table class="personal-data-table">
+                        <tr>
+                            <td>First name:</td>
+                            <td>{{ profile.first_name|default_if_none:"" }}</td>
+                        </tr>
+                        <tr>
+                            <td>Lase name:</td>
+                            <td>{{ profile.last_name|default_if_none:"" }}</td>
+                        </tr>
+                        <tr class="company-row">
+                            <td>Company:</td>
+                            <td>{{ profile.company|default_if_none:"" }}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td>{{ profile.phone|default_if_none:"" }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{{ profile.email|default_if_none:"" }}</td>
+                        </tr>
+                    </table>
+                    <br/>
+                    {% endwith %}
+                    <p><b><u>Project data</u></b></p>
+                    <p>{{ project.project_id }}</p>
+                    {% if project.status == project.STATUS_ACTIVE %}
+                        <div class="project-status-label badge badge-success inline-block box-shadow">Active</div> <a href="{% url 'manager:pause_project' pk=project.pk %}" class="project-status-btn">Pause project</a>
+                        {% comment %}<div class="project-status-description">Your assessment is currently visible to solar installers and financiers in our marketplace.</div>{% endcomment %}
+                    {% else %}
+                        <div class="project-status-label badge badge-warning inline-block box-shadow">Paused</div> <a href="{% url 'manager:resume_project' pk=project.pk %}" class="project-status-btn">Resume project</a>
+                        {% comment %}<div class="project-status-description">Your assessment is currently NOT visible to solar installers and financiers in our marketplace.</div>
+                        <div>
+                            {% if project.has_assessments %}
+                                <a href="{% url 'manager:resume_project' pk=project.pk %}" class="theme-link underline project-status-btn">Resume project</a>
+                            {% else %}
+                                {% trans 'Create an assessment to get started.' context 'Dashboard: Assessment needed notification.' %}
+                            {% endif %}
+                        </div>{% endcomment %}
+                    {% endif %}
+                </div>
+                <div class="card">
+                    <h3><i class="fa fa-check card-title-icon"></i>&nbsp; {% trans 'To-do list' context 'Dashboard: card title.' %}</h3>
+                    <hr>
+                    <ol class="todo-list no-indent">
+                        <li><a href="{% url 'solar:area' %}" class="default-link {% if project.selected_assessment %}done{% endif %}">Create an assessment</a>.</li>
+                        <li><a href="javascript:createModal('{% url 'user:personal_information_update' pk=user.profile.pk %}');" class="default-link {% if user.profile.first_name and user.profile.last_name and user.profile.company and user.profile.phone %}done{% endif %}">Complete your personal information</a>.</li>
+                        <li><span class="{% if project.avg_monthly_bill %}done{% endif %}">Add your avg. monthly electricity bill</span>.</li>
+                        <li><span class="{% if project.avg_monthly_consumption %}done{% endif %}">Add your avg. monthly electricity consumption</span>.</li>
+                        <li><span class="{% if project.electricity_bills.count >= settings.REQUIRED_ELECTRICITY_BILLS %}done{% endif %}">Upload your electricity bills</span>.</li>
+                    </ol>
+                </div>
+                <div class="hidden-xs hidden-sm">
+                    <br/>
+                    <p><b>Need help?</b></p>
+                    <p>
+                        <i class="fa fa-phone"></i> &nbsp; <a href="tel:+4402080682966" class="default-link no-decoration">+44 020 8068 2966</a><br/>
+                        <i class="fa fa-envelope"></i> &nbsp; <a href="mailto:contact@powermarket.net" class="default-link no-decoration">contact@powermarket.net</a>
+                    </p>
+                    <br/>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-8 column-right">
+                {# Assessment card. #}
+                {% with assessment=project.selected_assessment %}
+                    <div class="card">
+                        <h3><i class="fa fa-line-chart card-title-icon"></i>&nbsp; {% trans 'Assessment' context 'Dashboard: card title.' %}{% if assessment %} <i class="fa fa-check pull-right primary-text"></i>{% endif %}</h3>
+                        <hr>
+                        {% if assessment %}
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="profit-card">
+                                        <p>
+                                            <i class="glyphicon glyphicon-piggy-bank primary-text-dark"></i>&nbsp;&nbsp;
+                                            <span id="annual-savings-and-earnings-currency">{{ assessment.get_currency_display }}</span> <span id="annual-savings-and-earnings">{{ assessment.lifetime_gross_profit_estimate|floatformat:0|localize }}</span><br/>
+                                            <span class="primary-text-dark"><small><b>{% trans 'Total returns.*' context 'Profit card description.' %}</b></small></span>
+                                        </p>
+                                    </div>
+                                    <br/>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="energy-card">
+                                        <p>
+                                            <i class="glyphicon glyphicon-flash secondary-text-dark"></i>&nbsp;
+                                            <span id="annual-energy">{{ assessment.annual_energy_estimate|floatformat:0|localize }}</span> kWh<br/>
+                                            <span class="secondary-text-dark"><small><b>{% trans 'Generated energy/year.*' context 'Energy card description.' %}</b></small></span>
+                                        </p>
+                                    </div>
+                                    <br/>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="cost-card">
+                                        <p>
+                                            <i class="glyphicon glyphicon-credit-card gray-text"></i>&nbsp;&nbsp;
+                                            <span id="system-cost" class="theme-text">{% if assessment.system_cost_estimate %}<b>{{ assessment.get_currency_display }} {{ assessment.system_cost_estimate|floatformat:0 }}</b>{% else %}<i>N/A</i>{% endif %}</span><br/>
+                                            <span class="gray-text"><small><b>{% trans 'System cost.' context 'Energy card description.' %}</b></small></span>
+                                        </p>
+                                    </div>
+                                    <br/>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="break-even-card">
+                                        <p>
+                                            <i class="fa fa-calendar-check-o gray-text"></i>&nbsp;&nbsp;
+                                            <span id="break-even-period" class="theme-text">{% if assessment.break_even_duration_estimate %}<b>{{ assessment.break_even_duration_estimate|floatformat:1 }} years</b>{% else %}<i>N/A</i>{% endif %}</span><br/>
+                                            <span class="gray-text"><small><b>{% trans 'Payback period.' context 'Energy card description.' %}</b></small></span>
+                                        </p>
+                                    </div>
+                                    <br/>
+                                </div>
+                            </div>
+                            <p>The above numbers apply for a self-funded project and 100% consumption of the produced energy.</p>
+                            {% comment %}<h4>Notes&nbsp;<small><b>[<a href="javascript:createModal('{% url 'solar:assessment_notes_update' pk=assessment.pk %}');">edit</a>]</b></small></h4>
+                            <p>{{ assessment.notes|safe|default_if_none:"Click 'edit' to create notes for this project." }}</p>{% endcomment %}
+                            <a href="{% url 'solar:assessment' uuid=assessment.uuid %}" class="btn btn-theme">{% trans 'View full report' context 'Dashboard: view report button' %}</a>
+                        {% else %}
+                            <p>{% trans 'You do not have an assessment yet.' context 'Dashboard: no assessment message.' %}</p>
+                            <a href="{% url 'solar:area' %}" class="btn btn-primary">{% trans 'Create assessment' context 'Dashboard: create assessment button.' %}</a>
+                        {% endif %}
+                    </div>
+                {% endwith %}
+                {# Data collection cards. #}
+                {% if project.stage > project.STAGE_ASSESSMENT %}
+                    <div class="card">
+                        <h3><i class="fa fa-plug card-title-icon"></i>&nbsp; {% trans 'Data' context 'Dashboard: card title.' %}{% if project.avg_monthly_bill and project.avg_monthly_consumption %} <i class="fa fa-check pull-right primary-text"></i>{% endif %}</h3>
+                        <hr>
+                        <p>Please add the following data so that we can improve your assessment.</p>
+                        <form id="data-form" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <h4><i class="fa fa-credit-card card-title-icon"></i>&nbsp; {% trans 'Avg. Monthly Electricity Bill' context 'Dashboard: card title.' %}</h4>
+                                    <div class="avg-montly-bill-input-container data-input-container">
+                                        <span class="input-icon-left">{{ project.selected_assessment.get_currency_display }}</span>
+                                        {{ form.avg_monthly_bill }}
+                                    </div>
+                                    {{ form.avg_monthly_bill.errors }}
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <h4><i class="fa fa-bolt card-title-icon"></i>&nbsp; {% trans 'Avg. Monthly Electricity Consumption' context 'Dashboard: card title.' %}</h4>
+                                    <div class="avg-monthly-consumption-input-container data-input-container">
+                                        {{ form.avg_monthly_consumption }}
+                                        <span class="input-icon-right">kWh</span>
+                                    </div>
+                                    {{ form.avg_monthly_consumption.errors }}
+                                </div>
+                                <div class="col-xs-12"><button type="submit" class="btn btn-theme data-save-btn">Save data</button></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fa fa-file-text card-title-icon"></i>&nbsp; {% trans 'Electricity Bills' context 'Dashboard: card title.' %} <span class="pull-right">{% if project.electricity_bills.count >= settings.REQUIRED_ELECTRICITY_BILLS %}<i class="fa fa-check primary-text"></i>{% else %}<small>{{ project.electricity_bills.count }} / {{ settings.REQUIRED_ELECTRICITY_BILLS }}</small>{% endif %}</span></h3>
+                        <hr>
+                        <p>Please upload your electricity bills from the last 12 month so that we can improve your assessment.</p>
+                        {% if project.electricity_bills %}
+                            <div class="electricity-bills">
+                                <div class="row">
+                                    {% for bill in project.electricity_bills.all %}
+                                        <div class="col-xs-6 col-sm-3">
+                                            <div class="electricity-bill-container">
+                                                <a href="{{ bill.private_file.url }}" class="electricity-bill default-link no-decoration" target="_blank"><i class="fa fa-file"></i> &nbsp; {{ bill.date_str }}</a>
+                                                <a href="{% url 'manager:delete_electricity_bill' pk=bill.pk %}" class="electricity-bill-delete-btn"><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div>
+                            <a href="javascript:createModal('{% url 'manager:create_electricity_bill' %}');" class="btn btn-theme upload-bill-btn"><i class="fa fa-plus"></i> &nbsp; Upload electricity bill</a>
+                        </div>
+                    </div>
+                {% endif %}
+                {% comment %}<div class="card">
+                    <h3><i class="fa fa-university card-title-icon"></i>&nbsp; {% trans 'Financing' context 'Dashboard: card title.' %}</h3>
+                    <hr>
+                    <p>Please select your preferred financing option.</p>
+                    <a href="javascript:doNothing();" class="btn btn-theme"><i class="fa fa-money"></i>&nbsp; Pay up front</a> &nbsp; <a href="javascript:createModal('{% url 'coming_soon' %}');" class="btn btn-light-gray"><i class="fa fa-university"></i>&nbsp; Finance</a> &nbsp; <a href="javascript:createModal('{% url 'coming_soon' %}');" class="btn btn-light-gray"><i class="fa fa-hourglass-half"></i>&nbsp; Lease</a>
+                </div>{% endcomment %}
+            </div>
+        </div>
+        <br/>
+        <br/>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/modal.js' %}"></script>
+    <script>
+        $('input.humanize').number(true, 0);
+    </script>
+{% endblock %}

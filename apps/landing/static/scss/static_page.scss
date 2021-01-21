@@ -1,0 +1,20 @@
+@import 'variables';
+
+#wrapper {
+  // background-color: $lightest-gray;
+}
+
+.static-page-title {
+  padding-bottom: 1rem;
+
+  h3 {
+    color: $default-text-color;
+  }
+}
+
+/*.static-page-content {
+  background-color: $white;
+  padding: 30px;
+  border-radius: $border-radius-lg;
+  box-shadow: $default-box-shadow;
+}*/

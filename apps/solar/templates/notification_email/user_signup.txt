@@ -1,0 +1,7 @@
+Hi PowerMarket Managers,
+
+a new user has just signed up.
+
+Assessment URL: {{ short_link }}
+
+Have a nice day!

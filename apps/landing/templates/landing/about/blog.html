@@ -1,0 +1,44 @@
+{% extends "static_page.html" %}
+{% load i18n static svg %}
+
+{% block meta_title %}{{ block.super }} - Blog{% endblock %}
+{% block meta_description %}Official blog of PowerMarket. We blog everything about solar here.{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}{% trans 'Solar Blog' context 'Page title.' %}{% endblock %}
+{% block page_content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h3><a href="{% url 'blog' slug='huge-electricity-savings-for-business-and-science-parks' %}">Huge electricity savings for business and science parks</a></h3>
+            <h4>published on July 4, 2017 by Camille Salord.</h4>
+            <br/>
+            <h3><a href="{% url 'blog' slug='best-locations-for-commercial-solar-in-india' %}">Best locations for commercial solar in India</a></h3>
+            <h4>published on May 25, 2017 by Haem Roy.</h4>
+            <br/>
+            <h3><a href="{% url 'blog' slug='is-solar-the-right-solution-for-you' %}">Is solar the right solution for you?</a></h3>
+            <h4>published on May 24, 2017 by Haem Roy.</h4>
+            <br/>
+            <h3><a href="{% url 'blog' slug='a-win-win-for-solar-installers-and-customers' %}">A win-win for solar installers and customers</a></h3>
+            <h4>published on May 23, 2017 by Haem Roy.</h4>
+            <br/>
+            <h3><a href="{% url 'blog' slug='why-business-parks-are-bleeding-money' %}">Why business parks are bleeding money...</a></h3>
+            <h4>published on May 18, 2017 by Abhinav Jain.</h4>
+            <br/>
+            <h3><a href="{% url 'blog' slug='installing-home-solar-in-the-uk-part-2' %}">Installing Home Solar in the UK - A first year review (Part 2)</a></h3>
+            <h4>published on Mar 16, 2017 by Phil Worthington.</h4>
+            <br/>
+            <h3><a href="{% url 'blog' slug='installing-home-solar-in-the-uk-part-1' %}">Installing Home Solar in the UK - A first year review (Part 1)</a></h3>
+            <h4>published on Mar 15, 2017 by Phil Worthington.</h4>
+            <br/>
+            <h3><a href="{% url 'blog' slug='why-is-installing-solar-good-for-my-business' %}">Why is installing solar good for my business?</a></h3>
+            <h4>published on Oct 25, 2016 by Haem Roy.</h4>
+            <br/>
+            <h3><a href="{% url 'blog' slug='the-6-key-questions-about-solar-for-an-SME' %}">The 6 key questions about solar for an SME</a></h3>
+            <h4>published on Oct 3, 2016 by Haem Roy.</h4>
+        </div>
+    </div>
+{% endblock %}

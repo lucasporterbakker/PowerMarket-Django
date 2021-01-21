@@ -1,0 +1,80 @@
+@import "variables";
+
+#assessment-report {
+  position: relative;
+
+  .blur {
+    filter: blur(4px);
+  }
+}
+
+.report-overlay {
+  position: absolute;
+  width: 100%;
+  background-color: rgba($black, .5);
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  .overlay-content {
+    background-color: $white;
+    border-radius: 0;
+    padding: 2rem;
+
+    @media (min-width: $screen-sm-min) {
+      padding: 3rem;
+    }
+    
+    @media (min-width: $screen-md-min) {
+      padding: 5rem;
+
+    }
+
+    hr {
+      border-top-width: 4px;
+    }
+
+    .next-steps-table {
+      td {
+        vertical-align: top;
+        padding-bottom: 10px;
+
+        &:first-child {
+          padding-right: 10px;
+        }
+      }
+    }
+
+    .step-container {
+      .step-number {
+        .step-circle {
+          background-color: $theme-color;
+          color: $white;
+          display: inline-block;
+          text-align: center;
+          border-radius: 50%;
+          width: 5rem;
+          height: 5rem;
+          line-height: 5rem;
+          font-size: 150%;
+        }
+      }
+      .step-title {
+        margin-top: 15px;
+      }
+    }
+
+    .step-container.done {
+      .step-circle {
+        background-color: $light-gray;
+        color: $white;
+      }
+      .step-title > h3 {
+        color: $light-gray;
+      }
+      .step-description {
+        color: lighten($light-gray, 10%);
+      }
+    }
+  }
+}

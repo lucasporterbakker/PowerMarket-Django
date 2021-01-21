@@ -1,0 +1,12 @@
+Hi PowerMarket Managers,
+
+a provider contact was created.
+
+Company: {{ company }}
+Email: {{ email }}
+Phone: {{ phone }}
+Website: {{ website }}
+
+Type of business: {{ type_of_business }}
+
+Have a nice day!

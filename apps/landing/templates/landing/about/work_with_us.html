@@ -1,0 +1,36 @@
+{% extends "static_page.html" %}
+{% load i18n static %}
+
+{% block meta_title %}{{ block.super }} - {% trans 'Work with us' context 'Meta: Page title.' %}{% endblock %}
+{% block meta_description %}{% trans "Work with PowerMarket" context "Meta description." %}{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static 'css/company.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}{% trans 'Work with us' context 'Page title.' %}{% endblock %}
+{% block page_content %}
+    <div class="row">
+        {# What we do #}
+        <div id="what-we-do" class="col-xs-12 section-tight">
+            <h3>{% trans 'Volunteer' context 'Company page.' %}</h3>
+            <hr>
+            <p>
+                Volunteer today for one of the most impactful clean energy start-ups, with a vision to facilitate
+                sustainable energy globally.
+            </p>
+            <p>
+                The first step towards facilitating sustainable energy is providing easy to use, free information
+                on how sustainable energy can benefit individuals and businesses. PowerMarket would like to ensure
+                that its Satellite Assessment Tool is freely available across the globe, however, in order to do so,
+                we need your help to tell us about the solar energy market in your country.
+            </p>
+            <p>
+                We are looking for people with knowledge or experience in renewable energy markets, policy analysts
+                or energy analysts to volunteer with us. If you would like join us in our revolution, contact us at
+                contact@powermarket.net and we would love to hear from you.
+            </p>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "static_page.html" %}
+{% load i18n static %}
+
+{% block meta_title %}
+    Solar for your business - {{ block.super }}
+{% endblock %}
+
+{% block meta_description %}
+    {% trans "General information about commercial solar projects and installations." context "Meta description." %}
+{% endblock %}
+
+{% block page_title %}
+    {% trans 'Solar for your business' context 'Page title.' %}
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="row">
+
+        <div class="col-xs-12">
+
+            <p>
+
+                {% blocktrans context 'Commercial solar page.' %}
+                    Investing in a commercial PV system given a suitable roof area or open space on a company's premises, and a significant electricity bill in most countries is a no-brainer from a financial point of view.
+                    With the right financing model solar is a 0-risk investment that reduces electricity cost and lowers a business' carbon footprint.
+                    The latter does not only have a positive impact on the environment and global warming but also on a brand's image.<br/>
+                    <br/>
+                    There is however one problem.<br/>
+                    <br/>
+                    Buying a solar system can be tedious, take a lot of time and also burn a lot of money in consultant fees.
+                    This is where our assessment tool and marketplace enter the game. With PowerMarket the initial assessment for your PV installation is entirely free, easy and just takes a few clicks. Our comprehensive marketplace helps you strike the right deal so that solar really becomes a no-brainer for your business.<br/>
+                {% endblocktrans %}
+
+                <br/>
+                <a href="{% url 'landing_page' %}" class="btn btn-lg btn-theme">{% trans 'Get started' context 'Commercial solar page: action button.' %}</a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+{% endblock %}

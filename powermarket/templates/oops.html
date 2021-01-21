@@ -1,0 +1,42 @@
+{% extends "static_page.html" %}
+{% load i18n static %}
+
+{% block meta_title %}
+    {{ block.super }} - {% trans 'Oops!' context 'Meta: Page title.' %}
+{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static 'css/oops.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}
+    {% trans 'Oops!' context 'Page title.' %}
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+
+            <h3>{% trans 'We are sorry, seems like there was a problem.' context 'Oops page: subtitle.' %}</h3>
+
+            <br/>
+
+            <p class="lead">
+                {% trans 'Please try again and contact our support if the problem persists.' %}<br/>
+                <a href="mailto:{{ settings.SUPPORT_EMAIL }}">{{ settings.SUPPORT_EMAIL }}</a>
+            </p>
+
+            <br/>
+
+            <p><u>{% trans 'What to do next?' context 'Oops page: links title.' %}</u></p>
+            <ul class="no-indent">
+                <li><a href="{% url 'support:support' %}">{% trans 'Go to support page' context 'Oops page: link.' %}</a></li>
+                <li><a href="{% url 'landing_page' %}">{% trans 'Back to PowerMarket' context 'Oops page: link.' %}</a></li>
+            </ul>
+
+        </div>
+    </div>
+
+{% endblock %}

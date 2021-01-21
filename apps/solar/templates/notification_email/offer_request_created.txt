@@ -1,0 +1,12 @@
+Hi PowerMarket Managers,
+
+an offer was requested.
+
+Name: {{ name }}
+Email: {{ email }}
+Company: {{ company }}
+Phone: {{ phone }}
+
+Assessment URL: {{ short_link }}
+
+Have a nice day!

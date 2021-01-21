@@ -1,0 +1,223 @@
+@import "variables";
+
+#assessment-report {
+  @media (min-width: $screen-sm-min) {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 65%, rgba($white, 1) 100%) no-repeat,
+              url('../img/landscape_1920x1080.jpg') no-repeat;
+    background-size: 100vw calc(100vw * 0.5625);
+  }
+}
+
+.assessment-sharing-options {
+  margin: 15px 0;
+
+  @media all and (min-width: $screen-md-min) {
+    margin: 0;
+    text-align: right;
+  }
+}
+
+.highlight-cards-container {
+  margin: 0 -15px;
+
+  h3 {
+    margin-top: 1rem;
+  }
+
+  .highlight-card {
+    padding: 8px 15px;
+    border-radius: $border-radius-lg;
+    box-shadow: $default-box-shadow;
+
+    .highlight-card-icon {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 3rem;
+      margin-right: 15px;
+    }
+
+    .highlight-card-value {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 24px;
+      font-weight: bold;
+
+    }
+
+    .highlight-card-description {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+
+  .profit-card {
+    @extend .highlight-card;
+    background-color: $primary-color;
+
+    h1, h2, h3 {
+     color: $lightest-gray;
+    }
+  }
+
+  .energy-card {
+    @extend .highlight-card;
+    background-color: $secondary-color;
+
+    h1, h2, h3 {
+     color: $lightest-gray;
+    }
+  }
+
+  .cost-card, .break-even-card {
+    @extend .highlight-card;
+    background-color: darken($lighter-gray, 3%);
+
+    h1, h2, h3 {
+     color: $theme-color;
+    }
+  }
+}
+
+.graph-container {
+  text-align: center;
+
+  .graph {
+    width: 100%;
+    display: inline-block;
+  }
+}
+
+#map {
+  height: 300px;
+}
+
+#signup-form {
+  input {
+    max-width: 400px;
+  }
+}
+
+.environmental-benefits-table {
+  tr > td:not(:first-child) {
+    text-align: right;
+
+  }
+}
+
+.pm-card-icon {
+  width: 40px;
+  height: 40px;
+  margin-top: -5px;
+}
+
+/*.signup-card {
+  h4 {
+    color: $lightest-gray;
+    font-weight: 100;
+    font-size: 100%;
+    margin: 5px 0;
+  }
+}*/
+
+.questions-card {
+  h4 {
+    margin-bottom: 4px;
+  }
+  p {
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .support-option-icon {
+    width: 26px;
+    text-align: left;
+  }
+  .support-option-description {
+    padding-left: 26px;
+  }
+}
+
+.assessment-notes {
+  ul {
+    padding-left: 3rem;
+
+    li {
+      font-size: 80%;
+    }
+  }
+}
+
+.steps-container {
+  margin-bottom: 15px;
+
+  .steps {
+    .step {
+      text-align: center;
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      @media all and (max-width: $screen-xs-max) {
+        display: none;
+      }
+
+      .step-number {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 50%;
+        background-color: $theme-color;
+        color: $white;
+        font-weight: bold;
+      }
+
+      .step-title {
+        margin-top: 5px;
+        font-weight: bold;
+        color: $theme-color;
+      }
+    }
+
+    .step.done {
+      .step-number {
+        background-color: $light-gray;
+        color: $lightest-gray;
+
+      }
+
+      .step-title {
+        color: $light-gray;
+      }
+    }
+
+    .step.active {
+      .step-number {
+        background-color: $primary-color;
+        color: $lightest-gray;
+      }
+
+      .step-title {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.signup-form-container,
+.signup-info-container {
+  background-color: $white;
+  padding: 15px;
+  border-radius: $border-radius;
+  box-shadow: $default-box-shadow;
+
+  @media all and (max-width: $screen-sm-max) {
+    margin-bottom: 15px;
+  }
+}
+
+table.signup-info-table {
+  td {
+    padding-right: 15px;
+    padding-bottom: 10px;
+  }
+}

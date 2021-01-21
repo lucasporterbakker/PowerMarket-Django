@@ -1,0 +1,38 @@
+{% extends 'modal.html' %}
+{% load static bootstrap3 %}
+
+{% block modal_content %}
+    <form method="post">
+        <div class="modal-header" style="border-bottom: 1px solid #d0d0d0;">
+            <h3 class="modal-title"><span class="card-title-icon"><img class="pm-card-icon" src="{% static 'img/PM-logo_50x50.png' %}" /></span>&nbsp; <span>Access the marketplace</span></h3>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>Sign up to..</p>
+                    <p class="theme-text bold">
+                        <i class="glyphicon glyphicon-ok support-option-icon"></i>&nbsp;&nbsp; save, customize and improve this assessment.<br/>
+                        <i class="glyphicon glyphicon-ok support-option-icon"></i>&nbsp;&nbsp; receive quotes and offers directly from suppliers and financiers.<br/>
+                        <i class="glyphicon glyphicon-ok support-option-icon"></i>&nbsp;&nbsp; access our renewable marketplace.<br/>
+                        <i class="glyphicon glyphicon-ok support-option-icon"></i>&nbsp;&nbsp; manage your projects online.<br/>
+                        <i class="glyphicon glyphicon-ok support-option-icon"></i>&nbsp;&nbsp; 100% FREE, we only charge suppliers.<br/>
+                    </p>
+                    <br/>
+                </div>
+                <br/>
+                <div class="col-xs-12">
+                    <div style="max-width: 400px;">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                    </div>
+                    <p><small>By clicking 'sign up' you agree to our <a href="{% url 'terms_of_service' %}" class="default-link" target="_blank">Terms of Service</a>.</small></p>
+                    <br/>
+                    <div class="pull-right">
+                        <a href="#" class="btn btn-light-gray cancel-btn" data-dismiss="modal">Close</a>&nbsp;&nbsp;
+                        <button id="modal-submit-btn" type="submit" class="btn btn-lg btn-primary submit-btn">Sign up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "email/base_email.txt" %}
+{% load i18n l10n %}
+{% block content %}
+Dear {{ name }},
+
+I hope you found PowerMarket's solar assessment tool helpful.
+
+We've developed an innovative, satellite-based technology in conjunction with the European Space Agency that's allowing customers to save up to 30% of their annual energy costs and add a further source of cash flow to their income.
+
+Based on the assessment that you created, your total returns could be around £ {{ assessment.annual_profit_estimate|floatformat:0|localize }} per year, or £ {{ assessment.lifetime_gross_profit_estimate|floatformat:0|localize }} over the project’s life-time, by installing solar.
+
+We understand that for most customers the journey from assessment to finding the right installer, finding the right source of finance, quality assurance and maintenance can be colossal task, and that’s where PowerMarket brings its experience and expertise to simplify it for you.
+
+If you are also looking for such a solution, we would love to help you and understand your need further.
+
+Would it be possible to schedule a call with you at a time of your convenience to understand your requirement further? Alternatively, we can just discuss over email. Look forward to hearing from you.
+
+Best,
+Abhi.
+{% endblock %}

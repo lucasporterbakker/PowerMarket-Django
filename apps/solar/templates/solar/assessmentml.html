@@ -1,0 +1,671 @@
+{% extends "solar/solar_base.html" %}
+{% load i18n l10n static bootstrap3 socialaccount %}
+
+
+{% block meta_title %}{{ block.super }} - {% trans 'Solar Potential Assessment' context 'Meta: page title.' %}{% endblock %}
+
+{% block meta_description %}
+    {% trans "Report of your business' solar potential: generated energy, financial feasibility, environmental impact." context "Meta description." %}
+{% endblock %}
+
+
+{% block styles %}<link href="{% static 'css/assessment.css' %}" rel="stylesheet">{% endblock %}
+
+{% block content %}
+
+    <div id="assessment-report">
+        <div class="section-tight container">
+            <div class="container">
+            <div class="row">
+                {% if example %}
+                    <h1>{% trans 'Sample Report' context 'Assessment page title.' %}</h1>
+                {% else %}
+                    <h1>{% trans 'Artificial Intelligence-based solar assessment (BETA)' context 'Assessment page title.' %}</h1>
+                {% endif %}
+                {% if not example %}
+                    <div class="assessment-sharing-options">
+                        <span class="valign-middle">Share<span class="hidden-xs hidden-md"> your assessment</span>:</span> &nbsp;
+                        <a href="{{ assessment.sharing_url_twitter }}" target="_blank" class="btn btn-sm twitter-btn valign-middle"><i class="fa fa-twitter"></i></a> &nbsp;
+                        <a href="{{ assessment.sharing_url_linkedin }}" target="_blank" class="btn btn-sm linkedin-btn valign-middle"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                {% else %}
+                    <br/>
+                {% endif %}
+                <div class="col-xs-12">
+                    <br/>
+                    <div class="highlight-cards-container">
+                        {{ assessment.apply_ml}}
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="profit-card">
+                                    <div class="highlight-card-icon">
+                                        <i class="glyphicon glyphicon-piggy-bank primary-text-dark"></i>
+                                    </div>
+                                    <div class="highlight-card-value lightest-text">
+                                        {{ assessment.get_currency_display }} {{ assessment.lifetime_gross_profit_estimate|floatformat:0|localize }}
+                                    </div>
+                                    <div class="highlight-card-description primary-text-dark">
+                                        {% trans 'Estimated lifetime savings' context 'Profit card description.' %} **
+                                    </div>
+                                </div>
+                                <br/>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="energy-card">
+                                    <div class="highlight-card-icon">
+                                        <i class="glyphicon glyphicon-flash secondary-text-dark"></i>
+                                    </div>
+                                    <div class="highlight-card-value lightest-text">
+                                        {{ assessment.annual_energy_estimate|floatformat:0|localize }} kWh
+                                    </div>
+                                    <div class="highlight-card-description secondary-text-dark">
+                                        {% trans 'Estimated electricity/year' context 'Energy card description.' %}
+                                    </div>
+                                </div>
+                                <br/>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="cost-card">
+                                    <div class="highlight-card-icon">
+                                        <i class="glyphicon glyphicon-credit-card gray-text"></i>
+                                    </div>
+                                    <div class="highlight-card-value theme-text">
+                                        {% if assessment.system_cost_estimate %}
+                                            {{ assessment.get_currency_display }} {{ assessment.system_cost_estimate|floatformat:0 }}
+                                        {% else %}
+                                            <i>N/A</i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="highlight-card-description gray-text">
+                                        {% trans 'Estimated system cost' context 'Energy card description.' %}
+                                    </div>
+                                </div>
+                                <br/>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="break-even-card">
+                                    <div class="highlight-card-icon">
+                                        <i class="fa fa-calendar-check-o gray-text"></i>
+                                    </div>
+                                    <div class="highlight-card-value theme-text">
+                                        {% if assessment.break_even_duration_estimate %}
+                                            {{ assessment.break_even_duration_estimate|floatformat:1 }} years
+                                        {% else %}
+                                            <i>N/A</i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="highlight-card-description gray-text">
+                                        {% trans 'Estimated payback period' context 'Energy card description.' %}
+                                    </div>
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-6 column-left">
+                            <div class="card">
+                                <h3><i class="fa fa-bar-chart card-title-icon"></i>&nbsp; {% trans 'BETA AI results' context 'Savings / Earnings card title.' %}</h3>
+                                <hr>
+                                {{ assessment.display_ml|safe }}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-6 column-right">
+                            <div class="card">
+                                <h3><i class="fa fa-line-chart card-title-icon"></i>&nbsp; {% trans 'Lifetime value vs costs' context 'Savings / Earnings card title.' %}</h3>
+                                <hr>
+                                <p>
+                                    The chart below shows <b>{{ assessment.get_currency_display }} {{ assessment.lifetime_gross_profit_estimate|floatformat:0 }}</b> estimated electricity cost savings (+ FiT if applicable) over the first 25 years* versus an estimated system cost of <b>{{ assessment.get_currency_display }} {{ assessment.system_cost_estimate|floatformat:0 }}</b>.
+                                </p>
+                                <div class="graph-container">
+                                    <div class="graph">
+                                        <canvas id="cum-savings-earnings-chart" width="300" height="150"></canvas>
+                                    </div>
+                                </div>
+                                <p>*A calculation over 25 years is used due to the length of typical panel warranties, although your system should continue to generate clean, free electricity well beyond this timescale.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-6 column-left">
+                            <div class="card">
+                                <div class="map-container">
+                                    <h3><i class="glyphicon glyphicon-map-marker card-title-icon"></i>&nbsp; {% trans 'Your system' context 'Selection card title.' %}</h3>
+                                    <hr>
+                                    <p>
+                                        {% blocktrans context 'Selection card description' with assessment.selected_area|floatformat:1 as selected_area and assessment.num_panels as num_panels and assessment.system_capacity_estimate|floatformat:1 as system_capacity %}
+                                        Your selection has a total area of: <b>{{ selected_area }} m<sup>2</sup></b> which should provide space for up to a <b>{{ num_panels }} panel</b>, <b>{{ system_capacity }}kW</b> system.
+                                        {% endblocktrans %}<br/>
+                                        [<a href="{% if assessment.location %}{% url 'solar:area' location_uuid=assessment.location.uuid %}{% else %}{% url 'solar:area' %}{% endif %}">draw new selection</a>]
+                                    </p>
+                                    <div id="map"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-6 column-right">
+                            <div class="card">
+                                <h3><i class="fa fa-bar-chart card-title-icon"></i>&nbsp; {% trans 'Monthly savings' context 'Savings / Earnings card title.' %}</h3>
+                                <hr>
+                                <p>{% trans 'The chart below shows your monthly estimated electricity cost savings and FiT (Feed-in Tariff, if applicable), based on your proposed solar PV system and average monthly solar potential in your location' context 'Savings / Earnings card description' %}</p>
+                                <div class="graph-container">
+                                    <div class="graph">
+                                        <canvas id="savings-earnings-chart" width="300" height="150"></canvas>
+                                    </div>
+                                </div>
+                                <p>Estimates are based on a typical current electricity price of <b>{{ assessment.get_currency_display }}{{assessment.unit_energy_price|floatformat:2}}/kWh</b> in your location.  The actual value of electricity generated is likely to vary significantly over the lifetime of your solar PV system.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-6 column-left">
+                            <div class="card">
+                                <h3><i class="glyphicon glyphicon-tree-conifer card-title-icon"></i>&nbsp; {% trans 'Environmental benefits' context 'Environmental benefits card title.' %}</h3>
+                                <hr>
+                                <p>{% trans 'Your suggested solar PV system should have the following benefits to the environment (calculations according to <a href="http://amcleanenergy.com/" target="_blank">American Clean Energy, LLC</a>).' context 'Environmental benefits card description.' %}</p>
+                                <br/>
+                                <table class="table table-striped environmental-benefits-table">
+                                    <tr>
+                                        <td><i class="fa fa-industry"></i>&nbsp; {% trans 'Tons of carbon eliminated in 1 year: ' context 'Environmental benefits table header.' %}</td>
+                                        <td>{{ assessment.environmental_benefits.tons_of_carbon_eliminated_annually|floatformat:0 }}</td>
+                                    </tr>
+                                    {% if assessment.environmental_benefits.cars_off_the_road >= 1 %}
+                                    <tr>
+                                        <td><i class="fa fa-car"></i>&nbsp; {% trans 'Cars taken off the road for 1 year: ' context 'Environmental benefits table header.' %}</td>
+                                        <td>{{ assessment.environmental_benefits.cars_off_the_road|floatformat:0 }}</td>
+                                    </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td><i class="fa fa-filter"></i>&nbsp; {% trans 'Litres of petrol/gasoline saved: ' context 'Environmental benefits table header.' %}</td>
+                                        <td>{{ assessment.environmental_benefits.gasoline_equivalent|floatformat:0 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-tree"></i>&nbsp; {% trans 'Equivalent of trees cleansing the air for 1 year: ' context 'Environmental benefits table header.' %}</td>
+                                        <td>{{ assessment.environmental_benefits.tree_equivalent|floatformat:0 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-pagelines"></i>&nbsp; {% trans 'Equivalent of new trees planted: ' context 'Environmental benefits table header.' %}</td>
+                                        <td>{{ assessment.environmental_benefits.tree_planting_equivalent|floatformat:0 }}</td>
+                                    </tr>
+                                    {% if assessment.environmental_benefits.homes_powerd >= 1 %}
+                                    <tr>
+                                        <td><i class="fa fa-home"></i>&nbsp; {% trans 'Homes powered for 1 year: ' context 'Environmental benefits table header.' %}</td>
+                                        <td>{{ assessment.environmental_benefits.homes_powered|floatformat:0 }}</td>
+                                    </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td><i class="fa fa-lightbulb-o"></i>&nbsp; {% trans 'Lightbulbs powered for 1 year: ' context 'Environmental benefits table header.' %}</td>
+                                        <td>{{ assessment.environmental_benefits.lightbulbs_powered|floatformat:0 }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    {% if not assessment.project and not shared and not example %}
+                        <div class="card">
+                            <h3><span class="card-title-icon"><img class="pm-card-icon" src="{% static 'img/PM-logo_50x50.png' %}" /></span>&nbsp; <span>{% trans 'Sign up to access the marketplace' context 'Request card title.' %}</span></h3>
+                            <hr>
+                            <div class="steps-container">
+                                <div class="steps">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-2 col-sm-offset-1">
+                                            <div class="step active">
+                                                <div class="step-number">1</div>
+                                                <div class="step-title">Solar Assessment</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-2">
+                                            <div class="step">
+                                                <div class="step-number">2</div>
+                                                <div class="step-title">Project Scoping</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-2">
+                                            <div class="step">
+                                                <div class="step-number">3</div>
+                                                <div class="step-title">Project Design</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-2">
+                                            <div class="step">
+                                                <div class="step-number">4</div>
+                                                <div class="step-title">Permissions & Approvals</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-2">
+                                            <div class="step">
+                                                <div class="step-number">5</div>
+                                                <div class="step-title">Project Kick-Off</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="signup-form-container">
+                                        <h3>Realise your solar potential</h3>
+                                        <br/>
+                                        <form id="signup-form" method="POST" action="" autocomplete="off">
+                                            {% csrf_token %}
+                                            {% bootstrap_form form %}
+                                            <p>
+                                                <small>
+                                                    {% url 'terms_of_service' as terms_url %}
+                                                    By clicking 'sign up' you agree to our <a href="{{ terms_url }}" class="default-link">Terms of Service</a>.
+                                                </small>
+                                            </p>
+                                            <input id="sign-up-btn" class="btn btn-lg btn-theme inline-block" value='Sign up' type='submit' />
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="signup-info-container">
+                                        <br/>
+                                        <table class="signup-info-table lead">
+                                            <tr>
+                                                <td><i class="glyphicon glyphicon-ok support-option-icon"></i></td>
+                                                <td>Benefit from our 100% free online platform</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="glyphicon glyphicon-ok support-option-icon"></i></td>
+                                                <td>Receive quality quotes from our selection of suppliers in your area</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="glyphicon glyphicon-ok support-option-icon"></i></td>
+                                                <td>Manage your project at your pace along its lifecycle</td>
+                                            </tr>
+                                        </table>
+                                        {% comment %}{% if not assessment.contact %}
+                                            <h3>Do you need more time to decide?</h3>
+                                            <p>It’s totally fine, enter your email to get the report in your inbox:</p>
+                                            <form id="contact-form" method="POST" action="{% url 'solar:send_report' uuid=assessment.uuid %}" autocomplete="off">
+                                                {% csrf_token %}
+                                                {% bootstrap_form contact_form %}
+                                                <p>
+                                                    <small>
+                                                        By clicking 'sign up' you agree to our <a href="{{ terms_url }}" class="default-link">Terms of Service</a>.
+                                                    </small>
+                                                </p>
+                                                <input id="sign-up-btn" class="btn btn-theme inline-block" value='Send the report' type='submit' />
+                                            </form>
+                                        {% else %}
+                                            <h3>Report sent!</h3>
+                                            <p>Your report is waiting for you in your inbox.</p>
+                                            <p>In order to get a more detailed assessment please fill the form on the left and sign up for the marketplace.</p>
+                                        {% endif %}{% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <br/>
+                    {% if example %}
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6 column-left">
+                                <div class="card">
+                                    <div class="example-information">
+                                        <h3><i class="fa fa-info-circle card-title-icon"></i>&nbsp; {% trans 'Information' context 'Example information card title.' %}</h3>
+                                        <hr>
+                                        <p>{% trans 'This is an example report for a hypothetical PV installation.' context 'Example assessment.' %}</p>
+                                        <br/>
+                                        <p><b><u>{% trans 'Building:' context 'Example assessment.' %}</u></b></p>
+                                        <p>
+                                            {{ name }}
+                                            {% if address %}
+                                                <br/>
+                                                <small>{{ address }}</small>
+                                            {% endif %}
+                                        </p>
+                                        {% if info %}
+                                           <p><b><u>{% trans 'Description:' context 'Example assessment.' %}</u></b></p>
+                                            {{ info|safe }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6 column-right">
+                                <div class="card">
+                                    <div class="create-your-own">
+                                        <h3><i class="fa fa-plus"></i>&nbsp; {% trans 'Create your own' context 'Create your own card title.' %}</h3>
+                                        <hr>
+                                        <p>{% trans 'Click the button below to go back to the homepage and create your own assessment.' context 'Create your own card descriptions.' %}</p>
+                                        <a href="{% url 'landing_page' %}" class="btn btn-lg btn-primary">{% trans 'Get Started' context 'Create your own card button.' %}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                    {% endif %}
+                    {% comment %}{% if not example %}
+                        {% if signup %}
+                            <h2>{% trans 'Looks good. How do I get it?' context 'Assessment.' %}</h2>
+                            <br/>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6 column-left">
+                                {% if signup %}
+                                    <div class="card card-theme signup-card">
+                                        <h3><span class="card-title-icon"><img class="pm-card-icon" src="{% static 'img/PM-logo_50x50.png' %}" /></span>&nbsp; <span>{% trans 'Access the marketplace' context 'Request card title.' %}</span></h3>
+                                        <br/>
+                                        <p>
+                                            {% blocktrans context 'Request card description.' %}
+                                                This report only represents an initial assessment. Sign up to..
+                                            {% endblocktrans %}
+                                        </p>
+                                        <h4><i class="glyphicon glyphicon-ok support-option-icon"></i>&nbsp;&nbsp; save, customize and improve this assessment.</h4>
+                                        <h4><i class="glyphicon glyphicon-ok support-option-icon"></i>&nbsp;&nbsp; receive quotes and offers directly from suppliers and financiers.</h4>
+                                        <h4><i class="glyphicon glyphicon-ok support-option-icon"></i>&nbsp;&nbsp; access our renewable marketplace.</h4>
+                                        <h4><i class="glyphicon glyphicon-ok support-option-icon"></i>&nbsp;&nbsp; manage your projects online.</h4>
+                                        <h4><i class="glyphicon glyphicon-ok support-option-icon"></i>&nbsp;&nbsp; 100% FREE, we only charge suppliers.</h4>
+                                        <br/>
+                                        <form id="assessment-form" method="POST" action="" autocomplete="off">
+                                            {% csrf_token %}
+                                            {% bootstrap_form form %}
+                                            <p>
+                                                <small>
+                                                    {% url 'terms_of_service' as terms_url %}
+                                                    {% url 'privacy_policy' as privacy_url %}
+                                                    By clicking 'sign up' or using any of the social signup buttons you agree to our <a href="{{ terms_url }}" class="default-link">Terms of Service</a>.
+                                                </small>
+                                            </p>
+                                            <br/>
+                                            <input id="sign-up-btn" class="btn btn-lg btn-primary inline-block" value='Sign up' type='submit' />&nbsp;&nbsp;
+                                        </form>
+                                    </div>
+                                {% else %}
+                                    <div class="card notes-card">
+                                        <h3><i class="fa fa-sticky-note card-title-icon"></i>&nbsp; {% trans 'Notes' context 'Questions card title.' %}</h3>
+                                        <hr>
+                                        {% if assessment.notes %}
+                                            <p>{{ assessment.notes|safe }}</p>
+                                        {% else %}
+                                            <p>{% trans 'There are no notes yet for this project.' context 'Assessment: no notes placeholder.' %}</p>
+                                        {% endif %}
+                                        {% if assessment.project.profile.user == request.user %}
+                                            <p>[<a href="javascript:createModal('{% url 'solar:assessment_notes_update' pk=assessment.pk %}');">edit</a>]</p>ƒ
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-xs-12 col-lg-6 column-right">
+                                <div class="card questions-card">
+                                    <h3><i class="fa fa-users card-title-icon"></i>&nbsp; {% trans 'Any questions?' context 'Questions card title.' %}</h3>
+                                    <hr>
+                                    <p>{% trans 'No problem! The sole purpose of this service is to help you with all your concerns. Please pick one of the following support options:' context 'Questions card description.' %}</p>
+                                    <h4><i class="fa fa-comments-o support-option-icon"></i>Live chat</h4>
+                                    <p class="support-option-description"><small>Have you seen the live chat box at the bottom right of the page? Just start typing..., this is the quickest way to get personal assistance from our team.</small></p>
+                                    <h4><i class="fa fa-phone support-option-icon"></i>Request a call</h4>
+                                    <p class="support-option-description"><small>Visit the <a href="{% url 'support:support' %}">support page</a> to request a call.</small></p>
+                                    <h4><i class="fa fa-envelope-o support-option-icon"></i>Email</h4>
+                                    <p class="support-option-description"><small>Write us an email at <a href="mailto:contact@powermarket.net">contact@powermarket.net</a>. We'll get back to you as soon as we can.</small></p>
+                                    <h4><i class="fa fa-list-ul support-option-icon"></i>Frequently asked questions</h4>
+                                    <p class="support-option-description"><small>Have a look at the <a href="{% url 'faq' %}">FAQs</a> to find answers to the most common problems.</small></p>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                    {% endif %}{% endcomment %}
+                </div>
+                <div class="col-xs-12 assessment-notes">
+                    <p>{% trans '* Calculations:' context 'Calculation notes title.' %}</p>
+                    <ul>
+                        <li>{% trans 'Energy generation results are based on local weather and installation assumptions.' context 'Calculation note.' %}</li>
+                        <li>{% trans 'Savings and FiT results are based on average generation predictions and energy price assumptions in UK and India.' context 'Calculation note.' %}</li>
+                        <li>{% trans 'We are currently working on savings estimates for other countries.' context 'Calculation note.' %}</li>
+                        <li>{% trans 'Actual generation and savings may vary in practice.' context 'Calculation note.' %}</li>
+                    </ul>
+                    <br/>
+                    <p>{% trans '* Lifetime value estimates:' context 'Profit estimate notes title.' %}</p>
+                    <ul>
+                        <li>Estimates are based on a nominal lifetime of 25 years, although most systems will continue to operate significantly longer.</li>
+                        <li>For assessments in India only electricity savings are taken into account.</li>
+                        <li>For the UK assessments include FiT earnings according to UK regulations.</li>
+                        <li>Electricity prices are likely to vary significantly over a solar PV system lifetime.</li>
+                    </ul>
+                    <br/>
+                    <p>{% trans '* FiT (Feed-in Tariff if applicable):' context 'FiT notes title.' %}</p>
+                    <ul>
+                        <li>
+                            {% url 'markets' country='uk' as uk_markets %}
+                            {% blocktrans context 'Calculation note.' %}FiT is an incentive paid to producers of green energy. Please have a look at <a href="{{ uk_markets }}" target="_blank">this page</a> for more details about FiT in the UK.{% endblocktrans %}
+                        </li>
+                        <li>{% blocktrans context 'Calculation note.' %}FiT earnings include a degression rate of 0.06-0.07p/quarter (3 month), depending on consumption.{% endblocktrans %}</li>
+                    </ul>
+                    <br/>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ settings.HTTP_PROTOCOL }}://maps.google.com/maps/api/js?key={{ settings.MAPS_API_KEY }}&language=en"></script>
+    <script src="{% static 'bower_components/moment/moment.js' %}"></script>
+    <script src="{% static 'bower_components/chart.js/dist/Chart.min.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
+    <script src="{% static 'js/assessment.js' %}"></script>
+
+    <script>
+
+        var yMarginFactor = 1.2;
+
+        var labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var savings = {{ assessment.formatted_monthly_savings }};
+        var earnings = {{ assessment.formatted_monthly_earnings }};
+
+        var maxProfit = {{ assessment.max_monthly_profit|stringformat:"f" }};
+        var yMax = 0;
+        if (maxProfit >= 5000) {
+            yMax = Math.ceil(maxProfit * yMarginFactor/1000) * 1000;
+        } else {
+            yMax = Math.ceil(maxProfit * yMarginFactor/100) * 100;
+        }
+
+        var $savingsEarningsChart = $("#savings-earnings-chart");
+        var savingsEarningsChart = new Chart($savingsEarningsChart, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Savings',
+                        data: savings,
+                        backgroundColor: hex2rgba(themeColor, .7),
+                        borderColor: themeColor,
+                        borderWidth: 2,
+                        pointBackgroundColor: '#fff'
+                    }, {
+                        label: 'FiT Earnings (if applicable)',
+                        data: earnings,
+                        backgroundColor: hex2rgba(primaryColor, .7),
+                        borderColor: primaryColor,
+                        borderWidth: 2,
+                        pointBackgroundColor: '#fff'
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: '{{ assessment.get_currency_display }}'
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            max: yMax
+                        },
+                        stacked: true
+                    }]
+                }
+            }
+        });
+
+        var cum_profit_raw = {{ assessment.cum_lifetime_profit|safe }};
+        var cum_profit = [];
+        $.each(cum_profit_raw, function(idx, entry){
+            cum_profit.push({
+                x: entry[0],
+                y: entry[1]
+            })
+        });
+
+        var system_cost_raw={{ assessment.system_cost_estimate|safe }};
+        var system_cost = [];
+        $.each(cum_profit_raw, function(idx, entry){
+            system_cost.push({
+                x: entry[0],
+                y: system_cost_raw
+            })
+        });
+
+        var yMaxCumProfit = cum_profit_raw[cum_profit_raw.length-1][1];
+        //round so that we have a max of 2 sig fig on y axis
+        var roundingExp=Math.floor(Math.log(yMaxCumProfit)/Math.LN10);
+        var roundingDec=Math.pow(10,roundingExp);
+        yMaxCumProfit=Math.ceil(yMaxCumProfit/roundingDec)*roundingDec;
+
+        //if (yMaxCumProfit >= 5000) {
+        //    yMaxCumProfit = Math.ceil(yMaxCumProfit * yMarginFactor/1000) * 1000;
+        //} else {
+        //    yMaxCumProfit = Math.ceil(yMaxCumProfit * yMarginFactor/100) * 100;
+        //}
+
+        var $cumSavingsEarningsChart = $("#cum-savings-earnings-chart");
+        var cumSavingsEarningsChart = new Chart($cumSavingsEarningsChart, {
+            type: 'line',
+            data: {
+                datasets: [
+                    {
+                        label: 'Estimated system cost',
+                        data: system_cost,
+                        backgroundColor: hex2rgba(secondaryColor, .3),
+                        borderColor: secondaryColor,
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(0, 0, 0, .0)',
+                        pointBorderColor: 'rgba(0, 0, 0, .0)'
+                    },
+                    {
+                        label: 'Cumulative value (Savings + FiT)',
+                        data: cum_profit.slice(0,301),
+                        backgroundColor: hex2rgba(primaryColor, .7),
+                        borderColor: primaryColor,
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(0, 0, 0, .0)',
+                        pointBorderColor: 'rgba(0, 0, 0, .0)'
+                    },
+                    {
+                        label: 'Value beyond typical 25yr panel warranty', //We might want to include estimated production - many warranties are 90% output in 1st 10-12 yrs and 80% at 25yrs
+                        data: cum_profit,
+                        backgroundColor: hex2rgba(primaryColor, .3),
+                        borderColor: primaryColor,
+                        borderWidth: 1,
+                        borderDash: [3, 3],
+                        pointBackgroundColor: 'rgba(0, 0, 0, .0)',
+                        pointBorderColor: 'rgba(0, 0, 0, .0)'
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        type: 'time',
+                        ticks: {
+                            minRotation: 60
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: '{{ assessment.get_currency_display }}'
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            max: yMaxCumProfit
+                        }
+                    }]
+                },
+                tooltips: {
+                    enabled: true
+                }
+            }
+        });
+
+        function Polygon(map) {
+            var path = new google.maps.MVCArray;
+            var poly = new google.maps.Polygon({
+                strokeWeight: 2,
+                fillColor: secondaryColor,
+                strokeColor: secondaryColor
+            });
+            poly.setMap(map);
+            poly.setPaths(new google.maps.MVCArray([path]));
+            return {
+                path: path,
+                poly: poly,
+                markers: []
+            }
+        }
+
+        function init_map() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                mapTypeId: google.maps.MapTypeId.SATELLITE,
+                center: {
+                    lat: {{ assessment.lat }},
+                    lng: {{ assessment.lng }}
+                },
+                draggable: false,
+                panControl: false,
+                tilt: 0,
+                zoom: 18,
+                maxZoom: 20,
+                fullscreenControl: false,
+                mapTypeControl: false,
+                streetViewControl: false,
+                rotateControl: false,
+                scrollwheel: false
+            });
+
+            var points = [];
+
+            {% for poly in assessment.mpoly %}
+                var polygon = new Polygon(map);
+                {% for point in poly.0 %}
+                    var position = new google.maps.LatLng(
+                        parseFloat({{ point.0 }}).toFixed(6),
+                        parseFloat({{ point.1 }}).toFixed(6)
+                    );
+                    polygon.path.insertAt(polygon.path.length, position);
+                    points.push(position);
+                {% endfor %}
+            {% endfor %}
+
+            var bounds = new google.maps.LatLngBounds();
+            $.each(points, function(idx, p){
+               bounds.extend(p);
+            });
+
+            map.fitBounds(bounds);
+        }
+
+        $(document).ready(function() {
+            init_map();
+
+            {% if not settings.DEBUG and not assessment.project %}
+                setTimeout(function(){
+                    createModal('{% url 'solar:assessment_signup_modal' uuid=assessment.uuid %}');
+                }, 20000);
+            {% endif %}
+        });
+
+    </script>
+{% endblock %}

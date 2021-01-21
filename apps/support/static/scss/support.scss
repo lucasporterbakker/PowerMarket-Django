@@ -1,0 +1,16 @@
+
+.btn-support {
+  width: 100%;
+  text-align: center;
+  margin: 1rem 0;
+  height: 6rem;
+  line-height: 6rem;
+  font-size: 2.5rem;
+  padding: 0 3rem;
+
+  @media (max-width: 767px) {
+    height: 5rem;
+    line-height: 5rem;
+    font-size: 2rem;
+  }
+}

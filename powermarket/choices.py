@@ -1,0 +1,8 @@
+
+CURRENCY_GBP = 'GBP'
+CURRENCY_INR = 'INR'
+
+CURRENCY_CHOICES = (
+    (CURRENCY_GBP, '£'),
+    (CURRENCY_INR, '₹'),
+)

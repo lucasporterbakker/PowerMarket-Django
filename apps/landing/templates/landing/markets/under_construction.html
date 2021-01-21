@@ -1,0 +1,38 @@
+{% extends "static_page.html" %}
+{% load i18n static %}
+
+{% block meta_title %}
+    {{ block.super }} - {% trans 'Under construction' context 'Meta: Page title.' %}
+{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static 'css/markets.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}
+    {% trans 'Solar Market' context 'Page title.' %} {{ country }}
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="row">
+
+        <div class="col-xs-12 section-tight">
+           <p>
+               {% trans 'We are currently compiling information about this market. Thank you for your patience.' context 'Under construction: message.' %}
+           </p>
+
+           <br/>
+
+           <p><u>{% trans 'What to do now?' context 'Under construction.' %}</u></p>
+           <ul class="no-indent">
+               <li><a href="{% url 'landing_page' %}">{% trans 'Back to PowerMarket' context 'Under construction: link.' %}</a></li>
+               <li><a href="{% url 'commercial_solar' %}">{% trans 'Solar for your business' context 'Under construction: link.' %}</a></li>
+           </ul>
+
+        </div>
+
+    </div>
+
+{% endblock %}

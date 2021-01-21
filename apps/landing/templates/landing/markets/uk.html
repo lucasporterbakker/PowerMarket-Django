@@ -1,0 +1,250 @@
+{% extends "static_page.html" %}
+{% load i18n static %}
+
+{% block meta_title %}
+    {{ block.super }} - {% trans 'Solar Market UK' context 'Meta: Page title.' %}
+{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static 'css/markets.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}
+    {% trans 'Solar Market UK' context 'Page title.' %}
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="row">
+
+        <div class="col-xs-12 section-tight">
+
+            <p>
+                {% blocktrans %}
+                    Despite its rather low average of annual sun hours the UK (England, Scotland, Wales, Northern Ireland) is an important and fast growing solar market, ranking 4<sup>th</sup> among all nations with regards to installed PV capacity in 2015.
+                {% endblocktrans %}
+            </p>
+
+            <br/>
+
+            <h3>{% trans 'PV capacity' context 'Market UK: section header.' %}</h3>
+
+            <hr>
+
+            <p>{% trans 'Total installed PV capacity (domestic + commercial, 2015):' %}</p>
+            <h4>8,780 MW <small>({% trans '4.5% of global capacity, ranked 6<sup>th</sup> *' %})</small></h4>
+
+            <br/>
+
+            <p>{% trans 'PV capacity added in 2015:' %}</p>
+            <h4>3,510 MW <small>({% trans '8.0% of global added capacity, ranked 4<sup>th</sup> *' %})</small></h4>
+
+            <br/>
+
+            <p><small>* {% trans 'Source:' %} <a href="http://www.iea-pvps.org/fileadmin/dam/public/report/PICS/IEA-PVPS_-__A_Snapshot_of_Global_PV_-_1992-2015_-_Final_2_02.pdf" target="_blank">Snapshot of Global Photovoltaics market -  Report IEA PVPS T1-29:2016</a></small></p>
+
+            <br/>
+
+            <h3>{% trans 'PV on commercial buildings' context 'Market UK: section header.' %}</h3>
+
+            <hr>
+
+            <p>
+                {% blocktrans context 'Solar market UK.' %}
+                    The BRE (Building Research Establishment) National Solar Center released a report on solar PV installations on commercial buildings in the UK:
+                {% endblocktrans %}
+                <a href="http://www.r-e-a.net/upload/123160-nsc-solar-roofs-good-practice-guide-web.pdf" target="_blank">BRE (2016) Solar PV on commercial buildings: a guide for owners and developers, (K. Arora, S. Diu, J. Roper and G. Hartnell)</a>.
+            </p>
+
+            <p>
+                <u>{% blocktrans context 'Solar market UK.' %}The following is a summary of their findings:{% endblocktrans %}</u>
+            </p>
+
+            <ul class="no-indent">
+                <li>{% trans 'The UK has an estimated 250,000 hectares of south facing commercial roof space, which could provide roughly 50% of the UK\'s electricity demand if utilized with photovoltaics (PV).' context '' %}</li>
+                <li>{% trans 'In contrast to most other European countries commercial installations in the UK account for only a little more than one quarter of the total generated solar energy of 4.1GW.' context '' %}</li>
+                <li>{% trans 'Power Purchase Agreements (PPA) typically involve a lot of legal complications that account for the relatively low rate of commercial rooftop installations to date.' %}</li>
+                <li>{% trans 'In the UK around 6000-8000m<sup>2</sup> of sloping roof space is needed to accomodate 1MW PV capacity. Flat rooftops require a little more area to avoid shading between each of the panels.' %}</li>
+                <li>{% trans 'The consumption profile of the building(s) on site is key to the financial viability of the project. Generally, the higher the self-consumption percentage, the better the profit.' %}</li>
+            </ul>
+
+            <br/>
+
+            <h3>{% trans 'Commercial energy prices' context 'Market UK: section header.' %}</h3>
+
+            <hr>
+
+            <p>
+                {% blocktrans %}
+                    The following table gives the average energy prices in p/kWh for the last 3 years depending on
+                    size of consumer.
+                {% endblocktrans %}
+            </p>
+
+            <br/>
+
+            <div class="static-page-table-container">
+
+                <table class="energy-price-table">
+                    <tr>
+                        <th>Size of consumer</th>
+                        <th>Q1/2014</th>
+                        <th>Q1/2015</th>
+                        <th>Q1/2016</th>
+                    </tr>
+                    <tr>
+                        <td>Very small (< 20 MWh)</td>
+                        <td>13.20</td>
+                        <td>13.53</td>
+                        <td>12.53</td>
+                    </tr>
+                    <tr>
+                        <td>Small (< 500 MWh)</td>
+                        <td>11.44</td>
+                        <td>11.92</td>
+                        <td>11.71</td>
+                    </tr>
+                    <tr>
+                        <td>Small/Medium (< 2,000 MWh)</td>
+                        <td>10.28</td>
+                        <td>10.59</td>
+                        <td>10.41</td>
+                    </tr>
+                    <tr>
+                        <td>Medium (< 20,000 MWh)</td>
+                        <td>9.46</td>
+                        <td>9.81</td>
+                        <td>9.63</td>
+                    </tr>
+                    <tr>
+                        <td>Large (< 70,000 MWh)</td>
+                        <td>9.39</td>
+                        <td>9.56</td>
+                        <td>9.48</td>
+                    </tr>
+                    <tr>
+                        <td>Very large (< 150,000 MWh)</td>
+                        <td>9.02</td>
+                        <td>9.39</td>
+                        <td>9.27</td>
+                    </tr>
+                    <tr>
+                        <td>Extra large (> 150,000 MWh)</td>
+                        <td>9.03</td>
+                        <td>9.03</td>
+                        <td>8.88</td>
+                    </tr>
+                    <tr class="border-top">
+                        <td>Average</td>
+                        <td>10.06</td>
+                        <td>10.35</td>
+                        <td>10.17</td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <br/>
+            <br/>
+
+            <p><small>* {% trans 'Source:' %} <a href="https://www.gov.uk/government/statistical-data-sets/gas-and-electricity-prices-in-the-non-domestic-sector" target="_blank">Department of Energy & Climate Change</a></small></p>
+
+            <br/>
+
+            <h3>{% trans 'FiT (Feed-in Tariff) rate' context 'Market UK: section header.' %}</h3>
+
+            <hr>
+
+            <p>
+                {% blocktrans %}
+                    The following table gives the FiT rate for Q1/2016. The FiT rate is subject to a fixed degression rate of 0.06-0.07p/quarter depending on the amount of electricity generation.
+                {% endblocktrans %}
+            </p>
+
+            <br/>
+
+            <div class="static-page-table-container">
+
+                <table class="fit-rate-table">
+                    <tr>
+                        <th>Capacity</th>
+                        <th>FiT rate in p/kWh</th>
+                    </tr>
+                    <tr>
+                        <td>< 10kW</td>
+                        <td>3.70</td>
+                    </tr>
+                    <tr>
+                        <td>< 50kW</td>
+                        <td>3.89</td>
+                    </tr>
+                    <tr>
+                        <td>< 250kW</td>
+                        <td>1.79</td>
+                    </tr>
+                    <tr>
+                        <td>< 1MW</td>
+                        <td>1.65</td>
+                    </tr>
+                    <tr>
+                        <td>> 1MW</td>
+                        <td>0.52</td>
+                    </tr>
+                    <tr>
+                        <td>Stand alone</td>
+                        <td>0.42</td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <br/>
+            <br/>
+
+            <p><small>* {% trans 'Source:' %} <a href="https://www.ofgem.gov.uk/publications-and-updates/feed-tariff-fit-tariff-table-1-april-2017" target="_blank">https://www.ofgem.gov.uk/publications-and-updates/feed-tariff-fit-tariff-table-1-april-2017</a></small></p>
+
+            <br/>
+
+            <p>
+                {% blocktrans %}
+                    Note: FIT Payment rates for solar photovoltaic installations are determined by the Gas and Electricity Markets Authority (Ofgem) under Article 13 of the Feed-in Tariffs Order
+                    2012, in accordance with Annex 3 to Schedule A to Standard Licence Condition 33.
+                {% endblocktrans %}
+            </p>
+
+            <p>
+                 {% blocktrans %}A table of FiT rates for hydro generating stations, solar photovoltaic systems, wind turbines, anaerobic digestion systems and combined heat and power systems from April 1, 2016 trough March 31, 2019 can be found on the official ofgem website:{% endblocktrans %}
+                 <a href="https://www.ofgem.gov.uk/publications-and-updates/feed-tariff-fit-tariff-table-1-april-2017" target="_blank">FIT Generation & Export Payment Rate Table from 01 April 2017 - 31 March 2018</a>
+            </p>
+
+            <br/>
+
+
+            <h3>{% trans 'Solar potential maps' context '' %}</h3>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="col-xs-12 col-lg-6 solarmap-container">
+                    <img src="{% static 'img/solarmaps/solargis-map-UK-GHI_700x900.jpg' %}" width="100%" height="auto" alt="Global Horizontal Solar Irradiance UK" />
+                    <br/>
+                    <br/>
+                    <p><small>* {% trans 'Source:' %} <a href="http://solargis.com/assets/graphic/free-map/GHI/Solargis-United-Kingdom-GHI-solar-resource-map-en.png" target="_blank">GHI Solar Map © 2016 Solargis</a></small></p>
+                </div>
+
+                <div class="col-xs-12 col-lg-6 solarmap-container">
+                    <img src="{% static 'img/solarmaps/solargis-map-UK-DNI_700x900.jpg' %}" width="100%" height="auto" alt="Direct Normal Solar Irradiance UK" />
+                    <br/>
+                    <br/>
+                    <p><small>* {% trans 'Source:' %} <a href="http://solargis.com/assets/graphic/free-map/DNI/Solargis-United-Kingdom-DNI-solar-resource-map-en.png" target="_blank">DNI Solar Map © 2016 Solargis</a></small></p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

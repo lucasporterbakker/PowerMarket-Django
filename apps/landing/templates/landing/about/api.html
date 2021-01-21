@@ -1,0 +1,122 @@
+{% extends "static_page.html" %}
+{% load i18n static %}
+
+{% block meta_title %}
+    {{ block.super }} - API
+{% endblock %}
+
+{% block meta_description %}
+    {% trans "PowerMarket solar potential assessment API. Offer your customers solar assessments via satellite imagery." context "Meta description." %}
+{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static 'css/api.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}
+    {% trans 'API' context 'Page title.' %}
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="row">
+
+        <div class="col-xs-12 section-tight">
+
+            <h3>{% trans 'What does it take to acquire/increase customers?' context 'API page: section header.' %}</h3>
+
+            <p>{% trans 'Well, the answer would be..' context 'API page.' %}</p>
+
+            <p>
+                - {% trans 'Time' context 'API page: bullet.' %}<br/>
+                - {% trans 'Effort' context 'API page: bullet.' %}<br/>
+                - {% trans 'Money' context 'API page: bullet.' %}<br/>
+                - {% trans 'Constant engagement' context 'API page: bullet.' %}<br/>
+            </p>
+
+            <br/>
+
+            <p>
+                {% blocktrans context 'API page.' %}
+                    And even after all this, a majority of customers drop out as soon as you ask for their email or personal information!
+                    To top it off, think about the amount you spend on initial roof-top assessments.
+                {% endblocktrans %}
+            </p>
+
+            <br/>
+
+            <h3>{% trans 'What if there was a way to simplify all this… with minimal cost to you?' context 'API page: section header.' %}</h3>
+
+            <p>
+                {% blocktrans context 'API page.' %}
+                    PowerMarket has developed an automated tool that allows customers to assess their property’s solar RoI in a few seconds. Not just roof-tops, but any open area - car-park, swimming pool, lawn, you name it! Hundreds of customers have already used it to asses their property’s solar RoI, and you too can allow your customers access - from your own website.
+                {% endblocktrans %}
+            </p>
+
+            <p>
+                - {% trans 'Seamless integration with your website.' context 'API page: bullet.' %}<br/>
+                - {% trans 'Assessment without requirement of personal information.' context 'API page: bullet.' %}<br/>
+                - {% trans 'Hence trust factor increased and higher likelihood of trial.' context 'API page: bullet.' %}<br/>
+                - {% trans 'Generation projections and RoI reports can be customised to the PV solution offered by you.' context 'API page: bullet.' %}<br/>
+            </p>
+
+            <br/>
+
+            {% comment %}
+
+            <h3>{% trans 'Pricing' context 'API page: section header.' %}</h3>
+
+            <br/>
+
+            <div class="">
+                <table class="api-access-table">
+                    <tr>
+                        <th></th>
+                        <th><h4>{% trans 'Basic' context 'API page: table header.' %}</h4></th>
+                        <th><h4>{% trans 'Premium' context 'API page: table header.' %}</h4></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% trans 'Monthly' context 'API page: table entry.' %}<br/>
+                            {% trans 'Annual' context 'API page: table entry.' %}
+                        </td>
+                        <td>
+                            £ 50<br/>
+                            £ 480<br>
+                        </td>
+                        <td>
+                            £ 100<br/>
+                            £ 960*
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            {% trans 'Limit < 500 users / month.' context 'API page: table entry.' %}
+                        </td>
+                        <td>
+                            {% trans 'Limit < 2000 users / month.' context 'API page: table entry.' %}<br/>
+                            * {% trans 'Annual package also includes tech support, integration into existing website.' context 'API page: table entry.' %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <br/>
+            <br/>
+
+            {% endcomment %}
+
+            <h3>{% trans 'Request access' context 'API page: section header.' %}</h3>
+
+            <p>
+                {% trans 'As of now the PowerMarket API is still experimental. Please write us a message if you are interested in using it.' context 'API page.' %}<br/>
+                <a href="mailto:{{ settings.CONTACT_EMAIL}}">{{ settings.CONTACT_EMAIL }}</a>
+            </p>
+
+        </div>
+
+    </div>
+
+{% endblock %}

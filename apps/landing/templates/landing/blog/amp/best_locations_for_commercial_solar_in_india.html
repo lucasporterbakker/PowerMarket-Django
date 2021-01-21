@@ -1,0 +1,57 @@
+{% extends "landing/blog/amp/amp_blog_article.html" %}
+{% load i18n static svg %}
+
+{% block page_title %}Best locations for commercial solar in India{% endblock %}
+{% block page_subtitle %}C.L.E.R (Cost, Location, Environmental Impact and RoI){% endblock %}
+{% block article_author %}<a href="https://www.linkedin.com/in/haemroy/" target="_blank" class="underline">Haem Roy</a>{% endblock %}
+{% block article %}
+    <p>
+        <b>We begin with answering the one big question that every company thinking of installing solar is
+            first posed with: ‘How much would it cost?’</b>
+    </p>
+    <div>
+        <amp-img src="{% static 'img/rooftops-new_1920x740.jpg' %}" alt="Monetise your roof with PowerMarket" width="800" height="308"></amp-img>
+    </div>
+    <p>
+        The cost of installing a solar project in different countries can vary based on many factors such
+        as local manufacturing and import duties. In addition to that, the cost of solar can also differ
+        significantly based on the quality of solar panels and installation quality. As a result, the customer
+        must always be careful in selecting their supplier/EPC - a good way to do that is by asking for product
+        warranties. An easy way to find out the cost and identify pre-rated, high quality suppliers/EPCs is
+        by <a href="{% static 'landing_page' %}" class="underline">signing-up on PowerMarket</a> where we
+        verify and do a thorough background check on everyone listed.
+    </p>
+    <p>
+        However, the cost of the solar is not the only critical factor. One of the best solutions is to
+        install solar for captive use or self-consumption. By doing so, companies can reduce their dependence
+        on utility electricity by 30%-50%. Companies that are looking for ways to improve their environmental
+        impact and reduce operational cost also look for assets that have competitive return on investment
+        (RoI), and solar is such an asset. But in order to assess that, one must take several factors such as
+        solar irradiation, cost of electricity, location, site conditions etc into account.
+    </p>
+    <p>
+        For example, below are some of the states ideal for solar installation:
+    </p>
+    <div>
+        <amp-img src="{% static 'img/solar-map-india_1200x600.jpg' %}" alt="Solar map India" width="800" height="400"></amp-img>
+    </div>
+    <p class="text-center"><small><i>Figure 1: States ideal for captive commercial Solar, studied by PowerMarket, image source: Google Maps</i></small></p>
+    <p>
+        The above shown states, although not an exhaustive list, have two key factors in common –
+    </p>
+    <ol>
+        <li>High solar irradiation</li>
+        <li>High commercial electricity price</li>
+    </ol>
+    <p>
+        These two key factors make them ideal for a solar installation. As a result, the RoI of solar in
+        these states could be as early as 4-5 years. Solar panels on the other hand could be installed pretty
+        much anywhere – rooftop, carpark, open field etc.
+    </p>
+    <p>
+        Nevertheless, instead of trying to work all of these out by yourself, you can assess the Cost,
+        Environmental Impact and RoI of solar on your company for FREE by using
+        <a href="{% url 'landing_page' %}" class="underline">PowerMarket’s solar assessment tool</a> and sign-up to buy your
+        customised solar solution.
+    </p>
+{% endblock %}

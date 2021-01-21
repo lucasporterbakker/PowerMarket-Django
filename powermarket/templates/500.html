@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block meta_title %}{% trans 'Server error' %}{% endblock %}
+{% block styles %}<link href="{% static 'css/error_page.css' %}" rel="stylesheet">{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block content %}
+    <div class="centered-content-container">
+        <div class="centered-content">
+            <h1 class="text-xxl">500</h1>
+            <h1>Server error.</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer_container %}{% endblock %}

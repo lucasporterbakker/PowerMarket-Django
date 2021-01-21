@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% load i18n static bootstrap3 %}
+
+{% block styles %}
+    <link href="{% static 'css/theme.css' %}" rel="stylesheet">
+    <link href="{% static 'css/auth.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block wrapper %}
+
+    <div class="auth-container">
+        <div class="auth-inner-container">
+
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-xs-12">
+
+                        <div class="auth-branding">
+                            <div class="logo-container">
+                                <a href="{% url 'landing_page' %}"><img src="{% static 'img/PM-logo-large_240x240.png' %}" height="80" width="80" /></a>
+                            </div>
+                            <div class="brand-container">
+                                <a href="{% url 'landing_page' %}" class="no-decoration"><h2>Power Market</h2></a>
+                            </div>
+                        </div>
+                        <div class="auth-content">
+                            {% block content %}
+                                {% block auth_title_container %}
+                                    <div class="auth-title">
+                                        <h4>{% block auth_title %}{# Page title goes here. #}{% endblock %}</h4>
+                                    </div>
+                                {% endblock %}
+                                {% block auth_description-container %}
+                                    <div class="max-500">
+                                        {% block auth_description %}{# Additional description goes here. #}{% endblock %}
+                                    </div>
+                                {% endblock %}
+                                {% if form %}
+                                    {% block auth_form %}
+                                        <div class="auth-form">
+
+                                            <form class="{% block auth_form_class %}{% endblock %}" method="POST" action="{% block auth_form_action %}{% endblock %}" autocomplete="off">
+
+                                                {% csrf_token %}
+                                                {% bootstrap_form form %}
+
+                                                {% block auth_form_info %}{# Additional information to the form. #}{% endblock %}
+
+                                                {% block auth_submit_btn %}
+                                                    <input type="submit" name="submit" class="btn btn-lg btn-primary" value="{% block submit_btn_label %}{% trans 'Submit' context 'Default auth submit button label.' %}{% endblock %}" />
+                                                {% endblock %}
+
+                                            </form>
+
+                                        </div>
+                                    {% endblock %}
+                                {% endif %}
+                                <div class="auth-additional">
+                                    {% block auth_additional %}{# Additional content goes here. #}{% endblock %}
+                                </div>
+                                <div class="auth-footer">
+                                    {% block auth_footer %}{# Links, etc. #}{% endblock %}
+                                </div>
+                            {% endblock %}
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block shoutout %}{% endblock %}
+
+{% block footer_container %}{% endblock %}

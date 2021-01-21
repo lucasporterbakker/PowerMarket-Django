@@ -1,0 +1,23 @@
+/*
+ *   404
+ *
+ *   Author: Toni Engelhardt
+ *   Date: July 28, 2016
+ *
+ *   > scss/404.scss:
+ *   > 404: Page not found.
+*/
+
+@import 'variables';
+
+
+#wrapper {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  background: #000 url('../img/eclipse_1920x1080.jpg') center center no-repeat;
+
+  h1, h2, h3, h4 {
+    color: rgba(255, 255, 255, .3);
+  }
+}

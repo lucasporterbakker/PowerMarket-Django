@@ -1,0 +1,30 @@
+{% extends "static_page.html" %}
+{% load i18n %}
+
+{% block meta_title %}
+    {{ block.super }} - Cookie use
+{% endblock %}
+
+{% block meta_description %}
+    {% trans "Policy for cookie use on the PowerMarket website." context "Meta description." %}
+{% endblock %}
+
+{% block page_title %}Cookie use{% endblock %}
+
+{% block page_content %}
+
+    <p><small><b>Last updated on Jan 12, 2017.</b></small></p>
+
+    <br/>
+
+    <p>This site uses cookies to deliver a better user experience. Some cookies are essential, and the site won't work properly without them. These cookies are set when you submit a form, login or interact with the site by doing something that goes beyond clicking on simple links. Additionally we use non-essential cookies to anonymously track visitors or enhance your experience of the site.</p>
+
+    <p><b>Please don't use this site if you don't agree to cookie use.</b></p>
+
+    <p>We also use 3rd-party services like <a href="https://analytics.google.com/analytics/" target="_blank">Google Analytics</a> (please consult the <a href="https://www.google.com/policies/privacy/" target="_blank">Google Privacy Policy</a> for more details on cookie usage by Google Analytics), which use cookies to anonymously track user behaviour.
+
+    <p>To control third party cookies, you can adjust your browser settings.</p>
+
+    <p>By using our site you accept our <a href="{% url 'privacy_policy' %}">Privacy Policy</a>.</p>
+
+{% endblock %}

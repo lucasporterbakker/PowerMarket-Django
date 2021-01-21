@@ -1,0 +1,50 @@
+@import 'variables';
+
+
+#financing-table-container {
+  box-shadow: $default-box-shadow;
+  padding: 15px;
+
+  #financing-table {
+    table-layout: fixed;
+    width: 100%;
+
+    thead {
+      h3 {
+        margin-top: 10px;
+
+      }
+    }
+
+    th, td {
+      padding: 10px 10px;
+    }
+
+    th {
+
+    }
+
+    td {
+      font-size: 90%;
+    }
+
+    ul {
+      padding-left: 1.2em;
+      list-style-type: square;
+    }
+
+    .table-success {
+      background-color: $theme-success-pastel;
+      color: $theme-success;
+    }
+
+    .table-warning {
+      background-color: $theme-warning-pastel;
+      color: $theme-warning;
+    }
+
+    .table-lightest-gray {
+      background-color: $lightest-gray;
+    }
+  }
+}

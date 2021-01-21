@@ -1,0 +1,242 @@
+@import "variables";
+
+#wrapper {
+  min-height: 100vh;
+}
+
+.steps-container {
+  @media all and (min-width: $screen-sm-min) {
+    background-color: $lightest-gray;
+  }
+
+  .steps {
+    .step {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      @media all and (max-width: $screen-xs-max) {
+        display: none;
+      }
+
+      .step-number {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 50%;
+        background-color: $theme-color;
+        color: $white;
+        font-weight: bold;
+      }
+
+      .step-title {
+        margin-top: 5px;
+        font-weight: bold;
+        color: $theme-color;
+      }
+    }
+
+    .step.done {
+      .step-number {
+        background-color: $light-gray;
+        color: $lightest-gray;
+      }
+
+      .step-title {
+        color: $light-gray;
+      }
+    }
+
+    .step.active {
+      background-color: $white;
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+      border-bottom: 1px solid $white;
+
+      @media all and (max-width: $screen-xs-max) {
+        display: block;
+      }
+    }
+  }
+}
+
+.highlight-card {
+  padding: 1rem;
+  border-radius: $border-radius-lg;
+  box-shadow: $default-box-shadow;
+}
+
+.profit-card {
+  @extend .highlight-card;
+  background-color: $primary-color;
+  color: $lightest-gray;
+}
+
+.energy-card {
+  @extend .highlight-card;
+  background-color: $secondary-color;
+  color: $lightest-gray;
+}
+
+.cost-card, .break-even-card {
+  @extend .highlight-card;
+  background-color: darken($lighter-gray, 3%);
+
+  h1, h2, h3 {
+   color: $theme-color;
+  }
+}
+
+.project-status-description {
+  margin-top: 1rem;
+}
+
+.project-status-btn {
+  // margin-top: .5rem;
+  margin-left: 10px;
+  vertical-align: middle;
+  color: $light-gray;
+  font-size: 14px;
+  font-weight: bold;
+
+  &:hover {
+    color: $gray;
+    text-decoration: none;
+  }
+}
+
+.offer-container {
+  display: block;
+  background: darken($lighter-gray, 3%);
+  color: $gray;
+  padding: 1rem;
+  border-radius: $border-radius;
+  box-shadow: $default-box-shadow;
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  &:hover {
+    background: darken($lighter-gray, 6%);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .offer-title-container {
+    font-weight: bold;
+    color: $theme-color;
+  }
+
+  .offer-status-container {
+    font-size: 90%;
+    margin: 5px 0;
+  }
+
+  .offer-age-container {
+    font-size: 70%;
+  }
+}
+
+table.personal-data-table {
+  font-size: 90%;
+
+  td {
+    padding-right: 15px;
+  }
+
+  .company-row > td {
+    padding: 5px 0;
+  }
+
+}
+
+.todo-list {
+  .done {
+    text-decoration: line-through;
+  }
+}
+
+.data-input-container {
+  position: relative;
+  height: 34px;
+
+  @media all and (min-width: $screen-sm-min) {
+    max-width: 320px;
+  }
+
+  input {
+    position: absolute;
+    padding: 0 46px !important;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .input-icon {
+    position: absolute;
+    line-height: 34px;
+
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .input-icon-left {
+    @extend .input-icon;
+    left: 12px;
+  }
+
+  .input-icon-right {
+    @extend .input-icon;
+    right: 12px;
+  }
+
+}
+
+.data-save-btn {
+  margin-top: 10px;
+}
+
+.electricity-bills {
+  .electricity-bill-container {
+    position: relative;
+
+    .electricity-bill {
+      display: block;
+      background-color: $lighter-gray;
+      padding: 7px 16px;
+      margin-bottom: 7px;
+      border-radius: $border-radius;
+      box-shadow: $default-box-shadow;
+    }
+
+    .electricity-bill-delete-btn {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      top: 0;
+      right: 0;
+      background-color: darken($lighter-gray, 5%);
+      color: $theme-danger !important;
+
+      &:hover {
+        background-color: darken($lighter-gray, 8%);
+      }
+    }
+  }
+}
+
+.upload-bill-btn {
+  margin-top: 7px;
+}
+
+#id_month {
+  width: 50px;
+}
+
+#id_year {
+  width: 80px;
+}

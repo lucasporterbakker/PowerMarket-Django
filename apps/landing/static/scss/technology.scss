@@ -1,0 +1,25 @@
+@import 'variables';
+
+.technology-icon-container {
+  margin: 2rem 0;
+
+  .technology-icon {
+    width: 120px;
+    margin: auto;
+
+    svg {
+      path, rect, polygon {
+        fill: $theme-color;
+      }
+    }
+  }
+
+  .technology-icon-title {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .technology-icon-description {
+    text-align: center;
+  }
+}

@@ -1,0 +1,191 @@
+@import 'variables';
+
+body, div, a, p,
+h1, h2, h3, h4, h5, h6,
+tr, td, th,
+form .button {
+  font-family: $body-font-family !important;
+}
+
+a:link,
+a:visited {
+  color: $theme-color;
+}
+
+.admin-inline-btn {
+  padding: 0 10px;
+}
+
+.admin-inline-link {
+  color: $default-text-color !important;
+  font-weight: bold;
+
+  &:hover {
+    color: $default-text-color !important;
+    text-decoration: underline;
+  }
+}
+
+.admin-primary-inline-link {
+  color: $primary-color !important;
+  font-weight: bold;
+
+  &:hover {
+    color: $primary-color !important;
+    text-decoration: underline;
+  }
+}
+
+.vpad-5 {
+  margin: 5px 0;
+}
+
+// Default buttons.
+.btn-primary {
+  background-color: $primary-color !important;
+  color: $white !important;
+  border: none;
+  border-radius: $border-radius;
+  display: inline-block;
+
+  &:hover {
+    background-color: $primary-color-darker !important;
+    border: none;
+  }
+
+  &:disabled {
+    opacity: 1;
+  }
+}
+
+.btn-xs {
+  border-radius: $border-radius;
+  padding: 3px 8px;
+  font-size: 80%;
+}
+
+.btn-sm {
+  border-radius: $border-radius;
+  padding: 5px 10px;
+}
+
+.button.default {
+  @extend .btn-primary;
+}
+
+.submit-row input.default {
+  @extend .button.default;
+}
+
+input[type=text],
+input[type=password] {
+  background: transparent;
+  color: $theme-color;
+  border: 2px solid $theme-color;
+  border-radius: $border-radius;
+  outline-color: none !important;
+
+  &:active, &:focus {
+    border-color: $theme-color;
+  }
+}
+
+input[type=submit] {
+  @extend .button.default;
+}
+
+.object-tools a {
+  @extend .button.default;
+}
+
+// Panel headers.
+.module h2,
+.module caption,
+.inline-group h2 {
+  background: $theme-color;
+}
+
+//   Elements
+// ----------------------------------------------
+
+#header {
+  background: $theme-color;
+  color: $light-gray;
+  line-height: normal;
+
+  a:hover {
+    color: $white;
+    border-bottom-color: $white;
+  }
+
+  #branding {
+    height: 100%;
+
+    .navbar-logo {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .navbar-title {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 10px;
+      color: $white;
+      font-size: 140%;
+    }
+
+    .navbar-subtitle {
+      display: inline-block;
+      vertical-align: middle;
+      padding-left: .5rem;
+      color: $light-gray;
+      font-size: 140%;
+    }
+  }
+
+  #user-tools {
+    line-height: 40px;
+  }
+}
+
+div.breadcrumbs {
+  background: $lighter-gray;
+  color: $default-text-color;
+
+  a {
+    color: $primary-color;
+  }
+}
+
+#changelist-filter li.selected a {
+  color: $secondary-color !important;
+  font-weight: bold;
+
+  &:hover {
+    color: darken($secondary-color, 10%) !important;
+  }
+}
+
+.list-style-white {
+  background-color: $white;
+}
+
+.list-style-lightest-gray {
+  background-color: $lightest-gray;
+}
+
+.list-style-success {
+  background-color: rgba($theme-success, .1);
+}
+
+.list-style-info {
+  background-color: rgba($theme-info, .15);
+}
+
+.list-style-warning {
+  background-color: rgba($theme-warning, .1);
+}
+
+.list-style-danger {
+  background-color: rgba($theme-danger, .1);
+}

@@ -1,0 +1,82 @@
+@import 'variables';
+
+body {
+  height: 100vh;
+  background: $theme-color;
+  color: $light-gray;
+}
+
+.auth-container {
+  height: 100vh;
+  min-height: 600px;
+  text-align: center;
+  position: relative;
+
+  .auth-inner-container {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+
+    h1, h2, h3, h4, h5, h6 {
+      color: $lightest-gray;
+
+    }
+
+    .auth-branding {
+      padding-bottom: 1rem;
+    }
+
+    .auth-title {
+      h3, h4 {
+        color: $lightest-gray;
+      }
+    }
+
+    .auth-form {
+      padding-top: 1rem;
+      color: $light-gray;
+      max-width: 400px;
+      margin: auto;
+
+      label {
+        display: none;
+      }
+
+      input.form-control {
+        text-align: center;
+        background-color: $theme-color !important;
+        border: 2px solid $lighter-gray !important;
+        color: $white;
+
+        // From bootstrap.
+        height: 46px;
+        padding: 10px 16px;
+        font-size: 18px;
+        line-height: 1.3333333;
+      }
+
+      #id_password1 {
+        margin-top: 1rem;
+      }
+    }
+
+    .auth-additional {
+      padding-top: 3rem;
+
+      a {
+        color: $gray;
+      }
+    }
+
+    .legal-notice {
+      color: $gray;
+
+      a {
+        color: $light-gray;
+      }
+    }
+
+  }
+}

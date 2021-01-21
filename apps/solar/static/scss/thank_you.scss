@@ -1,0 +1,19 @@
+@import "variables";
+
+.thank-you-container {
+
+  @media (min-width: 768px) {
+    background: url('../img/penguins_1920x740.jpg') bottom no-repeat;
+    // background-position: bottom;
+    padding: 4rem;
+    height: 740px;
+  }
+
+  .thank-you-content-container {
+
+    @media (min-width: 768px) {
+      text-align: center;
+      padding: 3rem;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{% extends "modal.html" %}
+{% load i18n %}
+
+{% block modal_header %}
+    <div class="modal-header">
+        <h3 class="modal-title"><b>{% trans "Offer by" context "Offer modal: modal title." %} {{ object.supplier }}</b></h3>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12">
+        <h4>{{ object.headline }}</h4>
+        <p>{{ object.message|safe }}</p>
+    </div>
+    <div class="col-xs-12">
+        <br/>
+        <p class="alert alert-info">
+            <small>{% blocktrans context "Offer modal: info message." %}
+                If you click on 'I'm interested' your contact information and your report will be submitted to the
+                supplier so that they can get in contact with you for a more detailed offer. This is completely
+                unconditional! We recommend to get in contact with several suppliers to find the best offer for you.
+            {% endblocktrans %}</small>
+        </p>
+    </div>
+{% endblock %}
+
+{% block form_buttons %}
+    <div class="pull-left">
+        <a href="#" class="btn btn-sm btn-light-gray cancel-btn" data-dismiss="modal">{{ form_cancel_label }}</a>&nbsp;&nbsp;
+    </div>
+    <div class="pull-right">
+        <button type="submit" name="button" value="interested" class="btn btn-primary" onclick="workingAnimation();">{% trans "I'm interested" context "Offer modal: accept button." %}</button> &nbsp;
+        <button type="submit" name="button" value="reject" class="btn btn-sm btn-theme" onclick="workingAnimation();">{% trans "Reject" context "Offer modal: accept button." %}</button>
+    </div>
+{% endblock %}

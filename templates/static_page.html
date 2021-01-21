@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block styles %}
+    <link href="{% static 'css/theme.css' %}" rel="stylesheet">
+    <link href="{% static 'css/static_page.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container section-tight">
+        {% block page_title_container %}<div class="static-page-title"><h1>{% block page_title %}{% endblock %}</h1></div>{% endblock %}
+        {% comment %}{% block page_title_line %}<hr>{% endblock %}{% endcomment %}
+        <div class="static-page-content">
+            {% block page_content %}{% endblock %}
+        </div>
+    </div>
+    <br/>
+    <br/>
+{% endblock %}

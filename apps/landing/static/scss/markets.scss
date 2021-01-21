@@ -1,0 +1,26 @@
+@import "variables";
+
+.solarmap-container {
+  img {
+    border: 1px solid $theme-color;
+  }
+}
+
+.energy-price-table, .fit-rate-table {
+  td, th {
+    padding: 2px 20px 2px 0;
+  }
+  tr {
+    td:not(:first-child) {
+      text-align: right;
+    }
+
+    &:first-child {
+      border-bottom: 1px solid $default-text-color;
+    }
+  }
+
+  .border-top {
+    border-top: 1px solid $default-text-color;
+  }
+}

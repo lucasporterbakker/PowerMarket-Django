@@ -1,0 +1,46 @@
+{% extends "static_page.html" %}
+{% load i18n static svg %}
+
+{% block meta_title %}
+    {% trans "Solar 101" context "Meta title." %} - {{ block.super }}
+{% endblock %}
+
+{% block meta_description %}
+    {% trans "Lexicon of all terms related to solar systems, -installations and financial aspects." context "Meta description." %}
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'css/lexicon.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}Solar 101 / Glossary{% endblock %}
+
+{% block page_content %}
+
+    {% for entry in object_list %}
+
+        <div class="row">
+
+            {% ifchanged entry.term|slice:"1" %}
+                {% if not forloop.first %}
+                    <br/>
+                    <br/>
+                {% endif %}
+            {% endifchanged %}
+
+            <div class="col-xs-2 glossary-letter">
+                {% ifchanged entry.term|slice:"1" %}
+                    <h1>{{ entry.term|slice:"1" }}</h1>
+                {% endifchanged %}
+            </div>
+
+            <div id="{{ entry.slug }}" class="col-xs-10 col-md-8 glossary-entry">
+                <h3>{{ entry.term }}{% if entry.abbreviation %} ({{ entry.abbreviation }}){% endif %}</h3>
+                <p>{{ entry.description|safe }}</p>
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "static_page.html" %}
+{% load i18n static bootstrap3 %}
+
+{% block meta_title %}
+    {{ block.super }} - {% trans 'Support' context 'Meta: page title.' %}
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'css/support.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}{% trans 'Support' context 'Page title.' %}{% endblock %}
+
+{% block page_content %}
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <br/>
+            <h3>{% trans 'Contact' context 'Support page section title.' %}</h3>
+            <br/>
+            <p class="lead">
+                <i class="fa fa-phone"></i> &nbsp; <a href="tel:+4402080682966" class="gray-text">+44 020 8068 2966</a><br/>
+                <i class="fa fa-envelope"></i> &nbsp; <a href="mailto:{{ settings.CONTACT_EMAIL }}" class="gray-text">{{ settings.CONTACT_EMAIL }}</a>
+            </p>
+            <br/>
+            <p>
+                <small>
+                    <u>Business hours:</u><br/>
+                    Mo-Fr 9am to 5pm (GMT)
+                </small>
+            </p>
+        </div>
+
+        <div class="col-xs-12">
+            <br/>
+            <h3>{% trans 'Have you seen our live support?' context 'Support page section title.' %}</h3>
+            <p class="max-800">{% blocktrans %}
+                Have a look at the bottom right corner of your screen. With our chat widget you can directly get in contact with one of our staff.
+                If someone is available we will assist you live and guide you through our app if necessary. Otherwise we will get back to you as soon as possible.
+            {% endblocktrans %}</p>
+            <br/>
+        </div>
+
+        {% comment %}
+        <div class="col-xs-12">
+            <h3>{% trans 'Request a call' context 'Support page section title.' %}</h3>
+            <p>{% blocktrans %}
+                Just fill the form below and we will get back to you.
+                If you are located outside of Europe please add a note about your location so that we do not accidentally reach out to you in the middle of the night.
+            {% endblocktrans %}</p>
+            <br/>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <form method="POST" action="" autocomplete="off">
+
+                <div class="form-group">
+                    {# CallRequestForm #}
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                </div>
+
+                <input class="btn btn-lg btn-theme" type='submit' value='Request call' role="button" />
+
+            </form>
+            <br/>
+            <br/>
+        </div>
+        {% endcomment %}
+
+        {% comment %}
+        <div class="col-xs-12">
+            <h3>{% trans 'For more information, please select..' context 'Support page section title.' %}</h3>
+            <br/>
+        </div>
+
+        <div class="col-xs-12 col-md-4 col-lg-3">
+            <a href="" class="btn btn-lg btn-secondary btn-support">I am a user</a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="col-xs-12 col-md-4 col-lg-3">
+            <a href="" class="btn btn-lg btn-secondary btn-support">I am a supplier</a>
+        </div>
+        {% endcomment %}
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+@import "variables";
+
+.team-member-container {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  .team-member-img-container {
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .team-member-description {
+    margin-top: 1rem;
+  }
+}

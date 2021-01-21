@@ -1,0 +1,27 @@
+{% extends "static_page.html" %}
+{% load i18n static %}
+
+{% block meta_title %}
+    {{ block.super }} - {% trans 'Solar market global' context 'Meta: Page title.' %}
+{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static 'css/markets.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}
+    {% trans 'Global solar market' context 'Page title.' %}
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            Test
+        </div>
+
+    </div>
+
+{% endblock %}

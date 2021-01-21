@@ -1,0 +1,131 @@
+{% extends "static_page.html" %}
+{% load i18n static svg %}
+
+{% block meta_title %}
+    {{ block.super }} - {% trans 'Technology' context 'Meta: Page title.' %}
+{% endblock %}
+
+{% block meta_description %}
+    {% trans "Technology PowerMarket is using and developing. Satellite data processing. Machnine learning algorithms. GIS. A.I." context "Meta description." %}
+{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static 'css/technology.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}
+    {% trans 'Technology' context 'Page title.' %}
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="row">
+
+        <div class="col-xs-12">
+
+            <p>
+                {% blocktrans context 'Page description.' %}
+                    PowerMarket is developing cutting-edge technology and software to enhance the way we produce and
+                    consume energy. Our database contains solar potential assessments of many commercial buildings
+                    around the world. They yield valuable information about infrastructure, buildings, economic
+                    potential, etc. The following disciplines comprise our primary research focus.
+                {% endblocktrans %}
+            </p>
+
+            <br/>
+            <br/>
+
+            {# Technology: Satellite Imagery. #}
+            <div class="col-xs-6 col-md-3 technology-icon-container">
+                <div class="technology-icon">
+                    {% svg 'noun-satellite' %}
+                </div>
+                <br/>
+                <div class="technology-icon-title">
+                    <h4>{% trans 'Satellite data processing' context 'Technology: icon title.' %}</h4>
+                </div>
+            </div>
+
+            {# Technology: Machine learning. #}
+            <div class="col-xs-6 col-md-3 technology-icon-container">
+                <div class="technology-icon">
+                    {% svg 'noun-machine-learning' %}
+                </div>
+                <br/>
+                <div class="technology-icon-title">
+                    <h4>{% trans 'Machine learning algorithms' context 'Technology: icon title.' %}</h4>
+                </div>
+            </div>
+
+            {# Technology: GIS. #}
+            <div class="col-xs-6 col-md-3 technology-icon-container">
+                <div class="technology-icon">
+                    {% svg 'noun-gis' %}
+                </div>
+                <br/>
+                <div class="technology-icon-title">
+                    <h4>{% trans 'GIS' context 'Technology: icon title.' %}</h4>
+                </div>
+            </div>
+
+            {# Technology: A.I. #}
+            <div class="col-xs-6 col-md-3 technology-icon-container">
+                <div class="technology-icon">
+                    {% svg 'noun-ai' %}
+                </div>
+                <br/>
+                <div class="technology-icon-title">
+                    <h4>{% trans 'A.I.' context 'Technology: icon title.' %}</h4>
+                </div>
+            </div>
+
+        </div>
+
+        {% comment %}
+        <div class="col-xs-12">
+
+            <br/>
+            <br/>
+
+            <div id="satellite-data-processing">
+                <h3>{% trans 'Satellite data processing' context 'Technology: title.' %}</h3>
+                <ul class="no-indent">
+                    <li>{% trans 'Measurements and feature detection with optical imagery and LiDAR.' context 'Technology: bullet.' %}</li>
+                    <li>{% trans 'Solar irradiation based on weather data.' context 'Technology: bullet.' %}</li>
+                </ul>
+            </div>
+
+            <div id="machine-learning">
+                <h3>{% trans 'Machine learning algorithms' context 'Technology: title.' %}</h3>
+                <ul class="no-indent">
+                    <li>{% trans 'Tilt estimation of roof areas.' context 'Technology: bullet.' %}</li>
+                    <li>{% trans 'Edge detection.' context 'Technology: bullet.' %}</li>
+                    <li>{% trans 'Shade detection.' context 'Technology: bullet.' %}</li>
+                    <li>{% trans 'Large field scanning for potential targets.' context 'Technology: bullet.' %}</li>
+                </ul>
+            </div>
+
+            <div id="gis">
+                <h3>{% trans 'GIS' context 'Technology: title.' %}</h3>
+                <ul class="no-indent">
+                    <li>{% trans 'Fusion with satellite imagery.' context 'Technology: bullet.' %}</li>
+                    <li>{% trans 'Training data outlines.' context 'Technology: bullet.' %}</li>
+                    <li>{% trans 'Solar potential maps.' context 'Technology: bullet.' %}</li>
+                </ul>
+            </div>
+
+            <div id="ai">
+                <h3>{% trans 'A.I.' context 'Technology: title.' %}</h3>
+                <ul class="no-indent">
+                    <li>{% trans 'Market analysis.' context 'Technology: bullet.' %}</li>
+                    <li>{% trans 'Optimization.' context 'Technology: bullet.' %}</li>
+                </ul>
+            </div>
+
+        </div>
+        {% endcomment %}
+
+    </div>
+
+{% endblock %}

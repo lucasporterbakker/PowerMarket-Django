@@ -1,0 +1,14 @@
+@import 'variables';
+
+.press-entry-container {
+  .press-entry-title {
+    a {
+      color: $theme-color;
+
+      &:hover {
+        color: $theme-color;
+      }
+    }
+  }
+}
+

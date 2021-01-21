@@ -1,0 +1,147 @@
+/*
+ *   GLOBAL VARIABLES
+ *
+ *   Authors: Toni Engelhardt
+ *   Date: June 11, 2016
+ *
+ *   > scss/variables.scss:
+ *   > Define all global variables like colors, fonts, etc. here.
+*/
+
+//   Colors
+// ----------------------------------------------
+
+// Theme.
+
+$theme-color: #1a2238;
+$theme-light: lighten($theme-color, 25%);
+
+$primary-color: #248e57;
+$secondary-color: #fea739;
+
+
+// Light & dark versions of theme colours, used for borders, hover, etc.
+$primary-color-darker: darken($primary-color, 5%);
+$secondary-color-darker: darken($secondary-color, 5%);
+
+// Gray scale (to be defined...).
+$black: #000;
+$white: #fff;
+$gray-darker: #333;
+$gray-dark: #555;
+$gray: #6a6a6b;
+$light-gray: #9a9b9d;
+$lighter-gray: #e7e8ea;
+$lightest-gray: #F3F4F6;
+
+// Alerts (to be defined...).
+$theme-success: $primary-color;
+$theme-warning: $secondary-color;
+$theme-danger: #FF6347;  // #FF5B5D;
+$theme-info: #7EB4FF;
+$theme-purple: #CF66FF;
+
+// Alerts pastel.
+$theme-success-pastel: lighten($theme-success, 60%);
+$theme-warning-pastel: lighten($theme-warning, 36%);
+$theme-danger-pastel: lighten($theme-danger, 34%);
+
+// Text.
+$default-text-color: $gray;
+
+
+
+//   Typography
+// ----------------------------------------------
+
+@font-face {
+  font-family: "Roboto Condensed Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf');
+}
+
+@font-face {
+  font-family: "Roboto Condensed Regular";
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf');
+}
+
+$body-font-family: "Roboto Condensed Regular", Helvetica, Roboto, Arial, sans-serif;
+$body-font-size: 16px;
+
+
+//   Forms
+// ----------------------------------------------
+
+$input-placeholder-color: $light-gray;  // rgba($theme-color, 1);
+
+
+//   Elements
+// ----------------------------------------------
+
+$border-radius: 2px;
+$border-radius-lg: 2px;
+
+$navbar-height: 70px;
+$section-vertical-padding: 8rem;
+
+$default-box-shadow: 0 1px 2px rgba(0, 0 , 0, .4);
+
+
+//   Tooltips
+// ----------------------------------------------
+
+$tooltip-default-bg-color: $theme-light;
+$tooltip-default-text-color: $white;
+
+
+//   Social icon colours.
+// ----------------------------------------------
+
+$brand-color-linkedin-bg: #0077B5;
+$brand-color-linkedin-font: #ffffff;
+$brand-color-twitter-bg: #1da1f2;
+$brand-color-twitter-font: #ffffff;
+$brand-color-google-bg: #ffffff;
+$brand-color-google-font: #757575;
+
+
+//   Breakpoints
+//   (taken from Bootstrap)
+// ----------------------------------------------
+
+// Extra small screen / phone
+//** Deprecated `$screen-xs` as of v3.0.1
+$screen-xs:                  480px !default;
+//** Deprecated `$screen-xs-min` as of v3.2.0
+$screen-xs-min:              $screen-xs !default;
+//** Deprecated `$screen-phone` as of v3.0.1
+$screen-phone:               $screen-xs-min !default;
+
+// Small screen / tablet
+//** Deprecated `$screen-sm` as of v3.0.1
+$screen-sm:                  768px !default;
+$screen-sm-min:              $screen-sm !default;
+//** Deprecated `$screen-tablet` as of v3.0.1
+$screen-tablet:              $screen-sm-min !default;
+
+// Medium screen / desktop
+//** Deprecated `$screen-md` as of v3.0.1
+$screen-md:                  992px !default;
+$screen-md-min:              $screen-md !default;
+//** Deprecated `$screen-desktop` as of v3.0.1
+$screen-desktop:             $screen-md-min !default;
+
+// Large screen / wide desktop
+//** Deprecated `$screen-lg` as of v3.0.1
+$screen-lg:                  1200px !default;
+$screen-lg-min:              $screen-lg !default;
+//** Deprecated `$screen-lg-desktop` as of v3.0.1
+$screen-lg-desktop:          $screen-lg-min !default;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max:              ($screen-sm-min - 1) !default;
+$screen-sm-max:              ($screen-md-min - 1) !default;
+$screen-md-max:              ($screen-lg-min - 1) !default;

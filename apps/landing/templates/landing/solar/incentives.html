@@ -1,0 +1,51 @@
+{% extends "static_page.html" %}
+{% load i18n static %}
+
+{% block meta_title %}
+    {% trans 'Incentives for Solar Projects' context 'Page meta title.' %} - {{ block.super }}
+{% endblock %}
+
+{% block meta_description %}
+    {% trans "Information about government incentives for the commercial installation of solar systems." context "Meta description." %}
+{% endblock %}
+
+{% block page_title %}
+    {% trans 'Solar incentives' context 'Page title.' %}
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="row">
+
+        <div class="col-xs-12 section-tight">
+
+            <p>
+                {% blocktrans context 'Solar incentives.' %}
+                    Many countries around the world offer incentives for renewable energy projects in order to
+                    accelerate the large-scale transition to green energy sources. They comprise tax advantages
+                    and subsidies for the generation of green energy and investments in related projects. We are
+                    currently compiling all relevant information and legal aspects for accessing those incentives
+                    on a country/state level.
+                {% endblocktrans %}
+            </p>
+
+            <br/>
+
+            <p>
+                {% blocktrans context 'Solar incentives.' %}
+                    In the meantime, find out how your company can benefit from investing in a photovoltaic system.
+                {% endblocktrans %}
+            </p>
+
+            <br/>
+
+            <p><a href="{% url 'commercial_solar' %}" class="btn btn-lg btn-theme">{% trans 'Solar for your business' %}</a></p>
+
+            <br/>
+            <br/>
+
+        </div>
+
+    </div>
+
+{% endblock %}

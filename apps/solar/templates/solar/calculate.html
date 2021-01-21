@@ -1,0 +1,225 @@
+{% extends "solar/solar_base.html" %}
+{% load i18n static bootstrap3 %}
+
+{% block meta_title %}{{ block.super }} - Calculate solar potential{% endblock %}
+{% block styles %}<link href="{% static 'css/calculate.css' %}" rel="stylesheet">{% endblock %}
+
+{% block content %}
+
+    <div class="container section-tight">
+        <div class="row">
+
+            <div class="col-xs-12">
+                <h1>{% trans 'Solar Potential' context 'Calculations page title.' %} *</h1>
+                <br/>
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+
+                {# Profit. #}
+                <div class="card">
+                    <h1><i class="glyphicon glyphicon-gbp"></i> <span id="annual-savings-and-earnings"></span> <small> / year</small></h1>
+                    <h4>{% trans 'Profit, based on average consumption estimates.' context 'Profit card description.' %}</h4>
+                </div>
+
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+
+                {# Energy. #}
+                <div class="card">
+                    <h1><i class="glyphicon glyphicon-flash"></i> <span id="annual-energy"></span> kWh <small> / year</small></h1>
+                    <h4>{% trans 'Generated <span class="primary-text">green</span> energy.' context 'Energy card description.' %}</h4>
+                </div>
+
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+
+                {# Graph. #}
+                <div class="card">
+                    <h3>{% trans 'Savings / Earnings' context 'Savings / Earnings card title.' %}</h3>
+                    <p>{% trans 'Solar irradiation is depending on location and time of the year. Here is how your earnings and savings estimates look broken down on months.' context 'Savings / Earnings card description' %}</p>
+                    <br/>
+                    <div class="graph-container">
+                        <canvas id="energy-chart" width="300" height="150"></canvas>
+                    </div>
+                    <br/>
+                    <p>[Cumulative graph goes here.]</p>
+                </div>
+
+                {# Environmental benefits. #}
+                <div class="card">
+                    <h3>{% trans 'Environmental benefits' context 'Environmental benefits card title.' %}</h3>
+                    <p>{% trans 'The estimated solar installation going into service would have the following impact on the environment (Calculations according to <a href="http://amcleanenergy.com/" target="_blank">American Clean Energy, LLC</a>).' context 'Environmental benefits card description.' %}</p>
+                    <br/>
+                    <table class="table table-striped">
+                        <tr>
+                            <td><i class="fa fa-industry"></i>&nbsp; {% trans 'Tons of carbon eliminated in 1 year: ' context 'Environmental benefits table header.' %}</td>
+                            <td>{{ tons_of_carbon_eliminated_annually|floatformat:1  }}</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-car"></i>&nbsp; {% trans 'Cars taken off the road for 1 year: ' context 'Environmental benefits table header.' %}</td>
+                            <td>{{ cars_off_the_road|floatformat:1 }}</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-filter"></i>&nbsp; {% trans 'Litres of petrol/gasoline saved: ' context 'Environmental benefits table header.' %}</td>
+                            <td>{{ gasoline_equivalent|floatformat:0 }}</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-tree"></i>&nbsp; {% trans 'Equivalent of trees cleansing the air for 1 year: ' context 'Environmental benefits table header.' %}</td>
+                            <td>{{ tree_equivalent|floatformat:0 }}</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-leaf"></i>&nbsp; {% trans 'Equivalent of new trees planted: ' context 'Environmental benefits table header.' %}</td>
+                            <td>{{ tree_planting_equivalent|floatformat:1 }}</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-home"></i>&nbsp; {% trans 'Homes powered for 1 year: ' context 'Environmental benefits table header.' %}</td>
+                            <td>{{ homes_powered|floatformat:1 }}</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-lightbulb-o"></i>&nbsp; {% trans 'Lightbulbs powered for 1 year: ' context 'Environmental benefits table header.' %}</td>
+                            <td>{{ lightbulbs_powered|floatformat:0 }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+
+                {# Login form. #}
+                <div class="card">
+                    <div class="signup-form-container">
+                        <h3>{% trans 'Improve estimates' context 'Signup card title.' %}</h3>
+                        <p>{% trans 'Get more details and save your assessments. It\'s completely FREE.' context 'Signup card descriptions.' %}</p>
+                    </div>
+                </div>
+
+                {# Email form. #}
+                <div class="card">
+                    <div class="assessment-form-container">
+                        <h3>{% trans 'That is enough' context 'Email card title.' %}</h3>
+                        <p>{% trans 'If you want to receive this report via email, fill the form below and click send. This will also include a unique link which brings you back here to continue later if you wish.' context 'Email card description.' %}</p>
+                        <br/>
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            <p><small>
+                                {% url 'terms_of_service' as terms_url %}
+                                {% url 'privacy_policy' as privacy_url %}
+                                {% blocktrans context 'Email card terms and privacy notifier.' %}By clicking this button you agree to our <a href="{{ terms_url }}">Terms of Service</a> and to our <a href="{{ privacy_url }}">Privacy Policy</a>.{% endblocktrans %}
+                            </small></p>
+                            <br/>
+                            <input id="nextBtn" class="btn btn-lg btn-primary inline-block" value='Send' type='submit' />
+                        </form>
+                    </div>
+                </div>
+
+                {# Questions? #}
+                <div class="card">
+                    <div class="signup-form-container">
+                        <h3>{% trans 'Questions?' context 'Questions card title.' %}</h3>
+                        <p>{% trans 'Don\'t be afraid to ask. Just write us a message at:' context 'Questions card description.' %}</p>
+                        <h4><a href="mailto:contact@powermarket.net">contact@powermarket.net</a></h4>
+                    </div>
+                </div>
+
+            </div>
+
+            {# Note. #}
+            <div class="col-xs-12">
+                <br/>
+                <h4>{% trans '* Note:' context 'Calculation notes title.' %}</h4>
+                <ul>
+                    <li>{% trans 'Results are based on weather and installation assumptions.' context 'Calculation note.' %}</li>
+                    <li>{% trans 'Results are based on average consumption assumptions.' context 'Calculation note.' %}</li>
+                    <li>{% trans 'Actual results may vary.' context 'Calculation note.' %}</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'bower_components/moment/moment.js' %}"></script>
+    <script src="{% static 'bower_components/chart.js/dist/Chart.min.js' %}"></script>
+
+    <script>
+
+        function hex2rgba(hex,opacity){
+            hex = hex.replace('#','');
+            var r = parseInt(hex.substring(0,2), 16);
+            var g = parseInt(hex.substring(2,4), 16);
+            var b = parseInt(hex.substring(4,6), 16);
+            return 'rgba('+r+','+g+','+b+','+opacity+')';
+        }
+
+        var themeColor = '#1a2238';
+        var primaryColor = '#248e57';
+        var secondaryColor = '#fea739';
+
+        var apiUrl = '{% url 'api:calculation' area=area %}';
+
+        $.getJSON(apiUrl, function(data) {
+            var labels = [];
+            var savings = [];
+            var earnings = [];
+
+            $.each(data['monthly_data'], function(idx, entry) {
+                labels.push(entry.month);
+                savings.push(entry.savings);
+                earnings.push(entry.earnings);
+            });
+
+            $('#annual-savings-and-earnings').html(data.annual_total_profit);
+            $('#annual-energy').html(data.annual_energy);
+
+            var $energyChart = $("#energy-chart");
+            var energyChart = new Chart($energyChart, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Savings',
+                            data: savings,
+                            backgroundColor: hex2rgba(secondaryColor, .4),
+                            borderColor: secondaryColor,
+                            borderWidth: 2,
+                            pointBackgroundColor: '#fff'
+                        }, {
+                            label: 'Savings + Earnings',
+                            data: earnings,
+                            backgroundColor: hex2rgba(primaryColor, .4),
+                            borderColor: primaryColor,
+                            borderWidth: 2,
+                            pointBackgroundColor: '#fff'
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: '£'
+                            },
+                            ticks: {
+                                beginAtZero: true
+                            },
+                            stacked: true
+                        }]
+                    }
+                }
+            });
+        });
+
+    </script>
+{% endblock %}

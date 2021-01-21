@@ -1,0 +1,33 @@
+{% extends "modal.html" %}
+{% load i18n %}
+
+{% block modal_form %}
+
+    {% csrf_token %}
+
+    {# Hidden fields. #}
+    {{ form.project }}
+    {{ form.date }}
+
+    {{ form.non_field_errors }}
+
+    <label>Date of bill (MM / YYYY)</label>
+    <div class="date-container form-group">
+        <div class="month-input-container inline-block">
+            {{ form.month }}
+            {% comment %}<div class="inline-block">{{ form.month.errors }}</div>{% endcomment %}
+        </div>
+        &nbsp;
+        <div class="year-input-container inline-block">
+            {{ form.year }}
+            {% comment %}<div class="inline-block">{{ form.year.errors }}</div>{% endcomment %}
+        </div>
+    </div>
+    <label>Electricity bill</label>
+    <div>
+        {{ form.private_file }}
+        <small>{{ form.private_file.help_text }}</small>
+        {{ form.private_file.errors }}
+    </div>
+
+{% endblock %}

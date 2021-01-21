@@ -1,0 +1,46 @@
+@import 'variables';
+
+
+.step-container {
+  padding: 2rem 0;
+  text-align: center;
+
+  .step-icon {
+    width: 7vw;
+    height: 7vw;
+    margin-left: calc((100% - 6vw) / 2);
+    vertical-align: middle;
+
+    @media (max-width: 991px) {
+      width: 18vw;
+      height: 18vw;
+      margin-left: calc((100% - 18vw) / 2);
+    }
+
+    @media (max-width: 767px) {
+      width: 36vw;
+      height: 36vw;
+      margin-left: calc((100% - 36vw) / 2);
+    }
+
+    svg {
+      path, rect, polygon {
+        fill: $theme-color;
+      }
+      path.secondary {
+        fill: $secondary-color;
+      }
+      path.theme {
+        fill: $theme-color;
+      }
+      path.lighter-gray {
+        fill: $lighter-gray;
+      }
+    }
+  }
+
+  .step-description {
+    padding: 4rem 2rem 0 2rem;
+  }
+}
+

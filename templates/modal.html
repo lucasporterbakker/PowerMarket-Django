@@ -1,0 +1,68 @@
+{% load i18n static bootstrap3 %}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+
+        {% block modal_content %}
+
+            <form action="{{ form_action_url }}" method="post">
+
+                {% if modal_title %}
+                    <div class="modal-header">
+                        <h3 class="modal-title"><b>{{ modal_title|safe }}</b></h3>
+                    </div>
+                {% else %}
+                    {% block modal_header %}{% endblock %}
+                {% endif %}
+
+                <div class="modal-body">
+                    <div class="row">
+
+                        {% if modal_content %}
+                            <div class="col-xs-12">
+                                {{ modal_content|safe }}
+                                <br/>
+                                <br/>
+                            </div>
+                        {% else %}
+                            {% block content %}{% endblock %}
+                        {% endif %}
+
+                        <div class="col-xs-12">
+
+                            {% block modal_form %}
+                                {% if form %}
+                                    {% csrf_token %}
+                                    {% bootstrap_form form %}
+                                {% endif %}
+                            {% endblock %}
+
+                            {% if form_info %}
+                                <p><small>{{ form_info|safe }}</small></p>
+                            {% endif %}
+
+                            {% block form_buttons %}
+                                <div class="pull-right">
+                                    {% if form_cancel_label %}<a href="#" class="btn btn-light-gray cancel-btn" data-dismiss="modal">{{ form_cancel_label }}</a>{% endif %}
+                                    {% if form_submit_label %}&nbsp;&nbsp;<button id="modal-submit-btn" type="submit" class="btn btn-primary submit-btn" {% comment %}onclick="workingAnimation();"{% endcomment %}>{{ form_submit_label }}</button>{% endif %}
+                                </div>
+                            {% endblock %}
+
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+        {% endblock %}
+
+    </div>
+
+    <script>
+        function workingAnimation() {
+            document.getElementById('modal-submit-btn').innerHTML = '<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>&nbsp;&nbsp;Working...';
+        }
+    </script>
+
+    {% block modal_scripts %}{# Scripts that have to be executed in the modal. #}{% endblock %}
+</div>

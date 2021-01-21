@@ -1,0 +1,159 @@
+{% extends "email/base_email.html" %}
+{% load i18n l10n %}
+
+{% block content %}
+
+    <br/>
+
+    <p>
+        Dear {{ name }},<br/>
+        <br/>
+        I hope you found PowerMarket's solar assessment tool helpful.<br/>
+        <br/>
+        PowerMarket, supported by Oxford University Innovation and European Space Agency, was founded with a
+        mission – Sustainable energy for all. We’ve developed an innovative, satellite-based technology that allows
+        customers to assess their premises’ solar feasibility and procure from high-quality installers - saving up
+        to 30% of their annual energy costs, without any cost to you.<br/>
+        <br/>
+        Based on the assessment that you created, your total returns could be around
+        £ {{ assessment.annual_profit_estimate|floatformat:0|localize }} per year, or
+        £ {{ assessment.lifetime_gross_profit_estimate|floatformat:0|localize }}
+        over the project’s life-time, by installing solar.<br/>
+        <br/>
+        We understand that for most customers the journey from assessment to finding the right installer, finding
+        the right source of finance, quality assurance and maintenance can be colossal task, and that’s where
+        PowerMarket brings its experience and expertise to simplify it for you.<br/>
+        <br/>
+        If you are also looking for such a solution, we would love to help you and understand your need further.
+        Would it be possible to schedule a call with you at a time of your convenience to understand your requirement
+        further? Alternatively, we can just discuss over email. Look forward to hearing from you.
+    </p>
+
+    <br/>
+
+    <p>
+        Best,<br />
+        Abhi.
+    </p>
+
+    <br/>
+    <br/>
+
+    <div class="report-summary">
+
+        <br/>
+
+        <h4>{% trans "Solar Report Summary" context "Solar assessment email: section header." %}</h4>
+        <p><a href="{{ assessment.full_short_link }}">Go to full report</a></p>
+
+        <br/>
+
+        <div class="card card-profit">
+            <span class="card-title">{{ assessment.get_currency_display }} {{ assessment.lifetime_gross_profit_estimate|floatformat:0|localize }} *</span><br/>
+            <span class="card-content primary-text-dark">Total returns <small>incl. FIT**</small></span>
+        </div>
+        <div class="card card-energy">
+            <span class="card-title">{{ assessment.annual_energy_estimate|floatformat:0|localize }} kWh *</span><br/>
+            <span class="card-content secondary-text-dark">Generated energy/year.</span>
+        </div>
+        <div class="card card-cost">
+            <span class="card-title">{% if assessment.system_cost_estimate %}{{ assessment.get_currency_display }} {{ assessment.system_cost_estimate|floatformat:0 }} *{% else %}<i>N/A</i>{% endif %}</span><br/>
+            <span class="card-content">System cost.</span>
+        </div>
+        <div class="card card-payback">
+            <span class="card-title">{% if assessment.break_even_duration_estimate %}{{ assessment.break_even_duration_estimate|floatformat:1 }} years *{% else %}<i>N/A</i>{% endif %}</span><br/>
+            <span class="card-content">Payback period.</span>
+        </div>
+
+        <br/>
+        <br/>
+
+        <table class="report-table">
+
+            <tr>
+                <td class="table-section-title" colspan="2">Information</td>
+            </tr>
+
+            <tr><td colspan="2"><br/></td></tr>
+
+            <tr>
+                <td>Date created:</td>
+                <td>{{ assessment.created|date }}</td>
+            </tr>
+            <tr>
+                <td>Selected area:</td>
+                <td>{{ assessment.selected_area|floatformat:1|localize }} m<sup>2</sup></td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><br/></td>
+            </tr>
+
+            <tr>
+                <td class="table-section-title" colspan="2">Environmental impact</td>
+            </tr>
+
+            <tr><td colspan="2"><br/></td></tr>
+
+            <tr>
+                <td>{% trans 'Tons of carbon eliminated in 1 year: ' context 'Solar assessment email: Environmental impact.' %}</td>
+                <td>{{ assessment.environmental_benefits.tons_of_carbon_eliminated_annually|floatformat:0 }}</td>
+            </tr>
+            {% if assessment.environmental_benefits.cars_off_the_road >= 1 %}
+                <tr>
+                    <td>{% trans 'Cars taken off the road for 1 year: ' context 'Solar assessment email: Environmental impact.' %}</td>
+                    <td>{{ assessment.environmental_benefits.cars_off_the_road|floatformat:0 }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td>{% trans 'Litres of petrol/gasoline saved: ' context 'Solar assessment email: Environmental impact.' %}</td>
+                <td>{{ assessment.environmental_benefits.gasoline_equivalent|floatformat:0 }}</td>
+            </tr>
+            <tr>
+                <td>{% trans 'Equivalent of trees cleansing the air for 1 year: ' context 'Solar assessment email: Environmental impact.' %}</td>
+                <td>{{ assessment.environmental_benefits.tree_equivalent|floatformat:0 }}</td>
+            </tr>
+            <tr>
+                <td>{% trans 'Equivalent of new trees planted: ' context 'Solar assessment email: Environmental impact.' %}</td>
+                <td>{{ assessment.environmental_benefits.tree_planting_equivalent|floatformat:0 }}</td>
+            </tr>
+            {% if assessment.environmental_benefits.homes_powerd >= 1 %}
+            <tr>
+                <td>{% trans 'Homes powered for 1 year: ' context 'Solar assessment email: Environmental impact.' %}</td>
+                <td>{{ assessment.environmental_benefits.homes_powered|floatformat:0 }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td>{% trans 'Lightbulbs powered for 1 year: ' context 'Solar assessment email: Environmental impact.' %}</td>
+                <td>{{ assessment.environmental_benefits.lightbulbs_powered|floatformat:0 }}</td>
+            </tr>
+
+        </table>
+
+        <br/>
+        <br/>
+
+        <table class="report-notes">
+            <tr>
+                <td>* &nbsp; &nbsp;</td>
+                <td>
+                    Energy generation results are based on local weather and installation assumptions. Profit results
+                    are based on average capacity and UK energy prices. We are currently working on profit estimates
+                    for other countries. Actual results may vary.
+                </td>
+            </tr>
+            <tr>
+                <td>** &nbsp; &nbsp;</td>
+                <td>
+                    The estimate is based on a nominal lifetime of 25 years without accounting for the system cost!
+                    The calculation does not include tax benefits due to deductions.
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <br/>
+
+{% endblock content %}
+

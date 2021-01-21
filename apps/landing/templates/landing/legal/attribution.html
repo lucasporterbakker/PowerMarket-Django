@@ -1,0 +1,133 @@
+{% extends "static_page.html" %}
+{% load i18n static svg %}
+
+{% block meta_title %}
+    {{ block.super }} - Attribution
+{% endblock %}
+
+{% block meta_description %}
+    {% trans "Open source attribution of images and graphics used on powermarket.net." context "Meta description." %}
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'css/attribution.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}Attribution{% endblock %}
+
+{% block page_content %}
+
+    <br/>
+
+    <h3>{% trans 'The Noun Project' context 'Noun project title.' %}</h3>
+    <h4>{% blocktrans context 'Noun project description.' %}The following icons are licenced under the <a href="http://creativecommons.org/licenses/by/3.0/us/" target="_blank"><i class="fa fa-creative-commons"></i> Creative Commons</a> licence and are used on the page partially modified.{% endblocktrans %}</h4>
+
+    <br/>
+    <br/>
+    <br/>
+
+    {% comment %}
+    <div class="col-xs-6 col-md-3 text-center">
+        <div class="attribution-icon">{% svg 'noun-location' %}</div>
+        <br/>
+        <p>by <a href="https://thenounproject.com/creativestall/" target="_blank">Creative Stall</a></p>
+    </div>
+
+    <div class="hidden-md hidden-lg">
+        {# Only visible for xs and sm #}
+        <div class="clearfix"></div>
+        <br/>
+        <br/>
+    </div>
+
+    <div class="col-xs-6 col-md-3 text-center">
+        <div class="attribution-icon">{% svg 'noun-graph' %}</div>
+        <br/>
+        <p>by <a href="https://thenounproject.com/IconIsland/" target="_blank">Icon Island</a></p>
+    </div>
+
+    <div class="col-xs-6 col-md-3 text-center">
+        <div class="attribution-icon">{% svg 'noun-maintenance' %}</div>
+        <br/>
+        <p>by <a href="https://thenounproject.com/milindacourey10/" target="_blank">To Uyen</a></p>
+    </div>
+
+    <div class="clearfix"></div>
+    <br/>
+    <br/>
+
+    <div class="col-xs-6 col-md-3 text-center">
+        <div class="attribution-icon">{% svg 'noun-insurance' %}</div>
+        <br/>
+        <p>by <a href="https://thenounproject.com/rockicon/" target="_blank">Rockicon</a></p>
+    </div>
+
+    {% endcomment %}
+
+    <div class="col-xs-6 col-md-3 text-center">
+        <div class="attribution-icon">{% svg 'noun-polygon' %}</div>
+        <br/>
+        <p>by <a href="https://thenounproject.com/smashicons/" target="_blank">Oliviu Stoian</a></p>
+    </div>
+
+    <div class="col-xs-6 col-md-3 text-center">
+        <div class="attribution-icon">{% svg 'noun-solarpanels' %}</div>
+        <br/>
+        <p>by <a href="https://thenounproject.com/adam.terpening.9/" target="_blank">Adam Terpening</a></p>
+    </div>
+
+    <div class="hidden-md hidden-lg">
+        {# Only visible for xs and sm #}
+        <div class="clearfix"></div>
+        <br/>
+        <br/>
+    </div>
+
+    <div class="col-xs-6 col-md-3 text-center">
+        <div class="attribution-icon">{% svg 'noun-financing' %}</div>
+        <br/>
+        <p>by <a href="https://thenounproject.com/karthicknagarajanps/" target="_blank">Karthick Nagarajan</a></p>
+    </div>
+
+    <div class="col-xs-6 col-md-3 text-center">
+        <div class="attribution-icon">{% svg 'noun-support' %}</div>
+        <br/>
+        <p>by <a href="https://thenounproject.com/grega.cresnar/" target="_blank">Gregor Črešnar</a></p>
+    </div>
+
+    <div class="clearfix"></div>
+    <br/>
+    <br/>
+
+    <div class="col-xs-6 col-md-3 text-center">
+        <div class="attribution-icon">{% svg 'noun-machine-learning' %}</div>
+        <br/>
+        <p>by <a href="https://thenounproject.com/LAFS/" target="_blank">LAFS</a></p>
+    </div>
+
+    <div class="col-xs-6 col-md-3 text-center">
+        <div class="attribution-icon">{% svg 'noun-gis' %}</div>
+        <br/>
+        <p>by <a href="https://thenounproject.com/Rflor/" target="_blank">Rflor</a></p>
+    </div>
+
+    <div class="hidden-md hidden-lg">
+        {# Only visible for xs and sm #}
+        <div class="clearfix"></div>
+        <br/>
+        <br/>
+    </div>
+
+    <div class="col-xs-6 col-md-3 text-center">
+        <div class="attribution-icon">{% svg 'noun-satellite' %}</div>
+        <br/>
+        <p>by <a href="https://thenounproject.com/vectorsmarket/" target="_blank">Vectors Market</a></p>
+    </div>
+
+    <div class="col-xs-6 col-md-3 text-center">
+        <div class="attribution-icon">{% svg 'noun-ai' %}</div>
+        <br/>
+        <p>by <a href="https://thenounproject.com/evanmacdonald/" target="_blank">Evan MacDonald</a></p>
+    </div>
+
+{% endblock %}

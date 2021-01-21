@@ -1,0 +1,23 @@
+{% extends "socialaccount/base.html" %}
+{% load i18n %}
+
+{% block meta_title %}
+    {% trans "Sign up" %} -
+    {{ block.super }}
+{% endblock %}
+
+{% block auth_title %}
+    {% trans 'Sign up' context 'Socialauth signup: page title.' %}
+{% endblock %}
+
+
+{% block auth_description %}
+    {% blocktrans with provider_name=account.get_provider.name site_name=site.name %}
+        You are about to use your {{provider_name}} account to login to
+        {{site_name}}. As a final step, please complete the following form.
+    {% endblocktrans %}
+{% endblock %}
+
+{% block submit_btn_label %}
+    {% trans "Sign Up" %}
+{% endblock %}

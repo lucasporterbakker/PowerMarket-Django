@@ -1,0 +1,355 @@
+@import 'variables';
+
+.default-box-shadow {
+  box-shadow: $default-box-shadow;
+}
+
+.navbar-default {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+#wrapper {
+  padding-top: 0;
+}
+
+#cover {
+  height: calc(100vh - 140px);
+  min-height: 500px;
+  background: url('../img/landscape_1920x1080.jpg') 50% 0 / cover no-repeat;
+  text-align: center;
+  position: relative;
+
+  .cover-content-container {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+
+    .cover-content {
+      display: inline-block;
+
+      .cover-title {
+        margin: auto;
+        max-width: 860px;
+
+        @media (max-width: $screen-xs-max) {
+          h1 {
+            font-size: 2.7rem;
+          }
+          h3 {
+            font-size: 1.5rem;
+          }
+        }
+
+        @media (min-width: $screen-sm-min) {
+          padding: 0 3rem;
+        }
+      }
+
+      .subtitle-seperator {
+        color: rgba($theme-color, .5);
+      }
+
+      .form-group {
+        display: block;
+        padding: 0 1rem;
+
+        @media (max-width: 767px) {
+          padding: 0;
+        }
+
+        .input-prepend {
+          padding-left: 16px;
+
+          span {
+            color: $lightest-gray;
+          }
+        }
+
+        .address-input-container {
+          @extend .default-box-shadow;
+          border: none;
+          width: 100%;
+          max-width: 960px;
+          margin: auto;
+          height: 8rem;
+          font-size: 3rem;
+          border-radius: $border-radius-lg;
+
+          @media (max-width: 767px) {
+            border: none;
+            height: 6rem;
+            font-size: 2rem;
+          }
+
+          input {
+            background-color: rgba($theme-color, 1);
+            font-size: inherit;
+            height: inherit;
+            text-align: center;
+            font-weight: bold;
+            width: 100%;
+            color: $white;
+            padding: 0 5rem;
+            outline: none !important;
+            border: none !important;
+          }
+
+          .add-on {
+            position: absolute;
+            font-size: inherit;
+            color: $lightest-gray;
+            padding-left: 1.5rem;
+            padding-top: 0.3rem;
+            line-height: 8rem;
+
+            @media (max-width: 767px) {
+              line-height: 6rem;
+              padding-top: 0.1rem;
+            }
+          }
+
+          &::-webkit-input-placeholder { color: $lighter-gray; }
+          &:-moz-placeholder { color: $lighter-gray; }
+          &::-moz-placeholder { color: $lighter-gray; }
+          &:-ms-input-placeholder { color: $lighter-gray; }
+        }
+      }
+    }
+  }
+}
+
+.get-started-btn {
+  @extend .default-box-shadow;
+  margin: .5rem;
+  height: 6rem;
+  line-height: 6rem;
+  font-size: 2.5rem;
+  padding: 0 3rem;
+
+  @media (max-width: 767px) {
+    height: 5rem;
+    line-height: 5rem;
+    font-size: 2rem;
+  }
+}
+
+.explore-btn {
+  @extend .default-box-shadow;
+  background-color: $lightest-gray;
+  color: $theme-color;
+  margin: .5rem;
+  height: 4rem;
+  line-height: 3.9rem;
+  font-size: 2rem;
+  padding: 0 2rem;
+  border: none;
+
+  @media (max-width: 767px) {
+    height: 3.5rem;
+    line-height: 3.4rem;
+    padding: 0 1.8rem;
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    background-color: darken($lighter-gray, 3%);
+  }
+}
+
+#supported-by {
+  height: 140px;
+  line-height: 100px;
+  padding: 20px;
+  background-color: $lightest-gray;
+
+  .supported-by-label {
+    line-height: 100px;
+    margin: 0;
+  }
+
+  .supported-by-image-container {
+    img {
+      max-width: 80%;
+      height: auto;
+      max-height: 100px;
+    }
+  }
+}
+
+#headline {
+  background-color: $theme-color;
+
+  h1, h2, h3, h4 {
+    line-height: 1.4;
+    color: $lighter-gray;
+  }
+
+  .glyphicon, .fa {
+    color: $light-gray;
+  }
+}
+
+#how-it-works {
+
+  .group-title {
+    padding: 3rem 0;
+  }
+
+  .step-container {
+    padding: 2rem 0;
+    text-align: center;
+
+    .step-icon {
+      width: 7vw;
+      height: 7vw;
+      margin-left: calc((100% - 6vw)/2);
+      vertical-align: middle;
+
+      @media (max-width: 991px) {
+        width: 18vw;
+        height: 18vw;
+        margin-left: calc((100% - 18vw)/2);
+      }
+
+      @media (max-width: 767px) {
+        width: 36vw;
+        height: 36vw;
+        margin-left: calc((100% - 36vw)/2);
+      }
+
+      svg {
+        path, rect, polygon {
+          fill: $theme-color;
+        }
+        path.secondary {
+          fill: $secondary-color;
+        }
+        path.theme {
+          fill: $theme-color;
+        }
+        path.lighter-gray {
+          fill: $lighter-gray;
+        }
+      }
+    }
+
+    .step-number {
+      padding: 4rem 0 1rem 0;
+      text-align: center;
+
+      .circle {
+        display: inline-block;
+        width: 6rem;
+        height: 6rem;
+        line-height: 6rem;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 50%;
+        background-color: $lighter-gray;
+        color: $theme-color;
+      }
+    }
+
+    .step-title {
+      padding: 0 2rem 2rem 2rem;
+    }
+
+    .step-description {
+      padding: 0 2rem;
+    }
+  }
+}
+
+#screenshots {
+  background-color: $lightest-gray;
+
+  img {
+    box-shadow: $default-box-shadow;
+    border-radius: $border-radius;
+  }
+}
+
+#examples {
+  .example-container {
+
+    .example-image-container {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+    }
+
+    .example-image-container:after {
+      padding-top: 55%;
+      display: block;
+      content: '';
+    }
+
+    .example-image-content {
+      position: absolute;
+      background-color: $lighter-gray;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+
+      .example-image-table-container {
+        display: table;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+
+        .example-image-table-content {
+          display: table-cell;
+          vertical-align: middle;
+
+          h2, h4 {
+            color: $theme-color;
+          }
+        }
+      }
+    }
+
+    .example-title,
+    .example-description,
+    .example-button {
+      text-align: center;
+    }
+  }
+}
+
+#rooftop-solar {
+  background: url('../img/rooftops-new_1920x740.jpg') 50% 0 / cover no-repeat;
+  height: 100vw * 0.3854;
+  min-height: 250px;
+  position: relative;
+
+  .rooftop-solar-text-container {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+
+    .rooftop-solar-text {
+      display: inline-block;
+      background-color: rgba($theme-color, 0);
+      padding: 1rem 6rem;
+    }
+  }
+}
+
+#supporters {
+  h2 {
+    line-height: 1.5;
+  }
+}
+
+#green-planet {
+  background: url('../img/weeds_1920x400.jpg') 50% 0 / cover no-repeat;
+  height: 100vw * 0.2083;
+  min-height: 300px;
+  position: relative;
+}

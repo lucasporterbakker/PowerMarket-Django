@@ -1,0 +1,145 @@
+{% extends "solar/solar_base.html" %}
+{% load i18n static bootstrap3 svg %}
+
+{% block meta_title %}{% trans "Select region(s)" context "Select region(s): meta title." %} - {{ block.super }}{% endblock %}
+{% block meta_description %}{% trans "Select region(s) you think are suitable for solar panels." context "Select region(s): meta description." %}{% endblock %}
+
+{% block styles %}<link rel="stylesheet" href="{% static 'css/select_area.css' %}">{% endblock %}
+
+{% block navbar_subtitle %}{% trans 'Select region(s)' context 'Select area: navbar subtitle.' %}{% endblock %}
+{% block navbar_right %}
+    <li><a href="{% url 'support:support' %}">{% trans 'Support' context 'Navbar item.' %}</a></li>
+    {% if not user.is_authenticated %}
+        <li><a href="{% url 'account_login' %}">{% trans 'Login' context 'Navbar button.' %}</a></li>
+    {% else %}
+        <li><a href="{% url 'account_logout' %}" {% comment %}data-toggle="tooltip" data-placement="bottom" title="{% trans 'Logout' context 'Navbar tooltip.' %}"{% endcomment %}><i class="fa fa-power-off"></i> &nbsp;  {% trans 'Logout' context 'Navbar item.' %}</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block navbar_extra %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="controls-container">
+        <form id="select-area-form" novalidate method="POST">
+            {% csrf_token %}
+            {{ form.mpoly }}
+            {{ form.selected_area }}
+        </form>
+        <div id="location-input-container" class="controls">
+            <div class="controls-content">
+                <div class="controls-icon"><i class="glyphicon glyphicon-map-marker danger-text"></i></div>
+                <input id="pac-input" type="text" placeholder="Search Box" value="{{ address }}" disabled="disabled">
+            </div>
+        </div>
+        <div class="controls">
+            <div class="controls-content controls-icon"><span class="svg-icon">{% svg 'noun-polygon' %}</span></div>
+            <div id="polygon-control-0" class="polygon-control dropdown controls-content selected" data-polygon-id="0">
+                <div class="dropdown-toggle" id="polygon-dropdown-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">1</div>
+                <ul class="dropdown-menu" aria-labelledby="polygon-dropdown-0">
+                    {% comment %}<li class="dropdown-header">Polygon 1</li>{% endcomment %}
+                    <li><div class="control-item select-polygon"><i class="fa fa-mouse-pointer"></i> &nbsp; Select</div></li>
+                    <li><div class="control-item clear-markers"><i class="fa fa-times"></i> &nbsp; Clear</div></li>
+                    <li><div class="control-item remove-polygon"><i class="fa fa-trash"></i> &nbsp; Remove</div></li>
+                    {% comment %}
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">Change color</li>
+                    <li>
+                        <div class="color-patch-container">
+                            <div class="color-patch color-1 pointer"></div>
+                            <div class="color-patch color-2 pointer"></div>
+                            <div class="color-patch color-3 pointer"></div>
+                            <div class="color-patch color-4 pointer"></div>
+                        </div>
+                    </li>
+                    {% endcomment %}
+                </ul>
+            </div>
+            <div id="polygon-add-btn" class="controls-content polygon-control"><i class="fa fa-plus"></i></div>
+            <div id="polygon-help-btn" class="controls-content polygon-control"><i class="fa fa-question-circle-o"></i></div>
+        </div>
+        {% comment %}<div class="controls">
+            <div class="controls-content">
+                <div class="help-btn">
+                    <i class="fa fa-question-circle"></i>
+                </div>
+            </div>
+        </div>{% endcomment %}
+        <div class="inline-block controls-btn">
+            <a href="javascript:submitForm();" class="btn btn-primary create-report-btn"><i class="fa fa-arrow-right"></i> &nbsp; {% trans 'Estimate Solar Potential' context 'Control btn label.' %}</a>
+        </div>
+
+
+
+        <br/>
+        <div class="inline-block controls-btn">
+            <a href="/" class="btn btn-secondary"><i class="fa fa-arrow-right"></i> &nbsp; {% trans 'Change Location' context 'Control btn label.' %}</a>
+        </div>
+        <br/>
+        <div class="intro-container controls">
+            <div class="intro-container-content">
+                <p>
+                    <a id="close-intro-btn" href="#" class="btn btn-primary" style="float:right">{% trans 'X' context 'Intro btn label.' %}</a>
+                </p>
+                <h2>{% trans 'Draw around the region(s) you want to assess' context 'Page title.' %}</h2>
+                <hr>
+                <div class="col-intro-container">
+                    <div class="col-intro-scroll">
+                        <div class="col-intro">
+                            <h4>Adjust location</h4>
+                            <p><small>Click-and-drag the map to fine-tune the location, and use the +/- at bottom right to zoom in or out.  If you want assess a different location click Change Location:</small></p>
+                            <div class="animation">
+                                <img src="{% static 'img/address-input_300x160.jpg' %}" alt="Google Maps location autocomplete" />
+                            </div>
+                        </div>
+                        <div class="col-intro">
+                            <h4>Draw region</h4>
+                            <p><small>Click on the image to draw around the region you would like to assess for solar. Click again on a marker to remove it, click-and-drag to move it.</small></p>
+                            <div class="animation">
+                                <img src="{% static 'animations/select-area-animation_300x160.gif' %}" alt="Select roof area" />
+                            </div>
+                        </div>
+                        <div class="col-intro">
+                            <h4>Add more regions</h4>
+                            <p><small>You can draw around more than one region.  Click on the <b>+</b> button above to add more regions and on 1, 2... to edit, clear or remove regions you've already drawn</small></p>
+                            <div class="animation">
+                                <img src="{% static 'img/multi-polygon_300x160.jpg' %}" alt="Multi-polygon selection" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p style="text-align:right">
+                    {% comment %}<a id="demo-video-btn" href="https://youtu.be/-G7AN4KSKWk" target="_blank" class="btn btn-lg btn-primary"><i class="fa fa-play-circle-o"></i> &nbsp; {% trans 'Watch demo video' context 'Intro btn label.' %}</a> &nbsp;&nbsp;{% endcomment %}
+                    <a id="close-intro-btn2" href="#" class="btn btn-primary">{% trans 'Close This Info Box' context 'Intro btn label.' %}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+    <div class="location-not-found collapse">
+        <div class="container section-tight">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>{% trans 'Sorry, we couldn\'t find that location.' context 'Page title.' %}</h2>
+                    <h4>{% trans 'Maybe a spelling error? Please, try again.' context 'Page subtitle.' %}</h4>
+                    <br/>
+                    <p><a href="{% url 'landing_page' %}" class="btn btn-primary">{% trans 'Back to landing page' context 'Btn label.' %}</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer_container %}{% endblock %}
+
+{% block scripts %}
+    <script src="{{ settings.HTTP_PROTOCOL }}://maps.google.com/maps/api/js?key={{ settings.MAPS_API_KEY }}&libraries=places&language=en"></script>
+    <script src="{% static 'js/select_area.js' %}"></script>
+
+{% endblock %}
+
+{% block zopim_widget %}{% endblock %}
+

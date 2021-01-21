@@ -1,0 +1,32 @@
+{
+  "name": "powermarket",
+  "version": "0.2.3",
+  "description": "Check the README.me file for instructions.",
+  "homepage": "http://powermarket.net",
+  "private": true,
+  "main": "Gulpfile.js",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "chart.js": "^2.7.1",
+    "del": "^3.0.0",
+    "font-awesome": "^4.6.3",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-watch": "^4.3.11",
+    "jquery-number": "^2.1.6",
+    "moment": "^2.14.1",
+    "pace": "^0.0.4",
+    "toastr": "^2.1.4"
+  },
+  "dependencies_dev": {},
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.powermarket.uk:ltupin/webapp.git"
+  },
+  "author": "PowerMarket",
+  "license": "UNLICENSED",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
+

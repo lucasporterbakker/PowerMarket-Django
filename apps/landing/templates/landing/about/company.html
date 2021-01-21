@@ -1,0 +1,167 @@
+page.html" %}
+{% load i18n static %}
+
+{% block meta_title %}{{ block.super }} - {% trans 'About us' context 'Meta: Page title.' %}{% endblock %}
+{% block meta_description %}{% trans "About PowerMarket" context "Meta description." %}{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static 'css/company.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}{% trans 'About us' context 'Page title.' %}{% endblock %}
+{% block page_content %}
+    <div class="row">
+        {# What we do #}
+        <div id="what-we-do" class="col-xs-12 section-tight">
+            <h3>{% trans 'What we do' context 'Company page.' %}</h3>
+            <hr>
+            <p>
+                Climate change is one of the biggest threats today. PowerMarket, supported by the University of
+                Oxford and European Space Agency Business Incubator, is on a mission to facilitate sustainable energy
+                for all, creating energy independence.
+            </p>
+            <p>
+                The traditional energy model is based on centralised, large-scale electricity generation systems.
+                The model is not only capital intensive, but also has high carbon emissions. To combat the threat
+                of climate change, countries are increasingly switching to renewable electricity.  However, at a
+                national scale, most still focus on large-scale energy generation plants that require heavy capital
+                investment.
+            </p>
+            <p>
+                Sustainable energy transition challenge is not only for governments and public sector institutions,
+                but for all of us. PowerMarket’s objective is to help individuals and companies to cost effectively
+                install decentralised renewable energy generation and battery storage, so that they can become
+                increasingly energy independent and protect themselves from rising energy prices.
+            </p>
+            <p>
+                First few steps towards an energy revolution - PowerMarket’s pilot Satellite Assessment Tool (SAT)
+                allows individuals and companies to assess their property’s solar feasibility within a few clicks,
+                and for free.
+            </p>
+            <p>
+                Now you can use this information to find suppliers, finance and maintenance solutions fit for your
+                need.
+            </p>
+        </div>
+        <div id="our-team" class="section-tight">
+            <div class="col-xs-12">
+                <h3>{% trans 'Headquarters' context 'Company page.' %}</h3>
+                <hr>
+                <p>
+                    {% blocktrans context 'Company page.' %}
+                        SunReign Ltd<br/>
+                        3 West Way<br/>
+                        Botley, Oxford OX2 0JB, UK<br/>
+                    {% endblocktrans %}
+                </p>
+                <br/>
+            </div>
+        </div>
+        <div id="our-team" class="section-tight">
+            <div class="col-xs-12">
+                <h3>Team</h3>
+                <hr>
+                <p>
+                    {% blocktrans context 'Company page: team description.' %}Our team has over 50 years of combined experience in technology, innovation and design.{% endblocktrans %}
+                </p>
+                <br/>
+            </div>
+            <div class="team-member-container col-md-6">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="team-member-img-container">
+                            <img src="{% static 'img/TEAM-abhi_200x200.jpg' %}" alt="Abhinav Jain" />
+                        </div>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="team-member-name">
+                            <h4>Abhinav Jain</h4>
+                        </div>
+                        <div class="team-member-position">
+                            <h5>{% trans 'CEO' context 'Team: Abhi position.' %}</h5>
+                        </div>
+                        <div class="team-member-social-links">
+                            <a href="https://uk.linkedin.com/in/abhinav-jain-7447584b" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        </div>
+                        <div class="team-member-description">
+                            {% trans 'MBA at Oxford, founded 2 successful solar start-ups, commissioned over 200MW solar plants.' context 'Team: Abhi experience.' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member-container col-md-6">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="team-member-img-container">
+                            <img src="{% static 'img/TEAM-phil_200x200.jpg' %}" alt="Phil Worthington" />
+                        </div>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="team-member-name">
+                            <h4>Phil Worthington</h4>
+                        </div>
+                        <div class="team-member-position">
+                            <h5>{% trans 'Machine Learning and Satellite Imagery' context 'Team: Phil position.' %}</h5>
+                        </div>
+                        <div class="team-member-social-links">
+                            <a href="https://uk.linkedin.com/in/phil-worthington-b57b3b2" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        </div>
+                        <div class="team-member-description">
+                            {% trans 'M.Sc. Computer Science at Oxford, PhD and 15+ years experience in computer vision and machine learning.' context 'Team: Phil experience.' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member-container col-md-6">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="team-member-img-container">
+                            <img src="{% static 'img/TEAM-haem_200x200.jpg' %}" alt="Haem Roy" />
+                        </div>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="team-member-name">
+                            <h4>Haem Roy</h4>
+                        </div>
+                        <div class="team-member-position">
+                            <h5>{% trans 'Marketing and PR' context 'Team: Haem position.' %}</h5>
+                        </div>
+                        <div class="team-member-social-links">
+                            <a href="https://in.linkedin.com/in/haemroy" target="_blank"><i class="fa fa-linkedin"></i></a>&nbsp;
+                            <a href="https://twitter.com/Haemlet" target="_blank"><i class="fa fa-twitter"></i></a>
+                        </div>
+                        <div class="team-member-description">
+                            {% trans 'B.A. English Literature, Sociology, Anthropology, Hindi at Xavier\'s College, 8+ years experience in marketing and advertising.' context 'Team: Haem experience.' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member-container col-md-6">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="team-member-img-container">
+                            <img src="{% static 'img/TEAM-laurent_200x200.jpg' %}" alt="Laurent Tupin" />
+                        </div>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="team-member-name">
+                            <h4>Laurent Tupin</h4>
+                        </div>
+                        <div class="team-member-position">
+                            <h5>{% trans 'Infrastructure and Data Security' context 'Team: Laurent position.' %}</h5>
+                        </div>
+                        <div class="team-member-social-links">
+                            <a href="https://fr.linkedin.com/in/ltupin/en" target="_blank"><i class="fa fa-linkedin"></i></a>&nbsp;
+                            <a href="https://twitter.com/Guiques" target="_blank"><i class="fa fa-twitter"></i></a>
+                        </div>
+                        <div class="team-member-description">
+                            {% trans '10+ years experience in web architecture and data security, AWS, ITIL and Prince 2 certified.' context 'Team: Laurent experience.' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

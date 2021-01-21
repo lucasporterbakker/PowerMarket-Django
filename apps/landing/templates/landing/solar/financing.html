@@ -1,0 +1,220 @@
+{% extends "static_page.html" %}
+{% load i18n static %}
+
+{% block meta_title %}{{ block.super }} - {% trans 'Financing commerical solar projects' context 'Page meta title.' %}{% endblock %}
+{% block meta_description %}{% trans "Overview of different financing models and their pros and cons depending on various different business strategies and goals." context "Page meta description." %}{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static 'css/financing.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}{% trans 'Financing commercial solar projects' context 'Page title.' %}{% endblock %}
+{% block page_content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <p>
+                Financing a commercial solar project (SME, not utility scale) can be very complex. The following
+                provides a rundown of the different options.
+            </p>
+            <p>
+                Essentially, there are 3 different financing schemes available for commercial solar projects and
+                there is no one-size-fits-all solution to the question: “Which one is the best?”. Depending on your
+                financial situation, the rental agreement/ownership of your building(s), your organisation’s
+                electricity usage. the most feasible solution varies from case to case.
+            </p>
+            <p>
+                Below is a table which briefly explains how the 3 key financing options work, assuming you are a
+                property owner in the UK and looking to install solar for your business.
+            </p>
+            <br/>
+            <div id="financing-table-container">
+                <table id="financing-table" class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th width="20%"></th>
+                            <th><h3>Self-funded</h3></th>
+                            <th><h3>Solar Loan or Debt</h3></th>
+                            <th><h3>Solar Leasing / PPA</h3></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-success">
+                            <th>The PROs</th>
+                            <td>
+                                <ul>
+                                    <li>Highest Return on Investment.</li>
+                                    <li>Resale value of property increases.</li>
+                                    <li>Ownership of solar remains with you.</li>
+                                </uL>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Reduce  monthly electricity expense.</li>
+                                    <li>Ownership of the system remains yours.</li>
+                                    <li>Resale value of property increases.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Lowest risk.</li>
+                                    <li>No capital outlay required.</li>
+                                    <li>Discounted electricity</li>
+                                    <li>Ideal for businesses looking for low-risk, sustainable energy.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr class="table-warning">
+                            <th>The CONs</th>
+                            <td>
+                                <ul>
+                                    <li>Capital required.</li>
+                                    <li>Maintenance of the system is required, imperative to choose the right installer and
+                                        therefore a good quality product.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>20 - 30% capital investment may be required.</li>
+                                    <li>Creditworthiness required.</li>
+                                    <li>Maintenance of the system is required, imperative to choose the right installer and
+                                        therefore a good quality product.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Nominal savings, in most cases around 5% to 10%.</li>
+                                    <li>Ownership of the system retained by financier, could further yield to conflicts.</li>
+                                    <li>No impact on property’s value.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr class="table-lightest-gray">
+                            <th>Who owns the system?</th>
+                            <td>You</td>
+                            <td>You</td>
+                            <td>Financing company</td>
+                        </tr>
+                        <tr>
+                            <th>Who should consider this option?</th>
+                            <td>
+                                <ul>
+                                    <li>Stable businesses that have the required capital.</li>
+                                    <li>Businesses looking to maximise return on investment.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Businesses looking for a combination of RoI and sustainability.</li>
+                                    <li>Businesses looking to own the solar project.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Businesses looking for easy, zero risk sustainability solutions.</li>
+                                    <li>Businesses low on capital.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>How does it influence your cashflow?</th>
+                            <td>
+                                <ul>
+                                    <li>Significant long-term, assured energy bill savings.</li>
+                                    <li>In some cases, could also be inflation linked.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Short-term energy savings to offset debt repayments.</li>
+                                    <li>Savings generally continue for at least 10-12 years after debt repayment.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Smaller scale but zero risk energy cost savings.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br/>
+            <br/>
+
+            {% comment %}<div class="graph-container">
+                <div class="graph">
+                    <canvas id="roi-chart" width="300" height="150"></canvas>
+                </div>
+            </div>{% endcomment %}
+
+            {# Radar chart with RoI, risk, etc. http://www.chartjs.org/docs/#radar-chart #}
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    {% comment %}
+    {{ block.super }}
+
+    <script src="{% static 'bower_components/moment/moment.js' %}"></script>
+    <script src="{% static 'bower_components/chart.js/dist/Chart.min.js' %}"></script>
+
+    <script>
+
+        // var timeline =
+
+        new Chart($("#roi-chart"), {
+            type: 'line',
+            data: {
+                labels: [1, 4, 6],
+                datasets: [
+                    {
+                        label: 'Pay Upfront',
+                        data: [1, 2, 3, 4, 2, 6, 7, 2]
+                    } /*, {
+                        label: 'Loan/Debt',
+                        data: earnings,
+                        backgroundColor: hex2rgba(primaryColor, .7),
+                        borderColor: primaryColor,
+                        borderWidth: 2,
+                        pointBackgroundColor: '#fff'
+                    }, {
+                        label: 'Leasing',
+                        data: earnings,
+                        backgroundColor: hex2rgba(primaryColor, .7),
+                        borderColor: primaryColor,
+                        borderWidth: 2,
+                        pointBackgroundColor: '#fff'
+                    }*/
+                ]
+            }
+            /*options: {
+                scales: {
+                    xAxes: [{
+                        // stacked: true
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: '£'
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            max: yMax
+                        }
+                        // stacked: true
+                    }]
+                }
+            }*/
+        });
+        {% endcomment %}
+
+    </script>
+
+{% endblock %}

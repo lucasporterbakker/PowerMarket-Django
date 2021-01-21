@@ -1,0 +1,90 @@
+{% extends "static_page.html" %}
+{% load i18n static %}
+
+{% block meta_title %}
+    {{ block.super }} - {% trans 'Solar Market United States' context 'Meta: Page title.' %}
+{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="{% static 'css/markets.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}
+    {% trans 'Solar Market United States' context 'Page title.' %}
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="row">
+
+        <div class="col-xs-12 section-tight">
+        
+            <p>
+                {% blocktrans %}
+                    The U.S. solar market is very diverse, with PV capacity and regulations varying strongly depending on state. Though among the worlds largest solar nations it only produced 79 W per capita from PV in 2015.
+                {% endblocktrans %}
+            </p>
+
+            <h3>{% trans 'PV capacity' context 'Market US: section header.' %}</h3>
+
+            <hr>
+
+            <p>{% trans 'Total installed PV capacity (domestic + commercial, 2015):' %}</p>
+            <h4>25,620 MW <small>({% trans '13.1% of global capacity, ranked 4<sup>th</sup> *' %})</small></h4>
+
+            <br/>
+
+            <p>{% trans 'PV capacity added in 2015:' %}</p>
+            <h4>7,300 MW <small>({% trans '16.7% of global added capacity, ranked 3<sup>rd</sup> *' %})</small></h4>
+
+            <br/>
+
+            <p>{% trans 'PV per capita in 2015:' %}</p>
+            <h4>79 W</h4>
+
+            <br/>
+
+            <p><small>* {% trans 'Source:' %} <a href="http://www.iea-pvps.org/fileadmin/dam/public/report/PICS/IEA-PVPS_-__A_Snapshot_of_Global_PV_-_1992-2015_-_Final_2_02.pdf" target="_blank">Snapshot of Global Photovoltaics market -  Report IEA PVPS T1-29:2016</a></small></p>
+
+            <br/>
+
+            <h3>{% trans 'PV on commercial buildings' context 'Market US: section header.' %}</h3>
+
+            <hr>
+
+            <p>
+                {% blocktrans context 'Solar market China.' %}
+                    We are currently compiling this information. Thank you for your patience.
+                {% endblocktrans %}
+            </p>
+
+            <br/>
+
+            <h3>{% trans 'Solar potential maps' context 'Market US: section header.' %}</h3>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="col-xs-12 col-lg-6 solarmap-container">
+                    <img src="{% static 'img/solarmaps/solargis-map-US-GHI_700x509.jpg' %}" width="100%" height="auto" alt="Global Horizontal Solar Irradiance United States" />
+                    <br/>
+                    <br/>
+                    <p><small>* {% trans 'Source:' %} <a href="http://solargis.com/assets/graphic/free-map/GHI/Solargis-USA-GHI-solar-resource-map-en.png" target="_blank">GHI Solar Map © 2016 Solargis</a></small></p>
+                </div>
+
+                <div class="col-xs-12 col-lg-6 solarmap-container">
+                    <img src="{% static 'img/solarmaps/solargis-map-US-DNI_700x509.jpg' %}" width="100%" height="auto" alt="Direct Normal Solar Irradiance United States" />
+                    <br/>
+                    <br/>
+                    <p><small>* {% trans 'Source:' %} <a href="http://solargis.com/assets/graphic/free-map/DNI/Solargis-USA-DNI-solar-resource-map-en.png" target="_blank">DNI Solar Map © 2016 Solargis</a></small></p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

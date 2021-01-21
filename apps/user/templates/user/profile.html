@@ -1,0 +1,124 @@
+{% extends 'manager/manager_base.html' %}
+{% load i18n static %}
+
+{% block meta_title %}{% trans 'Profile' context 'Meta: title.' %}{% endblock %}
+
+{% block meta_description %}
+    {% trans "Your personal user information and settings." context "Meta description." %}
+{% endblock %}
+
+{% block styles %}<link href="{% static 'css/profile.css' %}" rel="stylesheet">{% endblock %}
+
+{% block content %}
+
+    <div class="container section-tight">
+
+        <div class="row">
+
+            <div class="col-xs-12">
+                <div class="page-title">
+                    <h2>{% trans 'Profile' context 'Profile: page title.' %}</h2>
+                </div>
+            </div>
+
+                <div class="col-xs-12 col-md-6 column-left">
+
+                    {% comment %}
+                    <div class="card">
+
+                        {# Welcome message #}
+                        <h3>
+                            <small>{% trans 'Welcome,' context 'Profile: welcome message.' %}</small><br/>
+                            {{ user.profile }}
+                        </h3>
+
+                        <br/>
+
+                    </div>
+                    {% endcomment %}
+
+                    <div class="card">
+
+                        {# Personal Information. #}
+                        <h4><i class="fa fa-user"></i>&nbsp; {% trans 'Personal information' context 'Profile: section header.' %}&nbsp; <b><small>[<a href="javascript:createModal('{% url 'user:personal_information_update' pk=user.profile.pk %}')">edit</a>]</small></b></h4>
+                        <hr>
+                        <div class="profile-table-container">
+                            <table class="profile-table">
+                                <tr>
+                                    <td>{% trans 'First name:' context 'Profile: Settings table.' %}</td>
+                                    <td>{{ user.profile.first_name|default_if_none:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans 'Last name:' context 'Profile: Settings table.' %}</td>
+                                    <td>{{ user.profile.last_name|default_if_none:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans 'Company:' context 'Profile: Settings table.' %}</td>
+                                    <td>{{ user.profile.company|default_if_none:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans 'Email:' context 'Profile: Settings table.' %}</td>
+                                    <td>{{ user.profile.email|default_if_none:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans 'Phone:' context 'Profile: Settings table.' %}</td>
+                                    <td>{{ user.profile.phone|default_if_none:"" }}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        {% comment %}<br/>
+
+                        <a href="javascript:createModal();" class="btn btn-theme">{% trans 'Edit' context '' %}</a>
+
+                        <br/>{% endcomment %}
+
+                    </div>
+
+                    <div class="card">
+
+                        {# Settings. #}
+                        <h4><i class="fa fa-cog"></i>&nbsp; {% trans 'Settings' context 'Profile: section header.' %}&nbsp; {% comment %}<b><small>[<a href="">edit</a>]</small></b>{% endcomment %}</h4>
+                        <hr>
+                        <p>{% trans 'Currently there are no settings.' context 'Profile.' %}</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-md-6 column-right">
+
+                    <div class="card">
+
+                        {# Account details. #}
+                        <h4><i class="fa fa-asterisk"></i>&nbsp; {% trans 'Account details' context 'Profile: section header.' %}</h4>
+                        <hr>
+                        <p>
+                            <small>{% blocktrans context 'Profile.' with user.date_joined as date_joined %}Created on {{ date_joined }}{% endblocktrans %}</small><br/>
+                            <small>{% blocktrans context 'Profile.' with user.last_login as last_login %}Last login on {{ last_login }}{% endblocktrans %}</small>
+                        </p>
+                        <br/>
+                        <p>
+                            {# Change password #}
+                            {% comment %}<a href="account_change_password" class="btn btn-theme">{% trans 'Change password' context 'Profile: button.' %}</a>{% endcomment %}
+                            {# Delete account #}
+                            <a href="javascript:createModal('{% url 'user:delete_account' pk=user.profile.pk %}');" class="btn btn-theme">{% trans 'Delete account' context 'Profile: button.' %}</a>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="{% static 'js/modal.js' %}"></script>
+
+{% endblock %}

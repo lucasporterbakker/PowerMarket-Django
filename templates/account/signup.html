@@ -1,0 +1,37 @@
+{% extends "base_auth.html" %}
+{% load i18n %}
+
+{% block meta_title %}
+    {% trans 'Signup' context 'Meta: auth title.' %} -
+    {{ block.super }}
+{% endblock %}
+
+{% block auth_title %}{% trans 'Welcome.' context 'Authentication page title.' %}{% endblock %}
+
+{% block auth_description %}
+    <p>
+        {% trans 'Sign up for your account.' context 'Authentication page description.' %}
+        {% comment %}<a href="">{% trans 'Why?' context 'Authentication page description.' %}</a>{% endcomment %}
+    </p>
+{% endblock %}
+
+{% block auth_form_info %}
+    <div class="legal-notice">
+        <p><small>
+            {% url 'terms_of_service' as terms_url %}
+            {% url 'privacy_policy' as privacy_url %}
+            {% blocktrans context 'Authentication page form info.' %}
+                By signing up you consent to our <a href="{{ terms_url }}">Terms of service</a> and <a href="{{ privacy_url }}">Privacy policy</a>.
+            {% endblocktrans %}
+        </small></p>
+    </div>
+    <br/>
+{% endblock %}
+
+{% block submit_btn_label %}{% trans 'Signup' context 'Authentication page submit button label.' %}{% endblock %}
+
+{% block auth_additional %}
+    <p>
+        <a href="{% url 'account_login' %}" class="">{% trans "I already have an account." %}</a>
+    </p>
+{% endblock %}

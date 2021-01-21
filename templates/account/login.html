@@ -1,0 +1,18 @@
+{% extends "base_auth.html" %}
+{% load i18n %}
+
+{% block meta_title %}
+    {% trans 'Login' context 'Meta: auth title.' %} -
+    {{ block.super }}
+{% endblock %}
+
+{% block auth_title %}{% trans 'Welcome back.' context 'Authentication page title.' %}{% endblock %}
+
+{% block submit_btn_label %}{% trans 'Login' context 'Authentication page submit button label.' %}{% endblock %}
+
+{% block auth_additional %}
+    <p>
+        <a href="{% url 'account_reset_password' %}">{% trans "I can't remember my password." %}</a><br/>
+        <a href="{% url 'account_signup' %}">{% trans "I don't have an account." %}</a>
+    </p>
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends "static_page.html" %}
+{% load i18n static bootstrap3 svg %}
+
+{% block meta_title %}
+    {{ block.super }} - {% trans 'Supplier Information' context 'Meta: page title.' %}
+{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'css/supplier_info.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_title %}{% trans 'Information for installers' context 'Page title.' %}{% endblock %}
+
+{% block page_content %}
+
+    <div class="row">
+
+        <div class="col-xs-12 section-tight">
+            <p>
+                Reduce your customers acquisition costs today by signing in
+            </p>
+            <br/>
+            <p>
+                PowerMarket’s mission is to facilitate sustainable energy for all. Our objectives are:
+            </p>
+            <ol>
+                <li>Make it easy for customers to evaluate, procure, finance and maintain solar energy projects.</li>
+                <li>Make it cheaper for installers to access qualified leads in their area.</li>
+            </ol>
+            <br/>
+            <p>
+                <i><b>Focus on your business and clients, PowerMarket will make sure you are never short of new projects.</b></i>
+            </p>
+            <br/>
+            <p><u>Satellite based technology</u></p>
+            <p>
+                PowerMarket inhouse technology uses downstream satellite data and artificial intelligence, to create
+                a solar map, which allows customers to assess the payback and environmental impact of solar on their
+                premises for free and within a few seconds. As a result, only interested customers sign-in on our
+                platform, after assessing their premises. PowerMarket team then follows-up with those interested
+                customers verifying their interest and only then shares it with the installer community.
+            </p>
+            <p><i><b>Data-Driven Approach</b></i></p>
+            <p>
+                As a registered installer, you can specify the geographical location and customer segment that you
+                want to target.
+            </p>
+            <p>
+                We at PowerMarket rely on a proven data-driven approach to ensure customer-installer fit.
+                Valuing customers’ and your time, PowerMarket team ensures that customer-installer fit is observed at
+                every sign-up on its platform, substantially increasing your chances of closing a deal and improving
+                your conversion rate.
+            </p>
+            <p><i><b>
+                As an installer registered on PowerMarket, you can now assess qualified leads in your area
+                while reducing your customer acquisition cost.
+            </b></i></p>
+        </div>
+
+        <div class="col-sm-6 col-md-3 step-container">
+            <div class="step-icon">
+                {% svg 'noun-polygon' %}
+            </div>
+            <div class="step-description">
+                <p class="lead">
+                    The customer assesses its solar potential and signs-ups.
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 step-container">
+            <div class="step-icon">
+                {% svg 'noun-solarpanels' %}
+            </div>
+            <div class="step-description">
+                <p class="lead">
+                    Solar specs and design created, using personalised data.
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 step-container">
+            <div class="step-icon">
+                {% svg 'noun-financing' %}
+            </div>
+            <div class="step-description">
+                <p class="lead">
+                    The customer receives quotes and financing options.
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 step-container">
+            <div class="step-icon">
+                {% svg 'noun-support' %}
+            </div>
+            <div class="step-description">
+                <p class="lead">
+                    We provide support until project completion.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <p><i><b>
+                PowerMarket is expanding fast, you want to be part of it
+            </b></i></p>
+            <p>
+                In the UK or India, sign-in now to receive hot leads from PowerMarket instantly.
+            </p>
+            <br/>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+
+            {# Supplier contact form. #}
+            <form id="supplier-form" method="POST" action="" autocomplete="off">
+
+                <div class="form-group">
+                    {# SupplierContactForm #}
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                </div>
+
+                <input class="btn btn-lg btn-theme" type='submit' value='Sign up' role="button" />
+
+            </form>
+
+            <br/>
+            <br/>
+
+        </div>
+
+        <div class="col-xs-12">
+            <p>Any Questions? We are here to help. <a href="{% url 'support:support' %}" class="underline">Visit our support page</a>.</p>
+            <br/>
+            <p>
+                If you are located elsewhere and still interested, please do not hesitate to get in touch via
+                <a href="mailto:contact@powermarket.net" class="underline">contact@powermarket.net</a> or leave your email here
+                (link to the bottom of the page) to get notified when PowerMarket will start covering your area.
+            </p>
+        </div>
+
+    </div>
+
+{% endblock %}

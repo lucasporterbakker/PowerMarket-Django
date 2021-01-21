@@ -1,0 +1,15 @@
+{% extends "socialaccount/base.html" %}
+{% load i18n %}
+
+{% block meta_title %}
+    {% trans "Social Network Login Failure" %} -
+    {{ block.super }}
+{% endblock %}
+
+{% block auth_title %}
+    {% trans 'Social Network Login Failure' context 'Socialauth authentication error: page title.' %}
+{% endblock %}
+
+{% block auth_description %}
+    {% trans "An error occurred while attempting to login via your social network account. Please use the back button in your browser." %}
+{% endblock %}

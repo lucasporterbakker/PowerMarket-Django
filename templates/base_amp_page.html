@@ -1,0 +1,159 @@
+<!doctype html>
+{% load i18n static %}
+<html amp lang="en">
+<head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <title>{% block meta_title %}{% endblock %}</title>
+    <link rel="canonical" href="{% block canonical_url %}{% endblock %}" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "{% block structured_data_type %}NewsArticle{% endblock %}",
+        "headline": "{% block structured_data_headline %}{% endblock %}",
+        "datePublished": "{% block structured_data_date_published %}2015-10-07T12:02:41Z{% endblock %}",
+        "image": [
+          "{% block structured_data_image %}{{ settings.SITE_URL }}{% static "img/PM-AMP-logo_x60.jpg" %}{% endblock %}"
+        ]
+      }
+    </script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        @font-face {
+            font-family: "Roboto Condensed Regular";
+            font-style: normal;
+            font-weight: 400;
+            src: url('{% static "fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf" %}');
+        }
+
+        @font-face {
+            font-family: "Roboto Condensed Regular";
+            font-style: normal;
+            font-weight: 700;
+            src: url('{% static "fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf" %}');
+        }
+        body {
+            font-family: "Roboto Condensed Regular", Helvetica, Roboto, Arial, sans-serif;
+            color: #6a6a6b;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #1a2238;
+        }
+        a {
+            font-weight: bold;
+            color: #1a2238;
+        }
+        a:hover {
+            color: #fea739;
+        }
+        .btn {
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        .btn:hover {
+            text-decoration: none;
+        }
+        .btn-theme {
+            background-color: #1a2238;
+            color: #fff;
+        }
+        .btn-theme:hover {
+            background-color: #151c2e;
+            color: #fff;
+        }
+        .navbar {
+            height: 70px;
+            border: none;
+            background-color: #1a2238;
+            color: #e7e8ea;
+            box-shadow: 0 1px 2px rgba(0, 0 , 0, .4);
+        }
+        .navbar-brand {
+            display: block;
+            height: 70px;
+            padding: 10px;
+            margin: 0;
+            color: #fff;
+            text-decoration: none;
+        }
+        .navbar-brand:hover {
+            text-decoration: none;
+        }
+        .navbar-logo {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .navbar-brand:hover {
+            color: #fff;
+        }
+        .navbar-title {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 15px;
+            font-size: 1.7rem;
+        }
+        .container {
+            padding: 15px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .amp-page-title > h1 {
+
+        }
+        .amp-page-title > h3 {
+            color: #999;
+        }
+        {% block styles %}{% endblock %}
+    </style>
+  </head>
+  <body>
+    {% block navbar %}
+        <nav class="navbar text-center">
+            <a class="navbar-brand" href="{% url 'landing_page' %}">
+                <amp-img src="{% static "img/PM-logo_50x50.png" %}" alt="PowerMarket" height="50" width="50" class="navbar-logo"></amp-img>
+                <span class="navbar-title">Power Market</span>
+            </a>
+        </nav>
+    {% endblock %}
+    {% block page_container %}
+        <div class="container">
+            {% block amp_header_container %}
+                <div class="amp-header">
+                    {% block amp_title_container %}
+                        <div class="amp-page-title">
+                            <h1>{% block page_title %}{% endblock %}</h1>
+                            <h3>{% block page_subtitle %}{% endblock %}</h3>
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+            {% block amp_content_container %}
+                <div class="amp-content">
+                    {% block amp_content %}{% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+    {% block page_footer %}
+        <div class="container text-center">
+            <p>
+                <small>
+                    &copy; {% now "Y" %} Copyright SunReign Ltd &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'terms_of_service' %}" class="legal-link">{% trans 'Terms of service' context 'Footer link.' %}</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'privacy_policy' %}" class="legal-link">Privacy policy</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'cookie_use' %}" class="legal-link">Cookie use</a>
+                </small>
+            </p>
+            <br/>
+        </div>
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,350 @@
+se.html" %}
+{% load i18n l10n static bootstrap3 svg thumbnail %}
+
+{% block meta_title %}{{ block.super }} - Calculate your solar potential{% endblock %}
+
+{% block styles %}
+    <link href="{% static 'css/landing_page.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    {# Section: Cover #}
+    <div id="cover">
+        <div class="cover-content-container">
+            <div class="cover-content container">
+                <div class="cover-title">
+                    <h1><b>Commercial solar without hassle</b></h1>
+                    <h3><b>Assessment <span class="subtitle-seperator"><i class="fa fa-arrow-right"></i></span> Supplier <span class="subtitle-seperator"><i class="fa fa-arrow-right"></i></span> Finance <span class="subtitle-seperator"><i class="fa fa-arrow-right"></i></span> Maintenance</b></h3>
+                </div>
+                <br/>
+                <!--h4>Please start entering your address or postcode in the box below, then click on the correct entry in the drop down list that appears<br/>Proceeding without clicking on the dropdown list may result in a less accurate estimate of your solar potential</h4-->
+                <form id="address-form" class="form-inline" method="POST" action="" autocomplete="off">
+                    <div class="form-group">
+                        {% csrf_token %}
+                        <div class="address-input-container">
+                            {{ form.address.errors }}
+                            <span class="add-on hidden-xs hidden-sm"><i class="glyphicon glyphicon-map-marker"></i></span>
+                            {{ form.address }}
+                            {# Hidden fields. #}
+                            {{ form.uuid }}
+                            {{ form.route }}
+                            {{ form.street_number }}
+                            {{ form.locality }}
+                            {{ form.administrative_area_level_1 }}
+                            {{ form.administrative_area_level_2 }}
+                            {{ form.postal_code }}
+                            {{ form.country }}
+                            {{ form.lat }}
+                            {{ form.lng }}
+                        </div>
+                    </div>
+                    <span class="hidden-xs">
+                        <br/>
+                    </span>
+                    <div class="cover-btn-container">
+                        {% comment %}<button class="btn btn-primary btn-lg get-started-btn" type='submit'>{% trans "Get FREE assessment" context "Landing page: cover button." %}</button>{% endcomment %}
+                        <a href="javascript:submitForm();" id="address-submit-btn"  class="btn btn-primary btn-lg get-started-btn">{% trans "Get FREE assessment" context "Landing page: cover button." %}</a>
+                        <a href="#how-it-works" class="btn btn-lg explore-btn smooth-scroll hidden-xs">{% trans "Find out more" context "Landing page: cover button." %}</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {# Section: Supporters #}
+    <div id="supported-by">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 hidden-xs hidden-sm text-center"><h4 class="supported-by-label">Supported by</h4></div>
+                <div class="col-xs-6 col-md-3">
+                    <div class="supported-by-image-container text-center">
+                        <a href="http://innovation.ox.ac.uk/" target="_blank"><img src="{% static 'img/OUI-Startup-Incubator-logo_200x120.png' %}" width="auto" height="80" /></a>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <div class="supported-by-image-container text-center">
+                        <a href="http://www.esa-bic.org.uk/" target="_blank"><img src="{% static 'img/ESA-BIC-logo_400x67.png' %}" width="auto" height="40" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# Section: Headline #}
+    {% comment %}<div id="headline" class="section-tight container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <div class="section-content">
+                        <br/>
+                        <h3>
+                            {% blocktrans context "Landing page: Section content." %}
+                                We help you cut down your electricity cost&nbsp;
+                                <i class="glyphicon glyphicon-piggy-bank"></i>&nbsp;,
+                                increase cash flow&nbsp;
+                                <i class="fa fa-line-chart"></i>&nbsp;
+                                and reduce your carbon footprint&nbsp;
+                                <i class="fa fa-tree primary-text"></i>
+                                <small><i class="fa fa-tree primary-text"></i></small>&nbsp;
+                                with commercial solar solutions&nbsp;
+                                <i class="fa fa-sun-o secondary-text"></i> .
+                            {% endblocktrans %}
+                        </h3>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>{% endcomment %}
+    {# Section: How it works #}
+    <div id="how-it-works" class="section container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <div class="section-header">
+                        <h1>How it works</h1>
+                        <h3 class="gray-text">Solar power projects for businesses can be lengthy and complex</h3>
+                        <h3><i class="fa fa-arrow-right"></i>&nbsp; We make it easy</h3>
+                        <br/>
+                        <p class="lead">
+                            {% blocktrans context "Landing page: Section content." %}
+                                Complete a <b><a href="#cover" class="smooth-scroll">free online assessment</a></b>
+                                with just a few clicks to immediately see whether your project is viable, and how much
+                                it will save you. We connect you with trusted high-quality, low-cost suppliers to
+                                ensure you have the smoothest installation.
+                            {% endblocktrans %}
+                        </p>
+                        <br/>
+                    </div>
+                </div>
+                <div class="section-content">
+                    {# Step: Polygon #}
+                    <div class="col-sm-6 col-md-3 step-container">
+                        <div class="step-icon">
+                            {% svg 'noun-polygon' %}
+                        </div>
+                        <div class="step-number">
+                            <div class="circle">1</div>
+                        </div>
+                        <div class="step-title">
+                            <h2>{% trans "Assess your solar potential" context "Landing page: How it works - step title." %}</h2>
+                        </div>
+                        <div class="step-description">
+                            <p class="lead">
+                                {% blocktrans context "Landing page: How it works - step description." %}
+                                    In less than 2 minutes, you can mark out the area of your roof, car park or on
+                                    the ground with our easy-to-use polygon tool and receive your free report with
+                                    initial estimates of your conceivable profit.
+                                {% endblocktrans %}
+                            </p>
+                        </div>
+                    </div>
+                    {# Step: Solar supplier #}
+                    <div class="col-sm-6 col-md-3 step-container">
+                        <div class="step-icon">
+                            {% svg 'noun-solarpanels' %}
+                        </div>
+                        <div class="step-number">
+                            <div class="circle">2</div>
+                        </div>
+                        <div class="step-title">
+                            <h2>{% trans "We select for you the right suppliers" context "Landing page: How it works - step title." %}</h2>
+                        </div>
+                        <div class="step-description">
+                            <p class="lead">
+                                {% blocktrans context "Landing page: How it works - step description." %}
+                                    Access our marketplace and select the best solar supplier to suit your unique
+                                    project needs. Include a maintenance contractor in your deal and take the hassle
+                                    out of sourcing resource manually yourself.
+                                {% endblocktrans %}
+                            </p>
+                        </div>
+                    </div>
+                    {# Step: Financing #}
+                    <div class="col-sm-6 col-md-3 step-container">
+                        <div class="step-icon">
+                            {% svg 'noun-financing' %}
+                        </div>
+                        <div class="step-number">
+                            <div class="circle">3</div>
+                        </div>
+                        <div class="step-title">
+                            <h2>{% trans "We tailor necessary finance plans" context "Landing page: How it works - step title." %}</h2>
+                        </div>
+                        <div class="step-description">
+                            <p class="lead">
+                                {% blocktrans context "Landing page: How it works - step description." %}
+                                    Whether your business is big or small, you can find the right finance, suited for
+                                    your needs. Add a customized insurance plan and enjoy a safe, zero risk
+                                    investment.
+                                {% endblocktrans %}
+                            </p>
+                        </div>
+                    </div>
+                    {# Step: Maintenance #}
+                    <div class="col-sm-6 col-md-3 step-container">
+                        <div class="step-icon">
+                            {% svg 'noun-support' %}
+                        </div>
+                        <div class="step-number">
+                            <div class="circle">4</div>
+                        </div>
+                        <div class="step-title">
+                            <h2>{% trans "We accompany you until project completion" context "Landing page: How it works - step title." %}</h2>
+                        </div>
+                        <div class="step-description">
+                            <p class="lead">
+                                {% blocktrans context "Landing page: How it works - step description." %}
+                                    We know the project is in good hands because we source the most trusted suppliers
+                                    with stellar track-records. We help manage the project and answer your questions
+                                    throughout so you are always in control.
+                                {% endblocktrans %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# Section: Rooftop solar #}
+    <div id="rooftop-solar" class="section container-fluid">
+        <div class="row">
+            <div class="rooftop-solar-text-container">
+                <div class="rooftop-solar-text"></div>
+            </div>
+        </div>
+    </div>
+    {# Section: Examples #}
+    {% if examples %}
+    <div id="examples" class="section container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <div class="section-header">
+                        <h1>{% trans "Have a look" context "Landing page: section title." %}</h1>
+                        <h3 class="gray-text">
+                            {% blocktrans context "Landing page: section description." %}
+                                Here are some sample reports we generated
+                            {% endblocktrans %}
+                        </h3>
+                    </div>
+                    <br/>
+                </div>
+                {% for example in examples %}
+                    {% if example.image %}
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="example-container">
+                                <div class="example-image-container">
+                                    <div class="example-image-content">
+                                        <img src="{{ example.image|thumbnail_url:'medium' }}" width="100%" height="auto" />
+                                    </div>
+                                </div>
+                                <div class="example-title">
+                                    <h3>{{ example.name }}</h3>
+                                </div>
+                                <div class="example-description">
+                                    <p class="lead">
+                                        <b><i class="fa fa-bolt"></i> {{ example.assessment.annual_energy_estimate|floatformat:0|localize }}</b> <small>kWh/year</small><br/>
+                                        <b>{{ example.assessment.get_currency_display }} {{ example.assessment.lifetime_gross_profit_estimate|floatformat:0|localize }}</b> <small>gross profit</small>
+                                    </p>
+                                </div>
+                                <div class="example-button">
+                                    <a href="{% url 'solar:example_assessment' slug=example.slug %}" class="btn btn-lg btn-theme example-btn">View report</a>
+                                </div>
+                                <br/>
+                                <br/>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="example-container">
+                        <div class="example-image-container">
+                            <div class="example-image-content">
+                                <div class="example-image-table-container">
+                                    <div class="example-image-table-content">
+                                        <h2><i class="fa fa-industry"></i></h2>
+                                        <h4>
+                                            {% blocktrans context "Landing page: Example image placeholder." %}
+                                                Your
+                                                building
+                                            {% endblocktrans %}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="example-title">
+                            <h3>Your business</h3>
+                        </div>
+                        <div class="example-description">
+                            <p class="lead">
+                                <b><i class="fa fa-bolt"></i> ???</b> <small>kWh/year</small><br/>
+                                <b>£ ???</b> <small>gross profit</small>
+                            </p>
+                        </div>
+                        <div class="example-button">
+                            <a href="#cover" class="btn btn-lg btn-primary example-btn smooth-scroll">{% trans "Get assessment" context "Landing page: Get assessment button." %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+        </div>
+    </div>
+    {% endif %}
+    {# Section: Green planet #}
+    {% comment %}<div id="green-planet" class="section container-fluid">{# Image container. #}</div>{% endcomment %}
+{% endblock %}
+{% block before_footer %}{% include 'shoutout.html' %}{% endblock %}
+{% block scripts %}
+    <script src="{{ settings.HTTP_PROTOCOL }}://maps.google.com/maps/api/js?key={{ settings.MAPS_API_KEY }}&libraries=places&language=en"></script>
+    <script src="{% static 'js/landing.js' %}"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    <script>
+    var pac_input = document.getElementById('id_address');
+
+    (function pacSelectFirst(input) {
+        // store the original event binding function
+        var _addEventListener = (input.addEventListener) ? input.addEventListener : input.attachEvent;
+
+        function addEventListenerWrapper(type, listener) {
+            // Simulate a 'down arrow' keypress on hitting 'return' when no pac suggestion is selected,
+            // and then trigger the original listener.
+
+            if (type == "keydown" || type=="blur") {
+                var orig_listener = listener;
+                listener = function(event) {
+                    var suggestion_selected = $(".pac-item-selected").length > 0;
+                    var keyCode=event.keyCode || event.which;
+                    if ((keyCode===13 || keyCode===9) && !suggestion_selected) {
+                        var simulated_downarrow = $.Event("keydown", {
+                            keyCode: 40,
+                            which: 40
+                        });
+                        orig_listener.apply(input, [simulated_downarrow]);
+                    }else if (event.type==="blur"){
+                        var tmp=$(".pac-container .pac-item:first-child").text();
+                        pac_input.value=tmp.substr(0,tmp.length/2);
+
+                        $(".pac-container .pac-item:first-child").bind('click',function(){console.log("simulated click");});
+                        populateFormLocationElements();
+                    }
+
+                    orig_listener.apply(input, [event]);
+                };
+            }
+
+            _addEventListener.apply(input, [type, listener]);
+        }
+
+        input.addEventListener = addEventListenerWrapper;
+        input.attachEvent = addEventListenerWrapper;
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+
+    })(pac_input);
+
+    </script>
+
+{% endblock %}
+

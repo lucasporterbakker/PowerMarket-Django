@@ -1,0 +1,11 @@
+Hi PowerMarket Managers,
+
+a contact was created.
+
+Name: {{ name }}
+Email: {{ email }}
+Phone: {{ phone }}
+
+Assessment URL: {{ short_link }}
+
+Have a nice day!

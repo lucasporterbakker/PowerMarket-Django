@@ -1,0 +1,28 @@
+{% extends "solar/solar_base.html" %}
+{% load i18n static %}
+
+{% block meta_title %}{{ block.super }} - Thank you{% endblock %}
+
+{% block meta_description %}
+    {% trans "We couldn't retrieve any data for this location." context "Meta description." %}
+{% endblock %}
+
+{% block styles %}<link href="{% static 'css/thank_you.css' %}" rel="stylesheet">{% endblock %}
+
+{% block content %}
+    <div class="section-tight">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>Sorry!</h1>
+                    <h4>We couldn't retrieve any data for this location. Click the button below if you want to make another selection.</h4>
+                    <br/>
+                    <p>
+                        <a href="{% url 'solar:area' %}" class="btn btn-lg btn-primary">Select area</a>
+                    </p>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

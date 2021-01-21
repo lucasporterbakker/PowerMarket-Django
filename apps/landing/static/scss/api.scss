@@ -1,0 +1,11 @@
+@import "variables.scss";
+
+table.api-access-table {
+    width: 100%;
+
+    th, td {
+        padding: 1rem 2rem;
+        vertical-align: top;
+        border: 1px solid $lighter-gray;
+    }
+}

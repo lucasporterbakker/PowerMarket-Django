@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+{% load i18n static %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block meta_title %}{% trans 'PowerMarket' context '<title> -tag.' %}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{% trans 'Assess the solar potential of your rooftop, car-park, farm etc, find suppliers, check finance and operate - all now within a few clicks.' context 'Meta: description.' %}{% endblock %}">
+    <meta property="og:title" content="{% trans 'PowerMarket - sustainable energy for all' context 'og:title' %}" />
+    <meta property="og:description" content="{% trans 'Assess the solar potential of your rooftop, car-park, farm etc, find suppliers, check finance and operate - all now within a few clicks.' context 'og:description.' %}">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://powermarket.net" />
+    <meta property="og:image" content="http://powermarket.net/static/img/PM-Open-Graph_1200x630.jpg" />
+    <meta name="google-site-verification" content="uNOErx518JcFVBVxEknh2rDlpIYoKCUmaORHJQQ1qgE" />
+    <meta name="msvalidate.01" content="C5BF7CB3D2C4D6D4F2CF820A67A59346" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/PM-favicon_32x32.ico' %}"/>
+    <link rel="stylesheet" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bower_components/toastr/toastr.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" >
+    {% block links %}{% endblock %}
+    {% block styles %}{% endblock %}
+
+    {% if not settings.DEBUG %}
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-80671671-1', 'auto');
+    ga('send', 'pageview');</script>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MQPNJW');</script>
+    {% endif %}
+    <script src="{% static 'bower_components/pace/pace.min.js' %}"></script>
+    {% block header_scripts %}{% endblock %}
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="loader" style="display:none; position: fixed;left: 0px;top: 0px;width: 100%;height: 100%;z-index: 9999; padding-left:20px; background: rgb(249,249,249) url('../../../static/img/page-loader.gif') 50% 50% no-repeat;"><h1>Processing with Power Market's advanced AI model...</h1><h2>This may take a few minutes, please be patient</h2></div>    {% if not settings.DEBUG %}
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQPNJW" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    {% endif %}
+    <div id="fb-root"></div>
+    {% block navbar %}
+        <nav class="navbar navbar-default navbar-fixed-top {% block navbar_classes %}{% endblock %}">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">
+                    <span class="navbar-logo"><img src="{% static "img/PM-logo_50x50.png" %}" height="100%" width="auto"></span>
+                    <span class="navbar-title">
+                        {% block navbar_title %}Power Market{% endblock %}
+                        <span class="navbar-subtitle hidden-xs">
+                            {% block navbar_subtitle %}{% endblock %}
+                        </span>
+                    </span>
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                {% url 'landing_page' as landing_url %}
+                {% url 'manager:dashboard' as dashboard_url %}
+                {% url 'user:profile' as profile_url %}
+                <ul class="nav navbar-nav">
+                    {% block navbar_left %}{% endblock %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% block navbar_right %}
+                        {% if not user.is_authenticated %}
+                            <li><a href="{% if request.path != landing_url %}{{ landing_url }}{% endif %}#how-it-works" class="smooth-scroll">{% trans 'How it works' context 'Navbar item.' %}</a></li>
+                            <li><a href="{% url 'solar:example_assessment' %}">{% trans 'Example Report' context 'Navbar item.' %}</a></li>
+                            <li><a href="{% url 'supplier:supplier_info' %}"><span class="hidden-sm">{% trans "Information for installers" context 'Navbar item.' %}</span><span class="visible-sm">{% trans "Suppliers" context 'Navbar item.' %}</span></a></li>
+                            <li><a href="{% url 'support:support' %}">{% trans 'Support' context 'Navbar item.' %}</a></li>
+                            <li><a href="{% url 'account_login' %}">{% trans 'Login' context 'Navbar button.' %}</a></li>
+                        {% else %}
+                            {% if request.path != dashboard_url %}<li><a href="{{ dashboard_url }}"><i class="fa fa-th-large"></i> &nbsp; {% trans 'Dashboard' context 'Navbar item.' %}</a></li>{% endif %}
+                            {% comment %}{% if request.path != profile_url %}<li><a href="{{ profile_url }}"><i class="fa fa-user"></i> &nbsp; {% trans 'Profile' context 'Navbar item.' %}</a></li>{% endif %}{% endcomment %}
+                            <li><a href="{% url 'support:support' %}"><i class="fa fa-question-circle-o"></i> &nbsp; {% trans 'Support' context 'Navbar item.' %}</a></li>
+                            <li><a href="{% url 'account_logout' %}"><i class="fa fa-power-off"></i> &nbsp;  {% trans 'Logout' context 'Navbar item.' %}</a></li>
+                        {% endif %}
+                    {% endblock %}
+                </ul>
+            </div>
+            {% block navbar_extra %}{% endblock %}
+        </nav>
+    {% endblock %}
+    {% block wrapper %}
+        <div id="wrapper">
+            {% block content %}{% endblock %}
+            <div class="push"></div>
+        </div>
+    {% endblock %}
+    {% block shoutout %}
+        {% if not user.is_authenticated %}
+            <div id="shoutout">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h3>{% trans 'Calculate the solar potential of your business and help save the environment.' context 'Shoutout message.' %}</h3>
+                            <br/>
+                            {% url 'landing_page' as landing_url %}
+                            <a href="{% if request.path == landing_url %}#cover{% else %}{{ landing_url }}{% endif %}" class="btn btn-lg btn-theme shoutout-btn smooth-scroll">{% trans 'Get Your Free Assessment' context 'Shoutout button.' %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endblock %}
+    {% block footer_container %}
+        <div id="footer">
+            {% block footer %}
+                <div class="container">
+                    <div id="footer-content" class="row">
+                        <div class="col-xs-6 col-sm-6 col-lg-3">
+                            <h2 class="footer-label">{% trans 'About' context 'Footer: section title.' %}</h2>
+                            <p><a href="{% url 'press' %}">{% trans 'News & Updates' context 'Footer: link.' %}</a></p>
+                            <p><a href="{% url 'supplier:supplier_info' %}">{% trans 'Information for installers' context 'Footer: link.' %}</a></p>
+                            <p><a href="{% url 'company' %}">{% trans 'About us' context 'Footer: link.' %}</a></p>
+                            <p><a href="{% url 'work_with_us' %}">{% trans 'Work with us' context 'Footer: link.' %}</a></p>
+                            <p><a href="{% url 'blog' %}">{% trans 'Blog' context 'Footer: link.' %}</a></p>
+                            <p><a href="{% url 'technology' %}">{% trans 'Technology' context 'Footer: link.' %}</a></p>
+                            <p><a href="{% url 'faq' %}">{% trans 'F.A.Q.' context 'Footer: link.' %}</a></p>
+                            <br/>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-lg-3">
+                            <h2 class="footer-label">{% trans 'Solar' context 'Footer: section title.' %}</h2>
+                            <p><a href="{% url 'commercial_solar' %}">{% trans 'Commercial solar' context 'Footer: link.' %}</a></p>
+                            <p><a href="{% url 'financing' %}">{% trans 'Financing commercial solar projects' context 'Footer: link.' %}</a></p>
+                            <p><a href="{% url 'incentives' %}">{% trans 'Government incentives' context 'Footer: link.' %}</a></p>
+                            <p><a href="{% url 'solar_101' %}">{% trans 'Solar 101' context 'Footer: link.' %}</a></p>
+                            <br/>
+                        </div>
+                        <div class="clearfix hidden-lg"></div>
+                        <div class="col-xs-6 col-sm-6 col-lg-3">
+                            <h2 class="footer-label">{% trans 'Markets' context 'Footer: section title.' %}</h2>
+                            <h4>{% trans 'Europe' context 'Footer: Market geographic category.' %}</h4>
+                            <p>&nbsp;&nbsp;<a href="{% url 'markets' country='uk' %}">{% trans 'Solar Market UK' context 'Footer: link.' %}</a></p>
+                            <p>&nbsp;&nbsp;<a href="{% url 'markets' country='germany' %}">{% trans 'Solar Market Germany' context 'Footer: link.' %}</a></p>
+                            <p>&nbsp;&nbsp;<a href="{% url 'markets' country='france' %}">{% trans 'Solar Market France' context 'Footer: link.' %}</a></p>
+                            <h4>{% trans 'Asia' context 'Footer: Market geographic category.' %}</h4>
+                            <p>&nbsp;&nbsp;<a href="{% url 'markets' country='india' %}">{% trans 'Solar Market India' context 'Footer: link.' %}</a></p>
+                            <p>&nbsp;&nbsp;<a href="{% url 'markets' country='china' %}">{% trans 'Solar Market China' context 'Footer: link.' %}</a></p>
+                            <p>&nbsp;&nbsp;<a href="{% url 'markets' country='japan' %}">{% trans 'Solar Market Japan' context 'Footer: link.' %}</a></p>
+                            <h4>{% trans 'North America' context 'Footer: Market geographic category.' %}</h4>
+                            <p>&nbsp;&nbsp;<a href="{% url 'markets' country='united_states' %}">{% trans 'Solar Market United States' context 'Footer: link.' %}</a></p>
+                            <h4>{% trans 'Oceania' context 'Footer: Market geographic category.' %}</h4>
+                            <p>&nbsp;&nbsp;<a href="{% url 'markets' country='australia' %}">{% trans 'Solar Market Australia' context 'Footer: link.' %}</a></p>
+                            <br/>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-lg-3">
+                            <h2 class="footer-label">{% trans 'Connect' context 'Footer: section title.' %}</h2>
+                            <p>{% trans 'Receive updates and useful information about solar energy and renewables on our social media channels.' context 'Footer: connect message.' %}</p>
+                            <br/>
+                            {% comment %}
+                            <a href="https://www.linkedin.com/company/power-market" target="_blank" class="social-icon-container"><i class="fa fa-linkedin"></i></a>
+                            <a href="https://twitter.com/Powermarketuk" target="_blank" class="social-icon-container"><i class="fa fa-twitter"></i></a>
+                            <a href="https://medium.com/@powermarket" target="_blank" class="social-icon-container"><i class="fa fa-medium"></i></a>
+                            {% endcomment %}
+                            <p>
+                                <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+                                <script type="IN/FollowCompany" data-id="13187317"></script>
+                                <a class="twitter-follow-button" href="https://twitter.com/Powermarketuk" data-show-count="false" data-show-screen-name="false"></a>
+                                <div class="fb-like" data-href="https://www.facebook.com/PowerMarketAI/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
+                            </p>
+                            <br/>
+                            <p>
+                                <a href="https://medium.com/@powermarket" target="_blank" class="social-icon-container"><i class="fa fa-medium"></i></a>
+                                <a href="https://angel.co/powermarket" target="_blank" class="social-icon-container"><i class="fa fa-angellist"></i></a>
+                            </p>
+                            <p>
+                            <i class="fa fa-phone"></i> &nbsp; <a href="tel:+4402080682966">+44 020 8068 2966</a><br/>
+                            <i class="fa fa-envelope"></i> &nbsp; <a href="mailto:contact@powermarket.net">contact@powermarket.net</a>
+                            </p>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div id="awards" class="row">
+                        <div class="col-xs-6 col-md-3">
+                            <br/>
+                            <div class="oui-image-container award-icon-container">
+                                <a href="http://innovation.ox.ac.uk/" class="award-icon" target="_blank"><img src="{% static 'img/OUI-Startup-Incubator-logo_200x120.png' %}" /></a>
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            <br/>
+                            <div class="esa-bic-container award-icon-container">
+                                <a href="http://www.esa-bic.org.uk/" class="award-icon" target="_blank"><img src="{% static 'img/ESA-BIC-logo_400x67.png' %}" /></a>
+                            </div>
+                        </div>
+                        <div class="clearfix hidden-md hidden-lg"></div>
+                        <div class="col-xs-6 col-md-3 col-md-offset-3">
+                            <br/>
+                            <div class="dt50-container award-icon-container">
+                                <a href="http://www.slush.org/news/dt50-europes-promising-startups-will-awarded-slush/" class="award-icon" target="_blank"><img src="{% static 'img/DT50-logo_200x72.png' %}" /></a>
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
+                    <br/>
+                    <hr>
+                    <div id="copyright" class="row">
+                        <div id="copyright-left" class="col-xs-12 col-md-6">
+                            <p>
+                                <small>
+                                    &copy; {% now "Y" %} Copyright SunReign Ltd &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="visible-xs"><br/></span>
+                                    <a href="{% url 'terms_of_service' %}" class="legal-link">{% trans 'Terms of service' context 'Footer link.' %}</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="{% url 'privacy_policy' %}" class="legal-link">Privacy policy</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="{% url 'cookie_use' %}" class="legal-link">Cookie use</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="{% url 'attribution' %}" class="legal-link">{% trans 'Attribution' context 'Footer link.' %}</a>
+                                </small>
+                            </p>
+                        </div>
+                        {% comment %}<div id="copyright-right" class="col-xs-12 col-md-6">
+                            <p>
+                                <small>
+                                    Contact: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="fa fa-phone"></i> &nbsp; <a href="tel:+4402080682966">+44 020 8068 2966</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="fa fa-envelope"></i> &nbsp; <a href="mailto:contact@powermarket.net">contact@powermarket.net</a>
+                                </small>
+                            </p>
+                        </div>{% endcomment %}
+                    </div>
+                    <div id="footnote" class="row">
+                        <div class="col-xs-12">
+                            <br/>
+                            <span class="faded-text"><small>
+                                Governments of many countries offer incentives to promote renewable energy
+                                projects. The most significant include Australia, Bulgaria, Canada, Croatia,
+                                Czech Republic, China, France, Germany, Greece, India, Ireland, Italy, Japan,
+                                Republic of Macedonia, Serbia, Slovakia, South Korea, Taiwan, Turkey, UK,
+                                United States.
+                            </small></span>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+    {% block impersonate %}
+        {% if user.is_impersonate %}
+            <div class="stop-impersonate-container">
+                <a href="{% url 'impersonate-stop' %}" class="btn stop-impersonate-btn">
+                    <small>{% trans "Stop impersonation" context "Stop impersonation button." %}</small>
+                </a>
+            </div>
+        {% endif %}
+    {% endblock %}
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'bower_components/toastr/toastr.min.js' %}"></script>
+    <script src="{% static 'bower_components/jquery-number/jquery.number.js' %}"></script>
+    <script src="{% static 'js/common.js' %}"></script>
+    <script type="text/javascript">
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "progressBar": false,
+            "preventDuplicates": true,
+            "positionClass": "toast-bottom-left",
+            "onclick": null,
+            "showDuration": "500",
+            "hideDuration": "500",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        {% for message in messages %}
+            toastr.{{ message.tags }}("", "{{ message }}");
+        {% endfor %}
+    </script>
+    <script>
+        window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+            t._e = [];
+            t.ready = function(f) {
+            t._e.push(f);
+            };
+            return t;
+        }(document, "script", "twitter-wjs"));
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.9&appId=1930984183809745";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    {% block zopim_widget %}
+        {% if not settings.DEBUG %}
+        <script type="text/javascript">
+            window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+            d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+            _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+            $.src="//v2.zopim.com/?45icWtHVhMMpzw6nqwNcyPNOtJlZSbVB";z.t=+new Date;$.
+            type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+        </script>
+        {% endif %}
+    {% endblock %}
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
+

@@ -1,0 +1,1072 @@
+/*
+ *   THEME
+ *
+ *   Author: Toni Engelhardt
+ *   Date: June 11, 2016
+ *
+ *   > scss/theme.scss:
+ *   > Define all global styles for the theme here.
+*/
+
+@import 'variables';
+
+
+body {
+  font-family: $body-font-family;
+  font-size: $body-font-size;
+  background-color: $lightest-gray;
+  color: $default-text-color;
+}
+
+.default-box-shadow {
+  box-shadow: $default-box-shadow;
+}
+
+.hide-box-shadow {
+  box-shadow: none !important;
+}
+
+
+//   Text
+// ----------------------------------------------
+
+a {
+  color: $secondary-color;
+
+  &:hover {
+    color: $secondary-color-darker;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+a.theme-link {
+  color: $theme-color;
+
+  &:hover {
+    color: $theme-color;
+  }
+}
+
+a.default-link {
+  color: $default-text-color;
+  text-decoration: underline;
+
+  &:hover {
+    color: $default-text-color;
+  }
+}
+
+hr {
+  border-color: darken($lighter-gray, 10%);
+
+  @media (max-width: $screen-xs-max) {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $theme-color;
+  font-weight: bold;
+}
+
+h1, .h1-font-size {
+  font-size: 3rem;
+
+  @media (min-width: 768px) {
+    font-size: 5rem;
+  }
+
+  @media (min-width: 992px) {
+    font-size: 6rem;
+  }
+}
+
+h2, .h2-font-size {
+  font-size: 2.5rem;
+
+  @media (min-width: 768px) {
+    font-size: 3.75rem;
+  }
+
+  @media (min-width: 992px) {
+    font-size: 4.5rem;
+  }
+}
+
+h3, .h3-font-size {
+  font-size: 2rem;
+
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+  }
+
+  @media (min-width: 992px) {
+    font-size: 3rem;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.text-xxl {
+  font-size: 700%;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.no-decoration {
+  text-decoration: none !important;
+
+  &:hover {
+    text-decoration: none !important;
+  }
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.valign-middle {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.white-text {
+  color: $white;
+}
+
+.lightest-text {
+  color: $lightest-gray;
+}
+
+.theme-text {
+  color: $theme-color !important;
+}
+
+.faded-text {
+  color: lighten($light-gray, 10%);
+}
+
+.primary-text {
+  color: $primary-color !important;
+}
+
+.primary-text-dark {
+  color: darken($primary-color, 20%) !important;
+}
+
+.secondary-text {
+  color: $secondary-color !important;
+}
+
+.secondary-text-dark {
+  color: darken($secondary-color, 40%) !important;
+}
+
+.gray-text {
+  color: $gray !important;
+}
+
+.danger-text {
+  color: $theme-danger !important;
+}
+
+.highlight {
+  background-color: $theme-color;
+  color: $white;
+  padding: 1rem 2rem;
+  border-radius: $border-radius-lg;
+
+  @media (max-width: 767px) {
+    padding: .5rem 1rem;
+  }
+}
+
+.highlight-primary {
+  background-color: $primary-color;
+}
+
+.highlight-secondary {
+  background-color: $secondary-color;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.underline-primary {
+  border-bottom: 6px solid $primary-color;
+}
+
+.font-weight-normal {
+  font-weight: normal !important;
+}
+
+.max-500 {
+  max-width: 500px;
+  margin: auto;
+}
+
+.max-800 {
+  max-width: 800px;
+}
+
+.box-shadow {
+  box-shadow: $default-box-shadow;
+}
+
+
+//   Lists
+// ----------------------------------------------
+
+ul.no-indent, ol.no-indent {
+  padding-left: 1.2em;
+}
+
+
+//   Alerts
+// ----------------------------------------------
+
+.alert {
+    border-radius: $border-radius;
+}
+
+
+//   Margins & Paddings
+// ----------------------------------------------
+
+.pad-15 {
+  padding: 15px;
+}
+
+.pad-30 {
+  padding: 30px;
+}
+
+
+//   Badges
+// ----------------------------------------------
+
+.badge {
+  background-color: $theme-color;
+  padding: 6px 14px;
+  font-size: 18px;
+  border-radius: $border-radius;
+}
+
+.badge-sm {
+  padding: 5px 8px;
+  font-size: 12px;
+}
+
+.badge-success {
+  background-color: $primary-color;
+}
+
+.badge-warning {
+  background-color: $secondary-color;
+}
+
+
+//   Forms
+// ----------------------------------------------
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.required label{
+  font-weight: bold;
+
+  &:after {
+    content: '*';
+  }
+}
+
+.form-control:focus {
+  // Set outline color for all inputs.
+  border-color: $theme-color;
+  box-shadow: inset 0 1px 1px rgba($theme-color, 0.075), 0 0 8px rgba($theme-color, 0.6);
+}
+
+input.form-control, textarea.form-control {
+  background: transparent;
+  color: $theme-color;
+  border: 2px solid $theme-color;
+  border-radius: $border-radius;
+  outline-color: $theme-color;
+
+  &:active, &:focus {
+    border-color: $theme-color;
+  }
+}
+
+.form-control::-webkit-input-placeholder { color: $input-placeholder-color; }
+.form-control:-moz-placeholder { color: $input-placeholder-color; }
+.form-control::-moz-placeholder { color: $input-placeholder-color; }
+.form-control:-ms-input-placeholder { color: $input-placeholder-color; }
+
+.input-lg {
+  border-width: 3px !important;
+  border-radius: $border-radius-lg !important;
+}
+
+// Google Maps autocomplete.
+.pac-container {
+  background-color: $theme-color;
+  border: none;
+  border-radius: $border-radius;
+  font-family: $body-font-family;
+
+  .pac-item {
+    color: $light-gray;
+    border-top: 1px solid darken($theme-color, 3%);
+
+    &:hover {
+      background-color: darken($theme-color, 3%);
+    }
+
+    .pac-item-query {
+      color: $lightest-gray;
+    }
+  }
+
+  .pac-item-selected {
+    background-color: darken($theme-color, 3%);
+    border-radius: $border-radius;
+  }
+}
+
+.pac-container:after {
+  margin: 3px;
+}
+
+ul.errorlist {
+  list-style-type: none;
+  background-color: lighten($theme-danger, 30%);
+  padding: 1rem;
+  margin-top: .5rem;
+  border-radius: $border-radius;
+
+  li {
+    font-weight: bold;
+    font-size: 90%;
+    color: $theme-danger;
+  }
+}
+
+
+//   Tooltips
+// ----------------------------------------------
+
+$tooltip-bg-color: $tooltip-default-bg-color;
+$tooltip-text-color: $tooltip-default-text-color;
+
+.tooltip.in {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.tooltip.top .tooltip-arrow {
+  border-top-color: $tooltip-bg-color;
+}
+
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: $tooltip-bg-color;
+}
+
+.tooltip-inner {
+  background-color: $tooltip-bg-color;
+  color: $tooltip-text-color;
+  border-radius: $border-radius;
+  font-weight: bold;
+  padding: 1rem;
+  box-shadow: $default-box-shadow;
+}
+
+
+//   Tables
+// ----------------------------------------------
+
+.static-page-table-container {
+    display: inline-block;
+    padding: 2rem;
+    background-color: $lighter-gray;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: $lightest-gray;
+}
+
+
+//   Buttons
+// ----------------------------------------------
+
+.btn {
+  border-radius: $border-radius;
+  font-weight: bold;
+  padding: 7px 16px;
+  box-shadow: $default-box-shadow;
+
+  &:focus {
+    // Set outline color for buttons.
+    outline: none;
+    border-color: transparent;  // $primary-color;
+    box-shadow: none;  // inset 0 1px 1px rgba($primary-color, 0.075), 0 0 4px rgba($primary-color, 0.6);
+  }
+}
+
+.btn-sm {
+  border-radius: $border-radius;
+  padding: 5px 10px;
+}
+
+.btn-lg {
+  border-radius: $border-radius-lg;
+  padding: 10px 20px;
+}
+
+.btn-xl {
+  border-radius: $border-radius-lg;
+  padding: 15px 30px;
+  font-size: 24px;
+}
+
+.btn-primary, .btn-primary:active, .btn-primary:focus, .btn-primary:visited {
+  background-color: $primary-color !important;
+  color: $white !important;
+  border: none;
+
+  &:hover {
+    background-color: $primary-color-darker !important;
+    color: $white !important;
+    border: none;
+  }
+
+  &:disabled {
+    opacity: 1;
+  }
+}
+
+.btn-secondary, .btn-secondary:active, .btn-secondary:focus, .btn-secondary:visited {
+  background-color: $secondary-color !important;
+  color: $white !important;
+  border: none;
+
+  &:hover {
+    background-color: $secondary-color-darker;
+    color: $white;
+    border: none;
+  }
+}
+
+.btn-theme, .btn-theme:active, .btn-theme:focus, .btn-theme:visited {
+  background-color: $theme-color;
+  color: $white;
+
+  &:hover {
+    background-color: darken($theme-color, 3%);
+    color: $white;
+  }
+}
+
+.btn-white-outline, .btn-white-outline:active, .btn-white-outline:focus, .btn-white-outline:visited {
+  border: 2px solid $white;
+  color: $white;
+}
+
+.btn-light-gray {
+  background-color: $light-gray !important;
+  color: $white !important;
+  border: none;
+
+  &:hover, &:active, &:focus {
+    background-color: darken($light-gray, 3%) !important;
+    color: $white !important;
+    border: none;
+  }
+}
+
+.socialauth-btn {
+  .socialauth-btn-label {
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+}
+
+.pm-btn, .pm-btn:active, .pm-btn:focus, .pm-btn:visited {
+  background-color: $theme-color;
+  color: $white !important;
+
+  &:hover {
+    background-color: darken($theme-color, 3%);
+    color: $white !important;
+  }
+}
+
+.linkedin-btn, .linkedin-btn:active, .linkedin-btn:focus, .linkedin-btn:visited {
+  background-color: $brand-color-linkedin-bg;
+  color: $brand-color-linkedin-font !important;
+
+  &:hover {
+    background-color: darken($brand-color-linkedin-bg, 3%);
+    color: $brand-color-linkedin-font !important;
+  }
+}
+
+.twitter-btn, .twitter-btn:active, .twitter-btn:focus, .twitter-btn:visited {
+  background-color: $brand-color-twitter-bg;
+  color: $brand-color-twitter-font !important;
+
+  &:hover {
+    background-color: darken($brand-color-twitter-bg, 3%);
+    color: $brand-color-twitter-font !important;
+  }
+}
+
+.google-btn, .google-btn:active, .google-btn:focus, .google-btn:visited {
+  background-color: $brand-color-google-bg;
+  color: $brand-color-google-font !important;
+
+  &:hover {
+    background-color: darken($brand-color-google-bg, 3%);
+    color: $brand-color-google-font !important;
+  }
+}
+
+
+//   Navigation
+// ----------------------------------------------
+
+.navbar {
+  margin: 0;
+  box-shadow: $default-box-shadow;
+}
+
+.navbar-right {
+  margin-right: 15px;
+
+}
+
+.navbar-default .navbar-collapse {
+
+  // Dropdown menu on mobile devices.
+
+  @media (max-width: 767px) {
+    background: $theme-color;
+
+    li {
+
+      &:hover {
+        background-color: darken($theme-color, 5%);
+      }
+
+      a {
+        padding: 0 20px;
+      }
+    }
+  }
+}
+
+.navbar-toggle {
+  height: $navbar-height;
+  margin: 0 20px;
+  border: none;
+
+  &:hover, &:focus, &:active {
+    background-color: transparent !important;
+  }
+
+  .icon-bar {
+    background-color: $lightest-gray !important;
+    height: 4px;
+    margin: 3px 0;
+    width: 34px;
+  }
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: $lightest-gray;
+  font-weight: bold;
+  line-height: calc(#{$navbar-height} - 30px);
+
+  &:hover {
+    color: $lightest-gray !important;
+  }
+
+  &:hover:not(.no-link) {
+    color: $secondary-color !important;
+  }
+}
+
+.navbar-default {
+  height: $navbar-height;
+  border: none;
+  background-color: $theme-color;
+  color: $lighter-gray;
+
+  .navbar-brand {
+    height: $navbar-height;
+    padding: 20px;
+    color: $white;  // inherit;
+
+    &:hover {
+      color: $white;
+    }
+
+    .navbar-title {
+      margin-left: 5px;
+      vertical-align: middle;
+      font-weight: bold;
+      font-size: 2rem;
+    }
+
+    .navbar-subtitle {
+      font-size: 1.5rem;
+      padding-left: 0.5rem;
+      color: $light-gray;
+    }
+  }
+}
+
+.navbar-highlight-btn {
+  line-height: normal !important;
+
+  @media (min-width: 768px) {
+    color: $white;
+    padding: 0 20px;
+  }
+}
+
+
+//   Content
+// ----------------------------------------------
+
+#wrapper {
+  min-height: 100%;
+  background-color: $white;
+  padding-top: $navbar-height;
+
+  // Vertically and horizontally centered content.
+  .centered-content-container {
+    position: relative;
+    height: 100vh;
+    text-align: center;
+
+    .centered-content {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+    }
+  }
+}
+
+.container-extra {
+  width: calc(50vw + 1170px/2);
+  margin: auto;
+}
+
+.section {
+  padding-top: $section-vertical-padding;
+  padding-bottom: $section-vertical-padding;
+
+  @media (max-width: $screen-sm-max) {
+    padding-top: $section-vertical-padding / 2;
+    padding-bottom: $section-vertical-padding / 2;
+  }
+
+  .section-header {
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  .section-content {
+    text-align: center;
+    padding: 2rem 1rem;
+
+  }
+}
+
+.section-tight {
+  padding-top: $section-vertical-padding/4;
+  padding-bottom: $section-vertical-padding/4;
+}
+
+.section-full-width {
+  padding-left: $section-vertical-padding/4;
+  padding-right: $section-vertical-padding/4;
+}
+
+.middle-box {
+  display: inline-block;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    width: 480px;
+    padding: 80px 40px 40px 40px;
+  }
+}
+
+.separator {
+  width: 100px;
+  display: inline-block;
+  height: 0;
+  border-top: 2px solid $lighter-gray;
+}
+
+
+//   Cards
+// ----------------------------------------------
+
+// Two column card layouts require column classes
+// to offset overflow.
+
+.column-left {
+  @media (min-width: 992px) {
+    padding-right: 30px;
+  }
+}
+
+.column-right {
+  @media (min-width: 992px) {
+    padding-left: 30px;
+  }
+}
+
+.card {
+  background-color: $lightest-gray;
+  margin: 0 -15px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: $border-radius-lg;
+  box-shadow: $default-box-shadow;
+
+  h3 {
+    margin-top: .5rem;
+  }
+}
+
+.card-primary {
+  background-color: $primary-color;
+  color: $white;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: $lightest-gray;
+  }
+}
+
+.card-theme {
+  background-color: $theme-color;
+  color: $light-gray;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: $lightest-gray;
+  }
+
+  a {
+    color: $lighter-gray;
+
+    &:hover {
+
+    }
+  }
+
+  hr {
+    border-color: $gray;
+  }
+}
+
+.card-transparent {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+
+//   Footer
+// ----------------------------------------------
+
+#shoutout {
+  padding: 5rem 0;
+  background-color: $primary-color;
+  text-align: center;
+
+  h3 {
+    color: $white;
+  }
+
+  .shoutout-text {
+
+  }
+
+  .shoutout-btn {
+    @extend .default-box-shadow;
+    height: 6rem;
+    padding: 0 3rem;
+    font-size: 2.6rem;
+    line-height: 5.6rem;
+
+    @media (max-width: 767px) {
+      height: 4.2rem;
+      padding: 0 2rem;
+      font-size: 2rem;
+      line-height: 4rem;
+    }
+  }
+}
+
+#footer  {
+  background-color: $lightest-gray;
+  padding: 5rem 0;
+  border-top: 1px solid $lighter-gray;
+  font-size: 14px;
+  
+  @media (max-width: $screen-xs-max) {
+    // text-align: center;
+  }
+
+  @media (max-width: 767px) {
+    padding-bottom: 7rem;
+  }
+
+  a {
+    color: $default-text-color;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+
+  p {
+    margin: 0 0 5px;
+  }
+
+  hr {
+    border-top-color: $lighter-gray;
+  }
+
+  .footer-label {
+    font-weight: bold;
+    padding-bottom: 1rem;
+  }
+
+  .social-icon-container {
+    // @extend .default-box-shadow;
+    background-color: $theme-color;
+    color: $white;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 0;  // $border-radius;
+
+    &:hover {
+      background-color: $secondary-color;
+      color: $white;
+    }
+  }
+
+  .award-icon-container {
+    line-height: 120px;
+    vertical-align: center;
+
+    .award-icon {
+      img {
+        max-width: 80%;
+
+      }
+    }
+  }
+
+  #copyright {
+    #copyright-right {
+      @media (min-width: $screen-md-min) {
+        text-align: right;
+      }
+    }
+  }
+
+  #footnote {
+    text-align: justify;
+
+    @media (max-width: $screen-xs-max) {
+      // text-align: center;
+
+    }
+  }
+}
+
+
+//   Modal
+// ----------------------------------------------
+
+.modal-content{
+  background-color: $lightest-gray;
+  border-radius: $border-radius-lg;
+  border: none;
+  box-shadow: $default-box-shadow;
+  // color: $light-gray;
+
+  h1, h2, h3, h4, h5, h6 {
+    // color: $white;
+  }
+
+  input {
+    color: $theme-color;
+    border-color: $theme-color;
+
+  }
+
+  .modal-header {
+    border: none;
+
+    h3 {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.modal-backdrop {
+  // Not sure if this is needed somehwere.
+  z-index: 0;
+}
+
+
+//   Loading animation
+// ----------------------------------------------
+
+.glyphicon-refresh-animate {
+  -animation: spin .7s infinite linear;
+  -webkit-animation: spin2 .7s infinite linear;
+}
+
+@keyframes spin {
+  from { transform: scale(1) rotate(0deg);}
+  to { transform: scale(1) rotate(360deg);}
+}
+
+@-webkit-keyframes spin2 {
+  from { -webkit-transform: rotate(0deg);}
+  to { -webkit-transform: rotate(360deg);}
+}
+
+
+//   Video embed elements
+// ----------------------------------------------
+
+.full-width-embed-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+
+  @media (max-width: $screen-xs-max) {
+    margin: 0 -15px;  // Avoid column padding on xs devices.
+  }
+}
+.full-width-embed-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+//   PACE plugin
+// ----------------------------------------------
+
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: $primary-color;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 4px;
+}
+
+
+//   Toastr.
+// ----------------------------------------------
+
+#toast-container > div,
+#toast-container > div:hover {
+  border-radius: $border-radius;
+  opacity: 1;
+  margin: 0;
+  -moz-box-shadow: $default-box-shadow;
+  -webkit-box-shadow: $default-box-shadow;
+  box-shadow: $default-box-shadow;
+}
+
+.toast-info {
+  background-color: $theme-info;
+}
+
+.toast-success {
+  background-color: $theme-success;
+}
+
+.toast-warning {
+  background-color: $theme-warning;
+}
+
+.toast-danger {
+  background-color: $theme-danger;
+}
+
+.toast-bottom-left {
+  left: 30px;
+  bottom: 30px;
+}
+
+//   Impersonate.
+// ----------------------------------------------
+
+.stop-impersonate-container {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+
+  .stop-impersonate-btn {
+    background: $theme-danger;
+    padding: 10px 15px;
+    color: $white;
+    font-weight: bold;
+
+    &:hover {
+      background-color: darken($theme-danger, 3%);
+    }
+  }
+}

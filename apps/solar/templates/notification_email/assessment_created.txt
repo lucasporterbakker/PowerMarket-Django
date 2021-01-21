@@ -1,0 +1,7 @@
+Hi PowerMarket Managers,
+
+an assessment was created (or updated).
+
+Assessment URL: {{ short_link }}
+
+Have a nice day!

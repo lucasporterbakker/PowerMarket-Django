@@ -1,0 +1,81 @@
+{% load i18n static inlinecss %}
+{% inlinecss "css/email.css" %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>{% block subject %}{{ subject }}{% endblock subject %}</title>
+</head>
+
+<body>
+    <table class="head-wrap">
+        <tr>
+            <td></td>
+            <td class="header container">
+                <div class="content">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="navbar-brand">
+                                    <div class="navbar-logo"><img src="http://powermarket.net{% static "img/PM-logo_50x50.png" %}" height="30" width="auto" alt="PowerMarket"></div>
+                                    <div class="navbar-title">
+                                        Power Market
+                                        <span class="navbar-subtitle hidden-xs">
+                                            Solar Energy
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td align="right">
+                                <h6 class="collapse">{% block logo_text %}&nbsp;{% endblock logo_text %}</h6>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    <table class="body-wrap">
+        <tr>
+            <td></td>
+            <td class="container">
+                <div class="content">
+                    <table class="max-800">
+                        <tr>
+                            <td id="message">
+
+                                {% block content %}{% endblock content %}
+
+                                {% block footnote %}
+                                    <p class="footnote">
+                                        <small>
+                                            This email was sent by <a href="https://powermarket.net">PowerMarket</a>.<br/>
+                                        </small>
+                                    </p>
+                                {% endblock %}
+
+                                {% block social_media %}
+                                    <p>
+                                        <a href="https://www.linkedin.com/company/power-market" class="sm-icon"><img src="http://powermarket.net{% static 'icons/linkedin-white_x48.png' %}" alt="LinkedIn" width="12" height="auto" /></a>
+                                        <a href="https://twitter.com/Powermarketuk" class="sm-icon"><img src="http://powermarket.net{% static 'icons/twitter-white_x48.png' %}" alt="Twitter" width="12" height="auto" /></a>
+                                        <a href="https://medium.com/@powermarket" class="sm-icon"><img src="http://powermarket.net{% static 'icons/medium-white_x48.png' %}" alt="Medium" width="12" height="auto" /></a>
+                                    </p>
+                                {% endblock %}
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+
+{% endinlinecss %}

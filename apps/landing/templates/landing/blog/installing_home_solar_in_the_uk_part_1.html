@@ -1,0 +1,60 @@
+{% extends "landing/blog/blog_article.html" %}
+{% load i18n static svg %}
+
+{% block meta_title %}Installing home solar in the UK - A first year review (Part 1) - {{ block.super }}{% endblock %}
+{% block meta_description %}{% trans "Technology PowerMarket is using and developing. Satellite data processing. Machnine learning algorithms. GIS. A.I." context "Meta description." %}{% endblock %}
+
+{% block page_title %}Installing home solar in the UK{% endblock %}
+{% block page_subtitle %}A first year review (Part 1){% endblock %}
+{% block article_author %}Phil Worthington{% endblock %}
+{% block article_content %}
+    <p>
+        Just over a year ago we had a 4kW solar system consisting of 17 solar panels installed at our
+        family home in Cheshire. This is a brief review of how it's working out for us so far.
+    </p>
+    <h3>Our system</h3>
+    <p>
+        Since we live in an old farmhouse (over 250 years old) with a heavy stone roof, we decided against
+        a rooftop installation. Fortunately we have a pretty big garden/paddock so setting aside a small
+        area for ground mounted solar panels wasn't a problem. It did mean a bit of a cost increase for the
+        ground mounting trays and burying a long cable to the house, but overall the system came in at under
+        £8000 for 17x265W panels with power optimisers.
+    </p>
+    <p><img src="{% static 'img/residential-ground-based-solar-array_1500x400.jpg' %}" width="100%" height="auto" /></p>
+    <p>
+        The system has been running without any problems since the end of January 2016.  To the end of
+        February 2017 it has generated 3.6MWh of electricity, which is in very close agreement with a
+        <a href="{% url 'landing_page' %}">www.powermarket.net</a> estimate of 3.1MWh per year for a system of
+        this size in this location, although the cost estimate of installing a similar system now is much
+        lower due to price falls over the last year.
+    </p>
+    <br/>
+    <h3>The benefits</h3>
+    <div class="row">
+        <div class="col-xs-12 col-sm-5">
+            <p>
+                We’ve cut our electricity usage by about half, but unfortunately a lot of our generation is being
+                exported to the grid rather than used by us.  We are getting better at putting the washing machine
+                and dishwasher on during daylight hours to make more use of it and minimize our use of electricity
+                from the grid.  That’s obviously saving us some money (approx. £300/year) at the moment but as with
+                most UK households, we’ve just been informed that our electricity price is about to rise by 10%,
+                so the financial benefits are likely to get substantially bigger over the 25+ year lifetime of our
+                system.
+            </p>
+            <p>
+                If we had battery storage the solar panels would more than cover our current electricity usage
+                except during the winter months, with plenty to spare for heating water in the summer.  Our house
+                isn’t on mains gas so we have to use an oil boiler for heating and hot water, but during the summer
+                we’ve already cut down our oil usage a bit.  Peak generation was around 400kWh in June, July and
+                August 2016, or around 13kWh per day, which is far higher than our usage.  With storage, we’d expect
+                to be pretty much self-sufficient for electricity from March-October, and get a useful contribution
+                to our usage outside those months.
+            </p>
+            <br/>
+            <p><a href="{% url 'blog' slug='installing_home_solar_in_the_uk_part_2' %}" class="btn btn-lg btn-theme">Read part 2</a></p>
+        </div>
+        <div class="col-xs-12 col-sm-7">
+            <img src="{% static 'img/assessment-screenshot-phil_800x640.jpg' %}" width="100%" height="auto" />
+        </div>
+    </div>
+{% endblock %}
